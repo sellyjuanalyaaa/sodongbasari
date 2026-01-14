@@ -1,10 +1,10 @@
-// @ts-nocheck
+
 import React, { useState, useEffect } from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import HeroSection from '@/components/HeroSection';
 import SectionTitle from '@/components/SectionTitle';
 import NewsCard from '@/components/NewsCard';
-import StatCard from '@/components/StatCard';
+
 import { Head, Link } from '@inertiajs/react';
 import { route } from 'ziggy-js';
 
@@ -87,14 +87,15 @@ const subStats = [
 
 // Helper component for counting up animation
 // Helper component for counting up animation
-const AnimatedCounter = ({ value, duration = 2000 }) => {
+const AnimatedCounter = ({ value, duration = 2000 }: { value: any; duration?: number }) => {
     const [count, setCount] = useState(0);
 
     // Robust parser for IDR format (e.g., "Rp 120.000.000,00") and standard numbers
-    const parseValue = (val) => {
+    const parseValue = (val: any) => {
         if (typeof val === 'number') return val;
         // Remove "Rp" and whitespace
-        let clean = val.toString().replace(/Rp|\s/g, '');
+        const cleanVal = val.toString().replace(/Rp|\s/g, '');
+        let clean = cleanVal;
 
         // Check if it has comma as decimal separator (Indonesian format)
         if (clean.includes(',') && clean.indexOf(',') > clean.lastIndexOf('.')) {
@@ -112,11 +113,11 @@ const AnimatedCounter = ({ value, duration = 2000 }) => {
     const isCurrency = typeof value === 'string' && value.includes('Rp');
 
     useEffect(() => {
-        let startTime = null;
-        let animationFrameId;
+        let startTime: number | null = null;
+        let animationFrameId: number;
         const startValue = 0; // Animate from 0 for a full effect, handled smoothly by easing
 
-        const animate = (currentTime) => {
+        const animate = (currentTime: number) => {
             if (!startTime) startTime = currentTime;
             const timeElapsed = currentTime - startTime;
             const progress = Math.min(timeElapsed / duration, 1);
@@ -148,7 +149,7 @@ const AnimatedCounter = ({ value, duration = 2000 }) => {
     return <span>{count.toLocaleString('id-ID')}</span>;
 };
 
-export default function Home({ villageInfo, latestNews, announcements, stats }) {
+export default function Home({ villageInfo }: { villageInfo: any }) {
     const [currentStat, setCurrentStat] = useState(0);
 
     useEffect(() => {

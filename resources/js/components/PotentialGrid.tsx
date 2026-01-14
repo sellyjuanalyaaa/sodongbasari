@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 export default function PotentialGrid({ potentials }) {
     if (!potentials || potentials.length === 0) return <div className="text-center text-slate-500">Belum ada data potensi.</div>;
 

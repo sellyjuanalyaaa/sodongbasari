@@ -1,7 +1,7 @@
-// @ts-nocheck
+
 import React, { useState } from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import SectionTitle from '@/components/SectionTitle';
 import {
     FileText,

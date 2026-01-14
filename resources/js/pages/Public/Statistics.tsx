@@ -1,10 +1,10 @@
-// @ts-nocheck
+
 import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head } from '@inertiajs/react';
 import SectionTitle from '@/components/SectionTitle';
 
-export default function Statistics({ villageInfo, demographics, budgets }) {
+export default function Statistics({ villageInfo }) {
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Statistik Desa" />

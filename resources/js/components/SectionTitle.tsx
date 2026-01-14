@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 export default function SectionTitle({ title, subtitle }) {
     return (
         <div className="text-center mb-12">

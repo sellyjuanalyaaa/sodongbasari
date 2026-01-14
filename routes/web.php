@@ -3,7 +3,6 @@
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
 
 // Public Routes (Village Website)
 Route::controller(PublicController::class)->group(function () {

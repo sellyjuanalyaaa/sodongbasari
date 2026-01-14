@@ -15,6 +15,13 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // 0. Admin User
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('password'),
+        ]);
+
         // 1. Village Info
         VillageInfo::create([
             'name' => 'Desa Sodong Basari',
@@ -33,7 +40,7 @@ class DatabaseSeeder extends Seeder
             $title = fake()->sentence();
             Post::create([
                 'title' => $title,
-                'slug' => Str::slug($title) . '-' . Str::random(5),
+                'slug' => Str::slug($title).'-'.Str::random(5),
                 'content' => fake()->paragraphs(3, true),
                 'category' => fake()->randomElement(['news', 'announcement']),
                 'published_at' => fake()->dateTimeBetween('-1 year', 'now'),

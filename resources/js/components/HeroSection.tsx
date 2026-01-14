@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import { Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { route } from 'ziggy-js';

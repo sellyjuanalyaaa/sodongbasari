@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';

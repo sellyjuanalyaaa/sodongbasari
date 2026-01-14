@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Budget;
 use App\Models\Demographic;
-use App\Models\Institution;
 use App\Models\Post;
 use App\Models\Potential;
 use App\Models\VillageInfo;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PublicController extends Controller
@@ -28,7 +26,7 @@ class PublicController extends Controller
             'stats' => [
                 'population' => Demographic::where('type', 'gender')->sum('value'),
                 'area' => '1500 Ha', // Static for now as field wasn't requested
-            ]
+            ],
         ]));
     }
 
@@ -69,6 +67,7 @@ class PublicController extends Controller
     public function newsShow($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
+
         return Inertia::render('Public/News/Show', array_merge($this->getCommonProps(), [
             'post' => $post,
             'related' => Post::where('id', '!=', $post->id)->latest()->take(3)->get(),

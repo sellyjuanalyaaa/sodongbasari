@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 export default function StatCard({ label, value, icon }) {
     return (
         <div className="bg-white p-8 rounded-2xl shadow-[0_5px_25px_-5px_rgba(0,0,0,0.05)] border border-slate-100 flex items-center space-x-5 hover:shadow-[0_10px_30px_-5px_rgba(239,160,11,0.15)] hover:-translate-y-1 transition-all duration-300 group">
