@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 import React from 'react';
 import { route } from 'ziggy-js';
 
-export default function NewsCard({ post }) {
+export default function NewsCard({ post }: { post: any }) {
     return (
         <div className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col h-full">
             <div className="h-48 overflow-hidden relative">

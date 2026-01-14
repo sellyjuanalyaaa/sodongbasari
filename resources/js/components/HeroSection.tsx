@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { route } from 'ziggy-js';
 
-export default function HeroSection({ villageInfo }) {
+export default function HeroSection({ villageInfo }: { villageInfo: any }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     // Default fallback images if local ones aren't available yet, but we are using local ones.

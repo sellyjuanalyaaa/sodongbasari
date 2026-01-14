@@ -1,5 +1,5 @@
 
-export default function SectionTitle({ title, subtitle }) {
+export default function SectionTitle({ title, subtitle }: { title: any; subtitle?: any }) {
     return (
         <div className="text-center mb-12">
             <span className="text-[#EFA00B] font-bold tracking-widest uppercase text-sm mb-2 block">{subtitle}</span>

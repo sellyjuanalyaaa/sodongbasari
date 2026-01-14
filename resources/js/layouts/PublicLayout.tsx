@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 import React, { useState } from 'react';
 import { route } from 'ziggy-js';
 
-export default function PublicLayout({ children, villageInfo }) {
+export default function PublicLayout({ children, villageInfo }: { children: React.ReactNode; villageInfo: any }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const links = [
