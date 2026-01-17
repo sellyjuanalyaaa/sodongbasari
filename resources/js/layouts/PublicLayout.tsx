@@ -12,7 +12,6 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
         { name: 'Statistik Desa', route: 'statistics' },
         { name: 'Potensi Desa', route: 'potentials' },
         { name: 'Info & Berita', route: 'news.index' },
-        { name: 'Layanan Desa', route: 'services' },
     ];
 
     return (

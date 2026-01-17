@@ -4,7 +4,7 @@ import TwoFactorSetupModal from '@/components/two-factor-setup-modal';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useTwoFactorAuth } from '@/hooks/use-two-factor-auth';
-import AppLayout from '@/layouts/app-layout';
+import AdminLayout from '@/layouts/AdminLayout';
 import SettingsLayout from '@/layouts/settings/layout';
 import { disable, enable, show } from '@/routes/two-factor';
 import { type BreadcrumbItem } from '@/types';
@@ -41,7 +41,7 @@ export default function TwoFactor({
     const [showSetupModal, setShowSetupModal] = useState<boolean>(false);
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <AdminLayout breadcrumbs={breadcrumbs}>
             <Head title="Two-Factor Authentication" />
 
             <h1 className="sr-only">Two-Factor Authentication Settings</h1>
@@ -96,6 +96,7 @@ export default function TwoFactor({
                                 {hasSetupData ? (
                                     <Button
                                         onClick={() => setShowSetupModal(true)}
+                                        className="bg-orange-600 hover:bg-orange-700 text-white"
                                     >
                                         <ShieldCheck />
                                         Continue Setup
@@ -111,6 +112,7 @@ export default function TwoFactor({
                                             <Button
                                                 type="submit"
                                                 disabled={processing}
+                                                className="bg-orange-600 hover:bg-orange-700 text-white"
                                             >
                                                 <ShieldCheck />
                                                 Enable 2FA
@@ -135,6 +137,6 @@ export default function TwoFactor({
                     />
                 </div>
             </SettingsLayout>
-        </AppLayout>
+        </AdminLayout>
     );
 }

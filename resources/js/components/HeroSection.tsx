@@ -3,30 +3,32 @@ import { Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { route } from 'ziggy-js';
 
-export default function HeroSection({ villageInfo }: { villageInfo: any }) {
+export default function HeroSection({ villageInfo, heroImages = [] }: { villageInfo: any, heroImages?: any[] }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    // Default fallback images if local ones aren't available yet, but we are using local ones.
-    const heroImages = [
-        '/images/hero/hero-1.jpg',
-        '/images/hero/hero-2.jpg',
-        '/images/hero/hero-3.jpg',
-        '/images/hero/hero-4.jpg',
-        '/images/hero/hero-5.jpg',
-    ];
+    // Use dynamic images if available, otherwise fallback
+    const images = (heroImages && heroImages.length > 0)
+        ? heroImages.map(img => img.image_path)
+        : [
+            '/images/hero/hero-1.jpg',
+            '/images/hero/hero-2.jpg',
+            '/images/hero/hero-3.jpg',
+            '/images/hero/hero-4.jpg',
+            '/images/hero/hero-5.jpg',
+        ];
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImageIndex((prevIndex) =>
-                prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
+                prevIndex === images.length - 1 ? 0 : prevIndex + 1
             );
         }, 5000); // Change image every 5 seconds
 
         return () => clearInterval(interval);
-    }, []);
+    }, [images.length]);
 
     // Function to manually set the slide
-    const setSlide = (index) => {
+    const setSlide = (index: number) => {
         setCurrentImageIndex(index);
     };
 
@@ -34,7 +36,7 @@ export default function HeroSection({ villageInfo }: { villageInfo: any }) {
         <div className="relative bg-slate-900 text-white overflow-hidden h-[600px] md:h-[700px] lg:h-[800px]">
             {/* Carousel Images */}
             <div className="absolute inset-0 w-full h-full">
-                {heroImages.map((image, index) => (
+                {images.map((image, index) => (
                     <div
                         key={index}
                         className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
@@ -84,7 +86,7 @@ export default function HeroSection({ villageInfo }: { villageInfo: any }) {
 
                 {/* Carousel Indicators */}
                 <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-4 z-20">
-                    {heroImages.map((_, index) => (
+                    {images.map((_, index) => (
                         <button
                             key={index}
                             onClick={() => setSlide(index)}

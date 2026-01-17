@@ -1,6 +1,6 @@
 import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
 import InputError from '@/components/input-error';
-import AppLayout from '@/layouts/app-layout';
+import AdminLayout from '@/layouts/AdminLayout';
 import SettingsLayout from '@/layouts/settings/layout';
 import { type BreadcrumbItem } from '@/types';
 import { Transition } from '@headlessui/react';
@@ -25,7 +25,7 @@ export default function Password() {
     const currentPasswordInput = useRef<HTMLInputElement>(null);
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <AdminLayout breadcrumbs={breadcrumbs}>
             <Head title="Password settings" />
 
             <h1 className="sr-only">Password Settings</h1>
@@ -122,6 +122,7 @@ export default function Password() {
                                     <Button
                                         disabled={processing}
                                         data-test="update-password-button"
+                                        className="bg-orange-600 hover:bg-orange-700 text-white"
                                     >
                                         Save password
                                     </Button>
@@ -143,6 +144,6 @@ export default function Password() {
                     </Form>
                 </div>
             </SettingsLayout>
-        </AppLayout>
+        </AdminLayout>
     );
 }

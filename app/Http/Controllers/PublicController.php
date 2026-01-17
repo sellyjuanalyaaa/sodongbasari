@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Budget;
 use App\Models\Demographic;
+use App\Models\Institution;
 use App\Models\Post;
 use App\Models\Potential;
+use App\Models\Statistic;
 use App\Models\VillageInfo;
+use App\Models\VillageOfficial;
 use Inertia\Inertia;
 
 class PublicController extends Controller
@@ -24,15 +27,20 @@ class PublicController extends Controller
             'latestNews' => Post::where('category', 'news')->latest()->take(3)->get(),
             'announcements' => Post::where('category', 'announcement')->latest()->take(2)->get(),
             'stats' => [
-                'population' => Demographic::where('type', 'gender')->sum('value'),
-                'area' => '1500 Ha', // Static for now as field wasn't requested
+                'population' => \App\Models\Demographic::orderBy('year', 'desc')->get()->first()?->total_male + \App\Models\Demographic::orderBy('year', 'desc')->get()->first()?->total_female ?? 0,
+                'area' => '1500 Ha', 
             ],
+            'heroImages' => \App\Models\HeroImage::where('is_active', true)->orderBy('order')->get(),
+            'officials' => VillageOfficial::where('is_active', true)->orderBy('order')->take(8)->get(),
         ]));
     }
 
     public function sodongBasari()
     {
-        return Inertia::render('Public/SodongBasari', array_merge($this->getCommonProps(), []));
+        return Inertia::render('Public/SodongBasari', array_merge($this->getCommonProps(), [
+            'officials' => VillageOfficial::where('is_active', true)->orderBy('order')->get(),
+            'institutions' => Institution::all(),
+        ]));
     }
 
     public function potentials()
@@ -44,7 +52,10 @@ class PublicController extends Controller
 
     public function statistics()
     {
+        $latestStatistic = Statistic::orderBy('year', 'desc')->first();
+        
         return Inertia::render('Public/Statistics', array_merge($this->getCommonProps(), [
+            'statistics' => $latestStatistic,
             'demographics' => Demographic::all(),
             'budgets' => Budget::orderBy('year', 'desc')->get(),
         ]));
@@ -71,6 +82,15 @@ class PublicController extends Controller
         return Inertia::render('Public/News/Show', array_merge($this->getCommonProps(), [
             'post' => $post,
             'related' => Post::where('id', '!=', $post->id)->latest()->take(3)->get(),
+        ]));
+    }
+
+    public function institutionShow($id)
+    {
+        $institution = Institution::with('activeMembers')->findOrFail($id);
+
+        return Inertia::render('Public/InstitutionDetail', array_merge($this->getCommonProps(), [
+            'institution' => $institution,
         ]));
     }
 }

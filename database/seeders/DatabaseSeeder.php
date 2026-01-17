@@ -72,14 +72,14 @@ class DatabaseSeeder extends Seeder
         }
 
         // 5. Demographics
-        Demographic::create(['label' => 'Laki-laki', 'value' => 1200, 'type' => 'gender']);
-        Demographic::create(['label' => 'Perempuan', 'value' => 1150, 'type' => 'gender']);
-        Demographic::create(['label' => 'Petani', 'value' => 800, 'type' => 'job']);
-        Demographic::create(['label' => 'Pedagang', 'value' => 300, 'type' => 'job']);
-        Demographic::create(['label' => 'PNS', 'value' => 50, 'type' => 'job']);
-        Demographic::create(['label' => 'SD', 'value' => 500, 'type' => 'education']);
-        Demographic::create(['label' => 'SMP', 'value' => 400, 'type' => 'education']);
-        Demographic::create(['label' => 'SMA', 'value' => 300, 'type' => 'education']);
+        Demographic::create([
+            'year' => 2024,
+            'total_male' => 1754,
+            'total_female' => 1709,
+            'total_families' => 1050,
+            'mutation_in' => 25,
+            'mutation_out' => 15,
+        ]);
 
         // 6. Budgets
         Budget::create(['year' => 2024, 'type' => 'income', 'amount' => 1200000000, 'realized_amount' => 1150000000]);
