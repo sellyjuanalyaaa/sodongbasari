@@ -11,7 +11,8 @@ import {
     Image as ImageIcon,
     LogOut,
     Menu,
-    BarChart3
+    BarChart3,
+    Tag
 } from "lucide-react";
 import {
     Sidebar,
@@ -45,6 +46,7 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
     const navItems = [
         { label: "Dashboard", routeName: "admin.dashboard", icon: LayoutDashboard },
         { label: "Berita & Artikel", routeName: "admin.posts.index", active: "admin.posts.*", icon: FileText },
+        { label: "Kategori Berita", routeName: "admin.categories.index", active: "admin.categories.*", icon: Tag },
         { label: "Potensi Desa", routeName: "admin.potentials.index", active: "admin.potentials.*", icon: Mountain },
         { label: "Lembaga Desa", routeName: "admin.institutions.index", active: "admin.institutions.*", icon: Building2 },
         { label: "Perangkat Desa", routeName: "admin.officials.index", active: "admin.officials.*", icon: Users },

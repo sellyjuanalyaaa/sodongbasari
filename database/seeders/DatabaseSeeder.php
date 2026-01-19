@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
                 'content' => fake()->paragraphs(3, true),
                 'category' => fake()->randomElement(['news', 'announcement']),
                 'published_at' => fake()->dateTimeBetween('-1 year', 'now'),
-                'image_path' => 'https://via.placeholder.com/600x400',
+                'image_path' => null, // Will use fallback image in frontend
             ]);
         }
 
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
                 'description' => fake()->paragraph(),
                 'location' => fake()->address(),
                 'contact_info' => fake()->phoneNumber(),
-                'image_path' => 'https://via.placeholder.com/400x300',
+                'image_path' => null, // Will use fallback image in frontend
             ]);
         }
 

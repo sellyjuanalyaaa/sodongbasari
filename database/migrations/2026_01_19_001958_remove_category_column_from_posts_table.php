@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->text('description')->nullable();
-            $table->string('color')->default('#EFA00B');
-            $table->timestamps();
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropColumn('category');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->string('category')->nullable()->after('content');
+        });
     }
 };

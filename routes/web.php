@@ -10,6 +10,7 @@ Route::controller(PublicController::class)->group(function () {
     Route::get('/sodong-basari', 'sodongBasari')->name('sodong-basari');
     Route::get('/statistik', 'statistics')->name('statistics'); // Statistik Desa
     Route::get('/potensi', 'potentials')->name('potentials'); // Potensi Desa
+    Route::get('/potensi/{id}', 'potentialShow')->name('potentials.show'); // Detail Potensi
     // Route::get('/layanan', 'services')->name('services'); // Layanan Desa - Ditiadakan
     Route::get('/news', 'news')->name('news.index');
     Route::get('/news/{slug}', 'newsShow')->name('news.show');
@@ -28,6 +29,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     
     // CRUD Resources
     Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
+    Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('potentials', \App\Http\Controllers\Admin\PotentialController::class);
     Route::resource('institutions', \App\Http\Controllers\Admin\InstitutionController::class);
     Route::resource('institutions.members', \App\Http\Controllers\Admin\InstitutionMemberController::class);

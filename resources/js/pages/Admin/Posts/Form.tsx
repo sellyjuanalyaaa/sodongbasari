@@ -10,12 +10,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Save, Loader2, Image as ImageIcon } from "lucide-react";
 
-export default function PostForm({ post }: { post?: any }) {
+export default function PostForm({ post, categories }: { post?: any; categories?: any[] }) {
     const isEdit = !!post;
 
     const { data, setData, post: submitPost, processing, errors } = useForm({
         title: post?.title || '',
-        category: post?.category || '',
+        category_id: post?.category_id?.toString() || '',
         content: post?.content || '',
         image: null as File | null,
         _method: isEdit ? 'PUT' : 'POST',
@@ -78,21 +78,28 @@ export default function PostForm({ post }: { post?: any }) {
                         {/* Category */}
                         <div className="space-y-2">
                             <Label htmlFor="category" className="text-gray-900 font-semibold">Kategori</Label>
-                            <Select
-                                value={data.category}
-                                onValueChange={(val) => setData('category', val)}
-                            >
-                                <SelectTrigger className="border-gray-200 focus:ring-orange-200">
-                                    <SelectValue placeholder="Pilih Kategori" />
-                                </SelectTrigger>
-                                <SelectContent className="bg-white border-gray-100">
-                                    <SelectItem value="Berita Desa">Berita Desa</SelectItem>
-                                    <SelectItem value="Pengumuman">Pengumuman</SelectItem>
-                                    <SelectItem value="Kegiatan">Kegiatan</SelectItem>
-                                    <SelectItem value="Artikel">Artikel</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            {errors.category && <p className="text-sm text-red-500">{errors.category}</p>}
+                            {categories && categories.length > 0 ? (
+                                <Select
+                                    value={data.category_id}
+                                    onValueChange={(val) => setData('category_id', val)}
+                                >
+                                    <SelectTrigger className="border-gray-200 focus:ring-orange-200">
+                                        <SelectValue placeholder="Pilih Kategori" />
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-white border-gray-100">
+                                        {categories.map((cat: any) => (
+                                            <SelectItem key={cat.id} value={cat.id.toString()}>
+                                                {cat.name}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            ) : (
+                                <div className="text-sm text-gray-500 p-3 bg-yellow-50 border border-yellow-200 rounded">
+                                    Belum ada kategori. <Link href={route('admin.categories.create')} className="text-orange-600 hover:underline">Buat kategori terlebih dahulu</Link>.
+                                </div>
+                            )}
+                            {errors.category_id && <p className="text-sm text-red-500">{errors.category_id}</p>}
                         </div>
 
                         {/* Content */}

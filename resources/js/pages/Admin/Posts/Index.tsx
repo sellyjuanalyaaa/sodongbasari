@@ -46,6 +46,8 @@ export default function PostIndex({ posts }: { posts: any }) {
                                 <th className="h-12 px-4 text-left align-middle font-medium text-gray-500">Thumbnail</th>
                                 <th className="h-12 px-4 text-left align-middle font-medium text-gray-500">Judul</th>
                                 <th className="h-12 px-4 text-left align-middle font-medium text-gray-500">Kategori</th>
+                                <th className="h-12 px-4 text-left align-middle font-medium text-gray-500">Dibuat Oleh</th>
+                                <th className="h-12 px-4 text-center align-middle font-medium text-gray-500">View</th>
                                 <th className="h-12 px-4 text-left align-middle font-medium text-gray-500">Tanggal</th>
                                 <th className="h-12 px-4 text-right align-middle font-medium text-gray-500">Aksi</th>
                             </tr>
@@ -58,16 +60,42 @@ export default function PostIndex({ posts }: { posts: any }) {
                                     </td>
                                     <td className="p-4 align-middle font-medium text-gray-700">{post.title}</td>
                                     <td className="p-4 align-middle">
-                                        <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${post.category === 'Berita Desa' ? 'bg-blue-50 text-blue-700 border-blue-100' :
-                                            post.category === 'Pengumuman' ? 'bg-amber-50 text-amber-700 border-amber-100' :
-                                                post.category === 'Kegiatan' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' :
-                                                    post.category === 'Artikel' ? 'bg-purple-50 text-purple-700 border-purple-100' :
-                                                        'bg-gray-100 text-gray-700 border-gray-200'
-                                            }`}>
-                                            {post.category}
+                                        {post.category ? (
+                                            <span 
+                                                className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                                                style={{ 
+                                                    backgroundColor: `${post.category.color}20`,
+                                                    color: post.category.color,
+                                                    border: `1px solid ${post.category.color}40`
+                                                }}
+                                            >
+                                                {post.category.name}
+                                            </span>
+                                        ) : (
+                                            <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 border-gray-200">
+                                                Tidak Ada Kategori
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td className="p-4 align-middle">
+                                        <span className="text-sm text-gray-700">
+                                            {post.creator?.name || 'Admin'}
                                         </span>
                                     </td>
-                                    <td className="p-4 align-middle text-gray-700">{new Date(post.published_at).toLocaleDateString()}</td>
+                                    <td className="p-4 align-middle text-center">
+                                        <div className="flex items-center justify-center gap-1 text-gray-600">
+                                            <Eye className="h-3.5 w-3.5" />
+                                            <span className="text-sm">{post.view_count || 0}</span>
+                                        </div>
+                                    </td>
+                                    <td className="p-4 align-middle text-gray-700">
+                                        {new Date(post.published_at).toLocaleDateString('id-ID', { 
+                                            day: 'numeric', 
+                                            month: 'short', 
+                                            year: 'numeric',
+                                            timeZone: 'Asia/Jakarta'
+                                        })}
+                                    </td>
                                     <td className="p-4 align-middle text-right">
                                         <div className="flex justify-end gap-2">
                                             <Button variant="ghost" size="icon" asChild>
@@ -104,7 +132,7 @@ export default function PostIndex({ posts }: { posts: any }) {
                             ))}
                             {posts.data.length === 0 && (
                                 <tr>
-                                    <td colSpan={5} className="p-4 text-center text-muted-foreground">Belum ada data berita.</td>
+                                    <td colSpan={7} className="p-4 text-center text-muted-foreground">Belum ada data berita.</td>
                                 </tr>
                             )}
                         </tbody>

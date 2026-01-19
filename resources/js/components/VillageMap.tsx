@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, LayersControl } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -33,8 +33,8 @@ interface VillageMapProps {
 }
 
 export default function VillageMap({ 
-    latitude = -6.9447, 
-    longitude = 109.3641, 
+    latitude = -7.1163628, 
+    longitude = 109.3063082, 
     villageName = "Desa Sodong Basari",
     totalRt = 0,
     totalRw = 0
@@ -51,10 +51,37 @@ export default function VillageMap({
                 className="z-0"
             >
                 <MapUpdater center={position} zoom={14} />
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
+                
+                <LayersControl position="topright">
+                    {/* OpenStreetMap Layer */}
+                    <LayersControl.BaseLayer checked name="Peta">
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                    </LayersControl.BaseLayer>
+                    
+                    {/* Satellite Layer - Esri World Imagery */}
+                    <LayersControl.BaseLayer name="Satelit">
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.esri.com/">Esri</a>'
+                            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                        />
+                    </LayersControl.BaseLayer>
+                    
+                    {/* Hybrid Layer - Satellite with Labels */}
+                    <LayersControl.BaseLayer name="Hybrid (Satelit + Label)">
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.esri.com/">Esri</a>'
+                            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                        />
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.esri.com/">Esri</a>'
+                            url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
+                        />
+                    </LayersControl.BaseLayer>
+                </LayersControl>
+
                 <Marker position={position}>
                     <Popup>
                         <div className="text-center">

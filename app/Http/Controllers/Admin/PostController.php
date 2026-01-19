@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -13,7 +14,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->paginate(10);
+        $posts = Post::with(['category', 'creator'])->latest()->paginate(10);
         return Inertia::render('Admin/Posts/Index', [
             'posts' => $posts
         ]);
@@ -21,14 +22,16 @@ class PostController extends Controller
 
     public function create()
     {
-        return Inertia::render('Admin/Posts/Form');
+        return Inertia::render('Admin/Posts/Form', [
+            'categories' => Category::all(),
+        ]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'category' => 'required|string|max:50',
+            'category_id' => 'required|exists:categories,id',
             'content' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -42,7 +45,8 @@ class PostController extends Controller
         Post::create([
             'title' => $validated['title'],
             'slug' => Str::slug($validated['title']) . '-' . Str::random(5),
-            'category' => $validated['category'],
+            'category_id' => $validated['category_id'],
+            'created_by' => auth()->id(),
             'content' => $validated['content'],
             'image_path' => $imagePath,
             'published_at' => now(),
@@ -54,7 +58,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         return Inertia::render('Admin/Posts/Form', [
-            'post' => $post
+            'post' => $post,
+            'categories' => Category::all(),
         ]);
     }
 
@@ -62,14 +67,14 @@ class PostController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'category' => 'required|string|max:50',
+            'category_id' => 'required|exists:categories,id',
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $updateData = [
             'title' => $validated['title'],
-            'category' => $validated['category'],
+            'category_id' => $validated['category_id'],
             'content' => $validated['content'],
         ];
 

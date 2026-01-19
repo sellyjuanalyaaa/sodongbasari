@@ -24,8 +24,12 @@ class PublicController extends Controller
     public function index()
     {
         return Inertia::render('Public/Home', array_merge($this->getCommonProps(), [
-            'latestNews' => Post::where('category', 'news')->latest()->take(3)->get(),
-            'announcements' => Post::where('category', 'announcement')->latest()->take(2)->get(),
+            'latestNews' => Post::whereHas('category', function($query) {
+                $query->where('slug', 'news');
+            })->latest()->take(3)->get(),
+            'announcements' => Post::whereHas('category', function($query) {
+                $query->where('slug', 'announcement');
+            })->latest()->take(2)->get(),
             'stats' => [
                 'population' => \App\Models\Demographic::orderBy('year', 'desc')->get()->first()?->total_male + \App\Models\Demographic::orderBy('year', 'desc')->get()->first()?->total_female ?? 0,
                 'area' => '1500 Ha', 
@@ -50,6 +54,19 @@ class PublicController extends Controller
         ]));
     }
 
+    public function potentialShow($id)
+    {
+        $potential = Potential::findOrFail($id);
+
+        return Inertia::render('Public/PotentialDetail', array_merge($this->getCommonProps(), [
+            'potential' => $potential,
+            'relatedPotentials' => Potential::where('id', '!=', $id)
+                ->where('category', $potential->category)
+                ->take(3)
+                ->get(),
+        ]));
+    }
+
     public function statistics()
     {
         $latestStatistic = Statistic::orderBy('year', 'desc')->first();
@@ -70,14 +87,23 @@ class PublicController extends Controller
 
     public function news()
     {
+        $mostTrending = Post::with('category')
+            ->orderBy('view_count', 'desc')
+            ->take(5)
+            ->get();
+
         return Inertia::render('Public/News/Index', array_merge($this->getCommonProps(), [
-            'posts' => Post::latest()->paginate(9),
+            'posts' => Post::with('category')->latest()->paginate(9),
+            'mostTrending' => $mostTrending,
         ]));
     }
 
     public function newsShow($slug)
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
+        $post = Post::with(['category', 'creator'])->where('slug', $slug)->firstOrFail();
+        
+        // Increment view count
+        $post->incrementViewCount();
 
         return Inertia::render('Public/News/Show', array_merge($this->getCommonProps(), [
             'post' => $post,

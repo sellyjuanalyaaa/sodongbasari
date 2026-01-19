@@ -14,4 +14,19 @@ class Post extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function incrementViewCount()
+    {
+        $this->increment('view_count');
+    }
 }
