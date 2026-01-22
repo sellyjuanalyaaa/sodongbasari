@@ -68,6 +68,7 @@ class InstitutionMemberController extends Controller
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'remove_photo' => 'nullable|boolean',
             'order' => 'required|integer|min:0',
             'is_active' => 'boolean',
         ]);
@@ -79,6 +80,14 @@ class InstitutionMemberController extends Controller
             'is_active' => $validated['is_active'] ?? true,
         ];
 
+        // Handle photo removal
+        if ($request->input('remove_photo') && $member->photo) {
+            $oldPath = str_replace('/storage/', '', $member->photo);
+            Storage::disk('public')->delete($oldPath);
+            $updateData['photo'] = null;
+        }
+
+        // Handle new photo upload
         if ($request->hasFile('photo')) {
             if ($member->photo) {
                 $oldPath = str_replace('/storage/', '', $member->photo);

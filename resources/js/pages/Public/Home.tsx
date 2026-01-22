@@ -8,37 +8,6 @@ import { Users } from 'lucide-react';
 import { Head, Link } from '@inertiajs/react';
 import { route } from 'ziggy-js';
 
-// Data Berita Manual sesuai Contoh
-const featuredNews = [
-    {
-        id: 1,
-        title: "Lomba Foto & Reels",
-        category: "Kamandaka",
-        published_at: "2022-11-20",
-        image_path: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        content: "Yuk ikutan lombanya! Buat karya semenarik mungkin dan menangkan hadiah jutaan rupiah...",
-        slug: "lomba-foto-reels"
-    },
-    {
-        id: 2,
-        title: "Event Kamandaka Ciptarasa",
-        category: "Taman Sari",
-        published_at: "2022-11-23",
-        image_path: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        content: "Rangkaian acara Kamandaka Ciptarasa bulan November akan dimeriahkan dengan berbagai lomba...",
-        slug: "event-kamandaka"
-    },
-    {
-        id: 3,
-        title: "Pagelaran Wayang Kulit",
-        category: "Budaya",
-        published_at: "2022-11-25",
-        image_path: "https://images.unsplash.com/photo-1583071299210-c6c113f4cb28?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        content: "Acara wayang kulit dengan lakon yang terkenal yaitu 'Semar Mbangun Kayangan'...",
-        slug: "wayang-kulit"
-    }
-];
-
 // Data Statistik Slider
 const subStats = [
     {
@@ -152,9 +121,6 @@ const AnimatedCounter = ({ value, duration = 2000 }: { value: any; duration?: nu
 export default function Home({ villageInfo, heroImages = [], stats = {}, officials = [], latestNews = [] }: { villageInfo: any, heroImages?: any[], stats?: any, officials?: any[], latestNews?: any[] }) {
     const [currentStat, setCurrentStat] = useState(0);
 
-    // Use latestNews from database if available, fallback to featuredNews
-    const displayNews = latestNews.length > 0 ? latestNews : featuredNews;
-
     const populationStat = {
         title: "Total Penduduk",
         subtitle: stats?.population ? `${Number(stats.population).toLocaleString('id-ID')} Jiwa` : "Data Belum Tersedia",
@@ -187,7 +153,7 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                     <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-20">
                         {/* Avatar Side */}
                         <div className="flex-shrink-0 relative">
-                            <div className="w-56 h-56 md:w-72 md:h-72 relative">
+                            <div className="w-72 h-72 md:w-96 md:h-96 relative">
                                 <img
                                     src="/images/kepala-desa.png"
                                     alt="Kepala Desa"
@@ -195,13 +161,13 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                                 />
                             </div>
                             {/* Subtle decorative element */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-amber-50 rounded-full blur-3xl -z-10 opacity-60"></div>
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-amber-50 rounded-full blur-3xl -z-10 opacity-60"></div>
                         </div>
 
                         {/* Text Side */}
                         <div className="flex-1 max-w-xl">
                             <div className="relative mb-10">
-                                <span className="text-7xl text-slate-900/5 font-serif leading-none block mb-6 select-none">"</span>
+                                <span className="text-7xl text-orange-600/20 font-serif leading-none block mb-6 select-none">"</span>
                                 <p className="text-slate-600 text-[15px] leading-[1.8] -mt-12 font-light">
                                     Selamat datang di Website Resmi Desa Sodong Basari, Belik, Kabupaten Pemalang.
                                     <br /><br />
@@ -393,20 +359,33 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                         <p className="text-slate-500 text-sm font-light">Berita Terkini</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {displayNews.map((post) => (
-                            <NewsCard key={post.id} post={post} />
-                        ))}
-                    </div>
+                    {latestNews.length > 0 ? (
+                        <>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {latestNews.map((post) => (
+                                    <NewsCard key={post.id} post={post} />
+                                ))}
+                            </div>
 
-                    <div className="text-center mt-16">
-                        <Link href={route('news.index')} className="inline-flex items-center px-8 py-3 border border-slate-900 text-slate-900 font-medium text-sm rounded-full hover:bg-slate-900 hover:text-white transition-all duration-300">
-                            Lihat Semua Berita
-                            <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </Link>
-                    </div>
+                            <div className="text-center mt-16">
+                                <Link href={route('news.index')} className="inline-flex items-center px-8 py-3 border border-slate-900 text-slate-900 font-medium text-sm rounded-full hover:bg-slate-900 hover:text-white transition-all duration-300">
+                                    Lihat Semua Berita
+                                    <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </Link>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="text-center py-16">
+                            <div className="text-slate-300 mb-4">
+                                <svg className="w-16 h-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                </svg>
+                            </div>
+                            <p className="text-slate-400 text-sm">Belum ada berita tersedia</p>
+                        </div>
+                    )}
                 </div>
             </section>
         </PublicLayout>

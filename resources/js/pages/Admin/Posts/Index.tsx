@@ -3,7 +3,7 @@ import React from 'react';
 import AdminLayout from '@/layouts/AdminLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { Button } from "@/components/ui/button";
-import { Plus, Pencil, Trash2, Eye } from "lucide-react";
+import { Plus, Pencil, Trash2, Eye, Folder } from "lucide-react";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -31,11 +31,18 @@ export default function PostIndex({ posts }: { posts: any }) {
                     <h1 className="text-3xl font-bold tracking-tight text-gray-900">Berita & Artikel</h1>
                     <p className="text-gray-500 mt-1">Kelola semua berita yang ditampilkan di website desa.</p>
                 </div>
-                <Button asChild className="bg-orange-600 hover:bg-orange-700 text-white shadow-sm">
-                    <Link href={route('admin.posts.create')}>
-                        <Plus className="mr-2 h-4 w-4" /> Tambah Berita
-                    </Link>
-                </Button>
+                <div className="flex gap-2">
+                    <Button asChild variant="outline" className="bg-white border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:text-green-800">
+                        <Link href={route('admin.categories.index')}>
+                            <Folder className="mr-2 h-4 w-4" /> Kelola Kategori
+                        </Link>
+                    </Button>
+                    <Button asChild className="bg-orange-600 hover:bg-orange-700 text-white shadow-sm">
+                        <Link href={route('admin.posts.create')}>
+                            <Plus className="mr-2 h-4 w-4" /> Tambah Berita
+                        </Link>
+                    </Button>
+                </div>
             </div>
 
             <div className="rounded-lg border border-gray-100 bg-white shadow-sm overflow-hidden">

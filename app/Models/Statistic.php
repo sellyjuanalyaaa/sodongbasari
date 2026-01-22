@@ -33,6 +33,29 @@ class Statistic extends Model
         'katolik',
         'hindu',
         'budha',
+        // Tempat Ibadah
+        'masjid',
+        'mushola',
+        'gereja',
+        'pura',
+        'vihara',
+        // Fasilitas Kesehatan
+        'puskesmas',
+        'posyandu',
+        'klinik',
+        // Fasilitas Olahraga
+        'lapangan_sepakbola',
+        'lapangan_voli',
+        'lapangan_badminton',
+        'gor',
+        // Wisata
+        'pantai',
+        'taman',
+        'cagar_budaya',
+        'wisata_alam',
+        // Migrasi Penduduk
+        'penduduk_datang',
+        'penduduk_keluar',
     ];
 
     protected $casts = [
@@ -60,5 +83,28 @@ class Statistic extends Model
         'katolik' => 'integer',
         'hindu' => 'integer',
         'budha' => 'integer',
+        // Tempat Ibadah
+        'masjid' => 'integer',
+        'mushola' => 'integer',
+        'gereja' => 'integer',
+        'pura' => 'integer',
+        'vihara' => 'integer',
+        // Fasilitas Kesehatan
+        'puskesmas' => 'integer',
+        'posyandu' => 'integer',
+        'klinik' => 'integer',
+        // Fasilitas Olahraga
+        'lapangan_sepakbola' => 'integer',
+        'lapangan_voli' => 'integer',
+        'lapangan_badminton' => 'integer',
+        'gor' => 'integer',
+        // Wisata
+        'pantai' => 'integer',
+        'taman' => 'integer',
+        'cagar_budaya' => 'integer',
+        'wisata_alam' => 'integer',
+        // Migrasi Penduduk
+        'penduduk_datang' => 'integer',
+        'penduduk_keluar' => 'integer',
     ];
 }

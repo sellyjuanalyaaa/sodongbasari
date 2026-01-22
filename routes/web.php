@@ -30,13 +30,29 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     // CRUD Resources
     Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('sliders', \App\Http\Controllers\Admin\SliderController::class);
     Route::resource('potentials', \App\Http\Controllers\Admin\PotentialController::class);
+    Route::resource('potential-categories', \App\Http\Controllers\Admin\PotentialCategoryController::class);
     Route::resource('institutions', \App\Http\Controllers\Admin\InstitutionController::class);
     Route::resource('institutions.members', \App\Http\Controllers\Admin\InstitutionMemberController::class);
     Route::resource('demographics', \App\Http\Controllers\Admin\DemographicController::class);
     Route::resource('budgets', \App\Http\Controllers\Admin\BudgetController::class);
     Route::resource('statistics', \App\Http\Controllers\Admin\StatisticController::class);
     Route::resource('officials', \App\Http\Controllers\Admin\VillageOfficialController::class);
+    Route::resource('former-village-heads', \App\Http\Controllers\Admin\FormerVillageHeadController::class);
+    
+    // Visitors
+    Route::get('/visitors', [\App\Http\Controllers\Admin\VisitorController::class, 'index'])->name('visitors.index');
+    
+    // Notifications
+    Route::get('/notifications', [\App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{id}/mark-as-read', [\App\Http\Controllers\Admin\NotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
+    Route::post('/notifications/mark-all-read', [\App\Http\Controllers\Admin\NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
+    Route::delete('/notifications/{id}', [\App\Http\Controllers\Admin\NotificationController::class, 'destroy'])->name('notifications.destroy');
+    
+    // Village Info
+    Route::get('/village-info', [\App\Http\Controllers\Admin\VillageInfoController::class, 'edit'])->name('village-info.edit');
+    Route::post('/village-info', [\App\Http\Controllers\Admin\VillageInfoController::class, 'update'])->name('village-info.update');
     
     // Settings
     Route::get('/hero-settings', [\App\Http\Controllers\Admin\HeroController::class, 'edit'])->name('hero.edit');

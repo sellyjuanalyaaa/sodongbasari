@@ -1,6 +1,11 @@
 
-export default function PotentialGrid({ potentials }: { potentials: any }) {
+export default function PotentialGrid({ potentials, categoryColors }: { potentials: any, categoryColors?: Record<string, string> }) {
     if (!potentials || potentials.length === 0) return <div className="text-center text-slate-500">Belum ada data potensi.</div>;
+
+    const getCategoryColor = (category: string) => {
+        // Ambil warna dari database, fallback ke orange
+        return categoryColors?.[category] || 'from-orange-500 to-amber-500';
+    };
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -12,9 +17,13 @@ export default function PotentialGrid({ potentials }: { potentials: any }) {
                             alt={item.name}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
+                        <div className="absolute top-4 right-4">
+                            <div className={`bg-gradient-to-r ${getCategoryColor(item.category)} px-3 py-1.5 rounded-lg text-xs font-medium text-white uppercase tracking-wide shadow-lg`}>
+                                {item.category}
+                            </div>
+                        </div>
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                             <h3 className="text-white text-lg font-bold">{item.name}</h3>
-                            <span className="text-[#FFE0B2] text-sm capitalize">{item.category}</span>
                         </div>
                     </div>
                     <div className="p-6">

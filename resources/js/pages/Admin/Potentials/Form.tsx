@@ -10,11 +10,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2, ArrowLeft, Upload, Image as ImageIcon } from "lucide-react";
 
-interface PotentialFormProps {
-    potential?: any;
+interface Category {
+    id: number;
+    name: string;
+    color: string;
 }
 
-export default function Form({ potential }: PotentialFormProps) {
+interface PotentialFormProps {
+    potential?: any;
+    categories: Category[];
+}
+
+export default function Form({ potential, categories }: PotentialFormProps) {
     const isEdit = !!potential;
     const { data, setData, post, processing, errors } = useForm({
         _method: isEdit ? 'put' : 'post',
@@ -85,11 +92,18 @@ export default function Form({ potential }: PotentialFormProps) {
                                         <SelectValue placeholder="Pilih Kategori" />
                                     </SelectTrigger>
                                     <SelectContent className="bg-white border-gray-100">
-                                        <SelectItem value="Wisata Alam">Wisata Alam</SelectItem>
-                                        <SelectItem value="UMKM">UMKM / Produk Lokal</SelectItem>
-                                        <SelectItem value="Pertanian">Pertanian & Perkebunan</SelectItem>
-                                        <SelectItem value="Seni Budaya">Seni & Budaya</SelectItem>
-                                        <SelectItem value="Lainnya">Lainnya</SelectItem>
+                                        {categories && categories.length > 0 ? (
+                                            categories.map((cat) => (
+                                                <SelectItem key={cat.id} value={cat.name}>
+                                                    <div className="flex items-center gap-2">
+                                                        <div className={`w-12 h-3 rounded bg-gradient-to-r ${cat.color}`}></div>
+                                                        <span>{cat.name}</span>
+                                                    </div>
+                                                </SelectItem>
+                                            ))
+                                        ) : (
+                                            <SelectItem value="Lainnya">Belum ada kategori</SelectItem>
+                                        )}
                                     </SelectContent>
                                 </Select>
                                 {errors.category && <p className="text-sm text-red-500">{errors.category}</p>}

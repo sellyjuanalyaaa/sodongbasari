@@ -5,10 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use App\Mail\AdminNotification;
 
 class PostController extends Controller
 {
@@ -42,7 +47,7 @@ class PostController extends Controller
             $imagePath = "/storage/$path";
         }
 
-        Post::create([
+        $post = Post::create([
             'title' => $validated['title'],
             'slug' => Str::slug($validated['title']) . '-' . Str::random(5),
             'category_id' => $validated['category_id'],
@@ -51,6 +56,45 @@ class PostController extends Controller
             'image_path' => $imagePath,
             'published_at' => now(),
         ]);
+
+        // Create notification in database
+        $user = auth()->user();
+        Notification::create([
+            'title' => 'Berita Baru Ditambahkan',
+            'message' => 'Berita baru "' . $post->title . '" telah ditambahkan ke website.',
+            'type' => 'success',
+            'action_text' => 'Lihat Berita',
+            'action_url' => route('admin.posts.index'),
+            'data' => [
+                'post_id' => $post->id,
+                'title' => $post->title,
+                'category' => Category::find($post->category_id)->name ?? '-',
+                'created_by' => $user ? $user->name : 'System',
+            ],
+        ]);
+
+        // Send email notification to admin
+        try {
+            $admin = User::first(); // Atau gunakan User::where('role', 'admin')->first();
+            if ($admin && $admin->email) {
+                $user = auth()->user();
+                Mail::to($admin->email)->send(new AdminNotification(
+                    'Berita Baru Ditambahkan',
+                    'Berita baru telah ditambahkan ke website.',
+                    'Lihat Berita',
+                    route('admin.posts.index'),
+                    [
+                        'judul' => $post->title,
+                        'kategori' => Category::find($post->category_id)->name ?? '-',
+                        'dibuat_oleh' => $user ? $user->name : 'System',
+                        'waktu' => now()->format('d M Y H:i'),
+                    ]
+                ));
+            }
+        } catch (\Exception $e) {
+            // Log error tapi jangan stop proses
+            Log::error('Failed to send email: ' . $e->getMessage());
+        }
 
         return to_route('admin.posts.index')->with('success', 'Berita berhasil ditambahkan.');
     }

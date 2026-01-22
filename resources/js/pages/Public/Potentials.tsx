@@ -4,19 +4,13 @@ import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
 import { route } from 'ziggy-js';
 
-export default function Potentials({ villageInfo, potentials }: { villageInfo: any, potentials: any[] }) {
+export default function Potentials({ villageInfo, potentials, categoryColors }: { villageInfo: any, potentials: any[], categoryColors: Record<string, string> }) {
     // SVG placeholder untuk potensi yang tidak memiliki gambar
     const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect fill='%23f8fafc' width='400' height='300'/%3E%3Cg fill='%2394a3b8'%3E%3Cpath d='M160 120h80v26H160zm-40 40h160v12H120z'/%3E%3Ccircle cx='186' cy='93' r='13'/%3E%3C/g%3E%3Ctext x='200' y='170' font-family='system-ui' font-size='14' fill='%23475569' text-anchor='middle'%3EPotensi Desa%3C/text%3E%3C/svg%3E";
     
-    const getCategoryLabel = (category: string) => {
-        const labels = {
-            tourism: 'Wisata',
-            product: 'Produk Unggulan',
-            agriculture: 'Pertanian',
-            craft: 'Kerajinan',
-            culinary: 'Kuliner'
-        };
-        return labels[category as keyof typeof labels] || category;
+    const getCategoryColor = (category: string) => {
+        // Ambil warna dari database, fallback ke orange
+        return categoryColors[category] || 'from-orange-500 to-[#EFA00B]';
     };
     
     return (
@@ -49,8 +43,8 @@ export default function Potentials({ villageInfo, potentials }: { villageInfo: a
                                                     e.currentTarget.src = placeholderImage;
                                                 }}
                                             />
-                                            <div className="absolute top-4 right-4 bg-gradient-to-r from-orange-500 to-[#EFA00B] px-3 py-1.5 rounded-lg text-xs font-medium text-white uppercase tracking-wide shadow-lg shadow-orange-200">
-                                                {getCategoryLabel(item.category)}
+                                            <div className={`absolute top-4 right-4 bg-gradient-to-r ${getCategoryColor(item.category)} px-3 py-1.5 rounded-lg text-xs font-medium text-white uppercase tracking-wide shadow-lg`}>
+                                                {item.category}
                                             </div>
                                         </div>
                                         <div className="p-6 flex flex-col flex-1">

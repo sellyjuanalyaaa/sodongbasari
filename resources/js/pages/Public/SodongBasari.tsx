@@ -20,13 +20,23 @@ interface Institution {
     logo_path: string | null;
 }
 
+interface FormerVillageHead {
+    id: number;
+    name: string;
+    photo: string | null;
+    start_year: number;
+    end_year: number;
+    achievement: string | null;
+}
+
 interface Props {
     villageInfo: any;
     officials: Official[];
     institutions: Institution[];
+    formerHeads: FormerVillageHead[];
 }
 
-export default function SodongBasari({ villageInfo, officials, institutions }: Props) {
+export default function SodongBasari({ villageInfo, officials, institutions, formerHeads }: Props) {
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Sodong Basari" />
@@ -40,6 +50,62 @@ export default function SodongBasari({ villageInfo, officials, institutions }: P
                         <p className="text-slate-500 text-sm font-light">Sodong Basari</p>
                     </div>
                     
+                    {/* Visi & Misi */}
+                    {(villageInfo?.vision || villageInfo?.mission) && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            {/* Debug - Hapus setelah testing */}
+                            {console.log('Village Info:', villageInfo)}
+                            
+                            {/* Visi */}
+                            {villageInfo?.vision && (
+                                <div className="bg-gradient-to-br from-orange-50 to-white p-8 rounded-xl border border-orange-200 hover:shadow-lg transition-all">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-[#EFA00B] rounded-lg flex items-center justify-center text-white shadow-md">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-xl font-semibold text-slate-900">Visi Desa</h3>
+                                    </div>
+                                    <div className="relative">
+                                        <div className="absolute left-0 top-0 text-6xl text-orange-200 font-serif leading-none">"</div>
+                                        <p className="text-slate-700 text-[15px] leading-relaxed pl-8 pt-6 font-light italic">
+                                            {villageInfo.vision}
+                                        </p>
+                                        <div className="absolute right-0 bottom-0 text-6xl text-orange-200 font-serif leading-none">"</div>
+                                    </div>
+                                </div>
+                            )}
+                            
+                            {/* Misi */}
+                            {villageInfo?.mission && (
+                                <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl border border-blue-200 hover:shadow-lg transition-all">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white shadow-md">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-xl font-semibold text-slate-900">Misi Desa</h3>
+                                    </div>
+                                    <div className="space-y-3">
+                                        {villageInfo.mission.split('\n').filter((item: string) => item.trim()).map((item: string, index: number) => (
+                                            <div key={index} className="flex gap-3">
+                                                <div className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-semibold mt-0.5">
+                                                    {index + 1}
+                                                </div>
+                                                <p className="text-slate-700 text-[15px] leading-relaxed font-light flex-1">
+                                                    {item.replace(/^\d+\.\s*/, '')}
+                                                </p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
                     {/* Gambaran Umum */}
                     <div className="bg-slate-50 p-8 md:p-10 rounded-xl border border-slate-200 mb-8">
                         <h3 className="text-xl md:text-2xl font-medium text-slate-900 mb-6 tracking-tight">Gambaran Umum Desa Sodong Basari</h3>
@@ -171,6 +237,81 @@ export default function SodongBasari({ villageInfo, officials, institutions }: P
                             </div>
                         )}
                     </div>
+
+                    {/* Riwayat Kepala Desa */}
+                    {formerHeads && formerHeads.length > 0 && (
+                        <div className="bg-gradient-to-br from-slate-50 to-white p-8 md:p-10 rounded-xl border border-slate-200 mt-8">
+                            <div className="flex items-center gap-3 mb-10">
+                                <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-[#EFA00B] rounded-lg flex items-center justify-center text-white shadow-md">
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <h3 className="text-xl md:text-2xl font-medium text-slate-900 tracking-tight">Riwayat Kepala Desa</h3>
+                            </div>
+                            
+                            <div className="relative">
+                                {/* Timeline Line */}
+                                <div className="absolute left-[23px] top-8 bottom-8 w-0.5 bg-gradient-to-b from-orange-200 via-orange-300 to-orange-200"></div>
+                                
+                                <div className="space-y-6">
+                                    {formerHeads.map((head, index) => (
+                                        <div key={head.id} className="relative pl-16 pb-8 last:pb-0">
+                                            {/* Timeline Dot */}
+                                            <div className="absolute left-0 top-2 w-12 h-12 bg-gradient-to-br from-orange-500 to-[#EFA00B] rounded-full flex items-center justify-center text-white font-semibold shadow-lg shadow-orange-200 z-10">
+                                                {index + 1}
+                                            </div>
+                                            
+                                            {/* Content Card */}
+                                            <div className="bg-white rounded-xl border border-slate-200 hover:border-orange-200 hover:shadow-lg transition-all duration-300 overflow-hidden">
+                                                <div className="flex flex-col md:flex-row">
+                                                    {/* Photo */}
+                                                    {head.photo && (
+                                                        <div className="md:w-32 md:h-32 h-48 flex-shrink-0">
+                                                            <img 
+                                                                src={`/storage/${head.photo}`}
+                                                                alt={head.name}
+                                                                className="w-full h-full object-cover"
+                                                            />
+                                                        </div>
+                                                    )}
+                                                    
+                                                    {/* Info */}
+                                                    <div className="flex-1 p-6">
+                                                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-3">
+                                                            <div>
+                                                                <h4 className="text-lg font-semibold text-slate-900 mb-1">{head.name}</h4>
+                                                                <div className="flex items-center gap-2 text-sm">
+                                                                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                                                        Kepala Desa
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex items-center gap-2 text-sm font-medium text-slate-600 bg-slate-50 px-4 py-2 rounded-lg">
+                                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                                </svg>
+                                                                {head.start_year} - {head.end_year}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        {head.achievement && (
+                                                            <div className="mt-4">
+                                                                <h5 className="text-sm font-medium text-slate-700 mb-2">Prestasi & Pencapaian:</h5>
+                                                                <p className="text-sm text-slate-600 leading-relaxed font-light">
+                                                                    {head.achievement}
+                                                                </p>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
                     {/* Lembaga Desa */}
                     <div className="bg-slate-50 p-8 md:p-10 rounded-xl border border-slate-200 mt-8">

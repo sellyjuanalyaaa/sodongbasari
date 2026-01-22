@@ -27,38 +27,30 @@ interface Props {
 }
 
 export default function Form({ institution, member }: Props) {
-    const { data, setData, post, put, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         name: member?.name || '',
         position: member?.position || '',
         photo: null as File | null,
+        remove_photo: false,
         order: member?.order || 0,
         is_active: member?.is_active ?? true,
+        _method: member ? 'PUT' : 'POST',
     });
 
     const [preview, setPreview] = useState<string | null>(member?.photo || null);
 
     const handleSubmit: FormEventHandler = (e) => {
         e.preventDefault();
-        
-        const formData = new FormData();
-        formData.append('name', data.name);
-        formData.append('position', data.position);
-        if (data.photo) {
-            formData.append('photo', data.photo);
-        }
-        formData.append('order', data.order.toString());
-        formData.append('is_active', data.is_active ? '1' : '0');
-        formData.append('_method', member ? 'PUT' : 'POST');
 
         if (member) {
+            // For update, use post with _method in data
             post(route('admin.institutions.members.update', [institution.id, member.id]), {
-                data: formData,
-                forceFormData: true,
+                preserveScroll: true,
             });
         } else {
+            // For create, use regular post
             post(route('admin.institutions.members.store', institution.id), {
-                data: formData,
-                forceFormData: true,
+                preserveScroll: true,
             });
         }
     };
@@ -67,6 +59,7 @@ export default function Form({ institution, member }: Props) {
         const file = e.target.files?.[0];
         if (file) {
             setData('photo', file);
+            setData('remove_photo', false); // Reset remove flag when new photo uploaded
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreview(reader.result as string);
@@ -77,6 +70,7 @@ export default function Form({ institution, member }: Props) {
 
     const removeImage = () => {
         setData('photo', null);
+        setData('remove_photo', true);
         setPreview(null);
     };
 

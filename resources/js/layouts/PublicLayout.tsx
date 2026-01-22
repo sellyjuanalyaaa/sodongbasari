@@ -1,10 +1,13 @@
 
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import React, { useState } from 'react';
 import { route } from 'ziggy-js';
+import VisitorStatsWidget from '@/components/VisitorStatsWidget';
+import BackToTop from '@/components/BackToTop';
 
 export default function PublicLayout({ children, villageInfo }: { children: React.ReactNode; villageInfo: any }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { visitorStats } = usePage().props as any;
 
     const links = [
         { name: 'Home', route: 'home' },
@@ -282,6 +285,12 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
                     </div>
                 </div>
             </footer>
+
+            {/* Visitor Stats Widget */}
+            {visitorStats && <VisitorStatsWidget stats={visitorStats} />}
+            
+            {/* Back to Top Button */}
+            <BackToTop />
         </div>
     );
 }

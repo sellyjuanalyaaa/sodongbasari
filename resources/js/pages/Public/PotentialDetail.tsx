@@ -1,7 +1,7 @@
 import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
-import { MapPin, Phone, Tag, ArrowLeft, ArrowRight } from 'lucide-react';
+import { MapPin, Phone, Tag, ArrowLeft, ArrowRight, Calendar, User } from 'lucide-react';
 import { route } from 'ziggy-js';
 
 interface Potential {
@@ -12,6 +12,10 @@ interface Potential {
     location: string;
     contact_info: string;
     image_path: string | null;
+    created_at: string;
+    creator?: {
+        name: string;
+    };
 }
 
 interface Props {
@@ -76,6 +80,22 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
                                     <span className="font-light">{potential.contact_info}</span>
                                 </div>
                             )}
+                        </div>
+                        
+                        {/* Created Info */}
+                        <div className="mt-4 pt-4 border-t border-slate-200">
+                            <div className="flex flex-wrap gap-6 text-xs text-slate-500">
+                                {potential.creator && (
+                                    <div className="flex items-center gap-2">
+                                        <User className="h-3.5 w-3.5 text-orange-500" />
+                                        <span>Dibuat oleh <span className="font-medium text-slate-700">{potential.creator.name}</span></span>
+                                    </div>
+                                )}
+                                <div className="flex items-center gap-2">
+                                    <Calendar className="h-3.5 w-3.5 text-orange-500" />
+                                    <span>Dibuat pada <span className="font-medium text-slate-700">{new Date(potential.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

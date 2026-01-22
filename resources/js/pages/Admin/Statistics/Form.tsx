@@ -33,6 +33,29 @@ interface StatisticFormData {
     katolik: string;
     hindu: string;
     budha: string;
+    // Tempat Ibadah
+    masjid: string;
+    mushola: string;
+    gereja: string;
+    pura: string;
+    vihara: string;
+    // Fasilitas Kesehatan
+    puskesmas: string;
+    posyandu: string;
+    klinik: string;
+    // Fasilitas Olahraga
+    lapangan_sepakbola: string;
+    lapangan_voli: string;
+    lapangan_badminton: string;
+    gor: string;
+    // Wisata
+    pantai: string;
+    taman: string;
+    cagar_budaya: string;
+    wisata_alam: string;
+    // Migrasi Penduduk
+    penduduk_datang: string;
+    penduduk_keluar: string;
 }
 
 interface Props {
@@ -67,6 +90,29 @@ export default function Form({ statistic }: Props) {
         katolik: statistic?.katolik || '',
         hindu: statistic?.hindu || '',
         budha: statistic?.budha || '',
+        // Tempat Ibadah
+        masjid: statistic?.masjid || '',
+        mushola: statistic?.mushola || '',
+        gereja: statistic?.gereja || '',
+        pura: statistic?.pura || '',
+        vihara: statistic?.vihara || '',
+        // Fasilitas Kesehatan
+        puskesmas: statistic?.puskesmas || '',
+        posyandu: statistic?.posyandu || '',
+        klinik: statistic?.klinik || '',
+        // Fasilitas Olahraga
+        lapangan_sepakbola: statistic?.lapangan_sepakbola || '',
+        lapangan_voli: statistic?.lapangan_voli || '',
+        lapangan_badminton: statistic?.lapangan_badminton || '',
+        gor: statistic?.gor || '',
+        // Wisata
+        pantai: statistic?.pantai || '',
+        taman: statistic?.taman || '',
+        cagar_budaya: statistic?.cagar_budaya || '',
+        wisata_alam: statistic?.wisata_alam || '',
+        // Migrasi Penduduk
+        penduduk_datang: statistic?.penduduk_datang || '',
+        penduduk_keluar: statistic?.penduduk_keluar || '',
     });
 
     const [imagePreview, setImagePreview] = useState<string | null>(
@@ -353,6 +399,113 @@ export default function Form({ statistic }: Props) {
                         <div>
                             <Label htmlFor="budha" className="text-gray-900 font-semibold">Budha *</Label>
                             <Input id="budha" name="budha" type="number" required value={formData.budha} onChange={handleChange} className="mt-1" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Tempat Ibadah */}
+                <div className="rounded-lg border border-gray-100 bg-white shadow-sm p-6">
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Tempat Ibadah</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <Label htmlFor="masjid" className="text-gray-900 font-semibold">Masjid *</Label>
+                            <Input id="masjid" name="masjid" type="number" required value={formData.masjid} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="mushola" className="text-gray-900 font-semibold">Mushola *</Label>
+                            <Input id="mushola" name="mushola" type="number" required value={formData.mushola} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="gereja" className="text-gray-900 font-semibold">Gereja *</Label>
+                            <Input id="gereja" name="gereja" type="number" required value={formData.gereja} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="pura" className="text-gray-900 font-semibold">Pura *</Label>
+                            <Input id="pura" name="pura" type="number" required value={formData.pura} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="vihara" className="text-gray-900 font-semibold">Vihara *</Label>
+                            <Input id="vihara" name="vihara" type="number" required value={formData.vihara} onChange={handleChange} className="mt-1" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Fasilitas Kesehatan */}
+                <div className="rounded-lg border border-gray-100 bg-white shadow-sm p-6">
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Fasilitas Kesehatan</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <Label htmlFor="puskesmas" className="text-gray-900 font-semibold">Puskesmas *</Label>
+                            <Input id="puskesmas" name="puskesmas" type="number" required value={formData.puskesmas} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="posyandu" className="text-gray-900 font-semibold">Posyandu *</Label>
+                            <Input id="posyandu" name="posyandu" type="number" required value={formData.posyandu} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="klinik" className="text-gray-900 font-semibold">Klinik *</Label>
+                            <Input id="klinik" name="klinik" type="number" required value={formData.klinik} onChange={handleChange} className="mt-1" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Fasilitas Olahraga */}
+                <div className="rounded-lg border border-gray-100 bg-white shadow-sm p-6">
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Fasilitas Olahraga</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <Label htmlFor="lapangan_sepakbola" className="text-gray-900 font-semibold">Lapangan Sepakbola *</Label>
+                            <Input id="lapangan_sepakbola" name="lapangan_sepakbola" type="number" required value={formData.lapangan_sepakbola} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="lapangan_voli" className="text-gray-900 font-semibold">Lapangan Voli *</Label>
+                            <Input id="lapangan_voli" name="lapangan_voli" type="number" required value={formData.lapangan_voli} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="lapangan_badminton" className="text-gray-900 font-semibold">Lapangan Badminton *</Label>
+                            <Input id="lapangan_badminton" name="lapangan_badminton" type="number" required value={formData.lapangan_badminton} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="gor" className="text-gray-900 font-semibold">GOR (Gedung Olahraga) *</Label>
+                            <Input id="gor" name="gor" type="number" required value={formData.gor} onChange={handleChange} className="mt-1" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Wisata */}
+                <div className="rounded-lg border border-gray-100 bg-white shadow-sm p-6">
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Fasilitas Wisata</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <Label htmlFor="pantai" className="text-gray-900 font-semibold">Pantai *</Label>
+                            <Input id="pantai" name="pantai" type="number" required value={formData.pantai} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="taman" className="text-gray-900 font-semibold">Taman *</Label>
+                            <Input id="taman" name="taman" type="number" required value={formData.taman} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="cagar_budaya" className="text-gray-900 font-semibold">Cagar Budaya *</Label>
+                            <Input id="cagar_budaya" name="cagar_budaya" type="number" required value={formData.cagar_budaya} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="wisata_alam" className="text-gray-900 font-semibold">Wisata Alam *</Label>
+                            <Input id="wisata_alam" name="wisata_alam" type="number" required value={formData.wisata_alam} onChange={handleChange} className="mt-1" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Migrasi Penduduk */}
+                <div className="rounded-lg border border-gray-100 bg-white shadow-sm p-6">
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Data Migrasi Penduduk</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <Label htmlFor="penduduk_datang" className="text-gray-900 font-semibold">Penduduk Datang *</Label>
+                            <Input id="penduduk_datang" name="penduduk_datang" type="number" required value={formData.penduduk_datang} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="penduduk_keluar" className="text-gray-900 font-semibold">Penduduk Keluar *</Label>
+                            <Input id="penduduk_keluar" name="penduduk_keluar" type="number" required value={formData.penduduk_keluar} onChange={handleChange} className="mt-1" />
                         </div>
                     </div>
                 </div>

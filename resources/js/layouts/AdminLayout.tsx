@@ -12,7 +12,10 @@ import {
     LogOut,
     Menu,
     BarChart3,
-    Tag
+    Tag,
+    History,
+    Target,
+    Bell
 } from "lucide-react";
 import {
     Sidebar,
@@ -45,11 +48,13 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
 
     const navItems = [
         { label: "Dashboard", routeName: "admin.dashboard", icon: LayoutDashboard },
+        { label: "Notifikasi", routeName: "admin.notifications.index", active: "admin.notifications.*", icon: Bell },
         { label: "Berita & Artikel", routeName: "admin.posts.index", active: "admin.posts.*", icon: FileText },
-        { label: "Kategori Berita", routeName: "admin.categories.index", active: "admin.categories.*", icon: Tag },
         { label: "Potensi Desa", routeName: "admin.potentials.index", active: "admin.potentials.*", icon: Mountain },
         { label: "Lembaga Desa", routeName: "admin.institutions.index", active: "admin.institutions.*", icon: Building2 },
         { label: "Perangkat Desa", routeName: "admin.officials.index", active: "admin.officials.*", icon: Users },
+        { label: "Riwayat Kepala Desa", routeName: "admin.former-village-heads.index", active: "admin.former-village-heads.*", icon: History },
+        { label: "Visi & Misi Desa", routeName: "admin.village-info.edit", active: "admin.village-info.*", icon: Target },
         { label: "Data Penduduk", routeName: "admin.demographics.index", active: "admin.demographics.*", icon: Users },
         { label: "Anggaran Desa", routeName: "admin.budgets.index", active: "admin.budgets.*", icon: Receipt },
         { label: "Statistik Desa", routeName: "admin.statistics.index", active: "admin.statistics.*", icon: BarChart3 },

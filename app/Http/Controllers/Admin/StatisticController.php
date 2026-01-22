@@ -53,6 +53,29 @@ class StatisticController extends Controller
             'katolik' => 'required|integer|min:0',
             'hindu' => 'required|integer|min:0',
             'budha' => 'required|integer|min:0',
+            // Tempat Ibadah
+            'masjid' => 'required|integer|min:0',
+            'mushola' => 'required|integer|min:0',
+            'gereja' => 'required|integer|min:0',
+            'pura' => 'required|integer|min:0',
+            'vihara' => 'required|integer|min:0',
+            // Fasilitas Kesehatan
+            'puskesmas' => 'required|integer|min:0',
+            'posyandu' => 'required|integer|min:0',
+            'klinik' => 'required|integer|min:0',
+            // Fasilitas Olahraga
+            'lapangan_sepakbola' => 'required|integer|min:0',
+            'lapangan_voli' => 'required|integer|min:0',
+            'lapangan_badminton' => 'required|integer|min:0',
+            'gor' => 'required|integer|min:0',
+            // Wisata
+            'pantai' => 'required|integer|min:0',
+            'taman' => 'required|integer|min:0',
+            'cagar_budaya' => 'required|integer|min:0',
+            'wisata_alam' => 'required|integer|min:0',
+            // Migrasi Penduduk
+            'penduduk_datang' => 'required|integer|min:0',
+            'penduduk_keluar' => 'required|integer|min:0',
         ]);
 
         if ($request->hasFile('infographic_image')) {
@@ -107,6 +130,29 @@ class StatisticController extends Controller
             'katolik' => 'required|integer|min:0',
             'hindu' => 'required|integer|min:0',
             'budha' => 'required|integer|min:0',
+            // Tempat Ibadah
+            'masjid' => 'required|integer|min:0',
+            'mushola' => 'required|integer|min:0',
+            'gereja' => 'required|integer|min:0',
+            'pura' => 'required|integer|min:0',
+            'vihara' => 'required|integer|min:0',
+            // Fasilitas Kesehatan
+            'puskesmas' => 'required|integer|min:0',
+            'posyandu' => 'required|integer|min:0',
+            'klinik' => 'required|integer|min:0',
+            // Fasilitas Olahraga
+            'lapangan_sepakbola' => 'required|integer|min:0',
+            'lapangan_voli' => 'required|integer|min:0',
+            'lapangan_badminton' => 'required|integer|min:0',
+            'gor' => 'required|integer|min:0',
+            // Wisata
+            'pantai' => 'required|integer|min:0',
+            'taman' => 'required|integer|min:0',
+            'cagar_budaya' => 'required|integer|min:0',
+            'wisata_alam' => 'required|integer|min:0',
+            // Migrasi Penduduk
+            'penduduk_datang' => 'required|integer|min:0',
+            'penduduk_keluar' => 'required|integer|min:0',
         ]);
 
         if ($request->hasFile('infographic_image')) {

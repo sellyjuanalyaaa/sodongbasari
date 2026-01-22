@@ -4,7 +4,7 @@ import AdminLayout from '@/layouts/AdminLayout';
 import { Head, Link } from '@inertiajs/react';
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Plus, Pencil, Trash2, MapPin } from "lucide-react";
+import { Plus, Pencil, Trash2, MapPin, Tag } from "lucide-react";
 import { router } from '@inertiajs/react';
 import {
     AlertDialog,
@@ -31,11 +31,18 @@ export default function Index({ potentials }: { potentials: any }) {
                     <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Potensi Desa</h1>
                     <p className="text-gray-500 mt-1">Kelola data potensi wisata, UMKM, dan sumber daya desa.</p>
                 </div>
-                <Link href={route('admin.potentials.create')}>
-                    <Button className="bg-orange-600 hover:bg-orange-700 text-white shadow-sm">
-                        <Plus className="mr-2 h-4 w-4" /> Tambah Potensi
-                    </Button>
-                </Link>
+                <div className="flex gap-2">
+                    <Link href={route('admin.potential-categories.index')}>
+                        <Button variant="outline" className="bg-white border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:text-green-800">
+                            <Tag className="mr-2 h-4 w-4" /> Kelola Kategori
+                        </Button>
+                    </Link>
+                    <Link href={route('admin.potentials.create')}>
+                        <Button className="bg-orange-600 hover:bg-orange-700 text-white shadow-sm">
+                            <Plus className="mr-2 h-4 w-4" /> Tambah Potensi
+                        </Button>
+                    </Link>
+                </div>
             </div>
 
             <div className="rounded-lg border border-gray-100 bg-white shadow-sm overflow-hidden">
