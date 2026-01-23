@@ -4,6 +4,8 @@ import PublicLayout from '@/layouts/PublicLayout';
 import HeroSection from '@/components/HeroSection';
 import NewsCard from '@/components/NewsCard';
 import { Users } from 'lucide-react';
+import { OrangeAccentTop, OrangeAccentBottom } from '@/components/SvgDecorations';
+import { AccentImage3 } from '@/components/ImageAccents';
 
 import { Head, Link } from '@inertiajs/react';
 import { route } from 'ziggy-js';
@@ -148,8 +150,10 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
             <HeroSection villageInfo={villageInfo} heroImages={heroImages} />
 
             {/* Welcome Section (Head of Village) */}
-            <section className="py-24 bg-white">
-                <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+            <section className="py-24 bg-white relative overflow-hidden">
+                <OrangeAccentTop className="right-0 top-0 opacity-100" />
+                <AccentImage3 className="left-[-5%] bottom-[-10%] w-[400px] opacity-15 -rotate-12" />
+                <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                     <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-20">
                         {/* Avatar Side */}
                         <div className="flex-shrink-0 relative">
@@ -303,7 +307,9 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
             </section>
 
             {/* Organizational Structure Section */}
-            <section className="py-24 bg-white">
+            <section className="py-24 bg-white relative overflow-hidden">
+                <OrangeAccentBottom className="left-0 top-0 w-[600px] -translate-x-1/3 -translate-y-1/4 opacity-100" />
+                <AccentImage3 className="right-[-5%] bottom-[-10%] w-[500px] opacity-10 rotate-[-15deg]" />
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Struktur Organisasi</h2>
@@ -322,8 +328,8 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                                     <div key={official.id} className="flex flex-col items-center group">
                                         <div className="mb-5 relative">
                                             {official.photo ? (
-                                                <img 
-                                                    src={official.photo} 
+                                                <img
+                                                    src={official.photo}
                                                     alt={official.name}
                                                     className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-2 border-slate-100 shadow-sm group-hover:scale-105 transition-all duration-500 ease-out group-hover:shadow-md"
                                                 />
@@ -338,7 +344,7 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                                     </div>
                                 ))}
                             </div>
-                            
+
                             <div className="text-center mt-16">
                                 <Link href={route('sodong-basari')} className="inline-flex items-center px-8 py-3 border border-slate-900 text-slate-900 font-medium text-sm rounded-full hover:bg-slate-900 hover:text-white transition-all duration-300">
                                     Lihat Selengkapnya
@@ -352,7 +358,8 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                 </div>
             </section>
             {/* Latest News Section */}
-            <section className="py-24 bg-slate-50">
+            <section className="py-24 bg-slate-50 relative overflow-hidden">
+                <AccentImage3 className="left-[-10%] top-1/2 w-[600px] -translate-y-1/2 opacity-10 rotate-[30deg]" />
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Kabar & Kegiatan</h2>

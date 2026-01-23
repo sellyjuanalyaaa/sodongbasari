@@ -15,10 +15,29 @@ import {
     ArrowRight,
     CheckCircle2
 } from 'lucide-react';
+import { AccentImage3 } from '@/components/ImageAccents';
+import { OrangeAccentBottom, OrangeAccentTop, DotsPattern, Blob2 } from '@/components/SvgDecorations';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+
+interface ServiceField {
+    name: string;
+    label: string;
+    type: string;
+    placeholder: string;
+}
+
+interface Service {
+    id: string;
+    title: string;
+    description: string;
+    icon: any;
+    color: string;
+    bgColor: string;
+    fields: ServiceField[];
+}
 
 // Service Definitions
 const services = [
@@ -104,8 +123,8 @@ const services = [
     },
 ];
 
-export default function Services({ villageInfo }) {
-    const [selectedService, setSelectedService] = useState(null);
+export default function Services({ villageInfo }: { villageInfo: any }) {
+    const [selectedService, setSelectedService] = useState<Service | null>(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     // Form state (simplified for frontend demo)
@@ -116,7 +135,7 @@ export default function Services({ villageInfo }) {
         details: {}
     });
 
-    const handleServiceClick = (service) => {
+    const handleServiceClick = (service: Service) => {
         setSelectedService(service);
         setIsSubmitted(false);
         setFormData({
@@ -127,7 +146,7 @@ export default function Services({ villageInfo }) {
         });
     };
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -135,7 +154,7 @@ export default function Services({ villageInfo }) {
         }));
     };
 
-    const handleDetailChange = (e) => {
+    const handleDetailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -146,7 +165,7 @@ export default function Services({ villageInfo }) {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Simulate backend submission
         setTimeout(() => {
@@ -158,8 +177,15 @@ export default function Services({ villageInfo }) {
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Layanan Desa" />
 
-            <div className="bg-slate-50 min-h-screen py-16 lg:py-24">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-slate-50 min-h-screen py-16 lg:py-24 relative overflow-hidden">
+                <OrangeAccentBottom className="right-0 top-0 opacity-100 rotate-180" />
+                <OrangeAccentTop className="left-0 bottom-0 opacity-50" />
+                <DotsPattern className="left-10 top-20 opacity-20" />
+                <Blob2 className="right-0 bottom-1/4 opacity-30 w-96 h-96" />
+                <Blob2 className="right-0 bottom-1/4 opacity-30 w-96 h-96" />
+                <AccentImage3 className="left-[-5%] bottom-[-5%] w-[600px] opacity-10 -rotate-12" />
+                <AccentImage3 className="right-[-10%] top-[40%] w-[500px] opacity-5 rotate-12" />
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <SectionTitle
                         title="Layanan Mandiri"
                         subtitle="Urus Surat Keterangan Tanpa Antri"
@@ -300,7 +326,7 @@ export default function Services({ villageInfo }) {
                             </div>
                             <h3 className="text-xl font-bold text-slate-800">Terima Kasih!</h3>
                             <p className="text-slate-600 max-w-sm mx-auto">
-                                Permintaan surat <strong>{selectedService.title}</strong> telah terkirim.
+                                Permintaan surat <strong>{selectedService?.title}</strong> telah terkirim.
                                 Silakan tunggu konfirmasi melalui WhatsApp atau datang ke kantor desa dengan membawa dokumen pendukung.
                             </p>
                             <Button className="mt-6 bg-slate-900 text-white hover:bg-slate-800" onClick={() => setSelectedService(null)}>

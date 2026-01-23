@@ -3,20 +3,26 @@ import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
 import { route } from 'ziggy-js';
+import { OrangeAccentTop, DotsPattern } from '@/components/SvgDecorations';
+import { AccentImage3 } from '@/components/ImageAccents';
 
 export default function Potentials({ villageInfo, potentials, categoryColors }: { villageInfo: any, potentials: any[], categoryColors: Record<string, string> }) {
     // SVG placeholder untuk potensi yang tidak memiliki gambar
     const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect fill='%23f8fafc' width='400' height='300'/%3E%3Cg fill='%2394a3b8'%3E%3Cpath d='M160 120h80v26H160zm-40 40h160v12H120z'/%3E%3Ccircle cx='186' cy='93' r='13'/%3E%3C/g%3E%3Ctext x='200' y='170' font-family='system-ui' font-size='14' fill='%23475569' text-anchor='middle'%3EPotensi Desa%3C/text%3E%3C/svg%3E";
-    
+
     const getCategoryColor = (category: string) => {
         // Ambil warna dari database, fallback ke orange
         return categoryColors[category] || 'from-orange-500 to-[#EFA00B]';
     };
-    
+
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Potensi Desa" />
-            <div className="py-24 bg-white">
+            <div className="py-24 bg-white relative overflow-hidden">
+                <OrangeAccentTop className="right-0 top-0 opacity-100" />
+                <DotsPattern className="left-0 bottom-0 opacity-20" />
+                <AccentImage3 className="left-[-5%] bottom-[20%] w-[400px] opacity-10 rotate-45" />
+                <AccentImage3 className="right-[-5%] top-[10%] w-[400px] opacity-10 -rotate-12" />
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                     <div className="text-center mb-16">
                         <div className="inline-block px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full mb-4">
@@ -35,9 +41,9 @@ export default function Potentials({ villageInfo, potentials, categoryColors }: 
                                 >
                                     <div className="bg-white rounded-xl overflow-hidden border border-slate-200 hover:border-orange-200 hover:shadow-md transition-all duration-300 flex flex-col h-full">
                                         <div className="h-52 bg-slate-50 overflow-hidden relative shrink-0">
-                                            <img 
-                                                src={item.image_path || placeholderImage} 
-                                                alt={item.name} 
+                                            <img
+                                                src={item.image_path || placeholderImage}
+                                                alt={item.name}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 onError={(e) => {
                                                     e.currentTarget.src = placeholderImage;

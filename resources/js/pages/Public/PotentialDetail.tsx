@@ -2,6 +2,8 @@ import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
 import { MapPin, Phone, Tag, ArrowLeft, ArrowRight, Calendar, User } from 'lucide-react';
+import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
+import { AccentImage3 } from '@/components/ImageAccents';
 import { route } from 'ziggy-js';
 
 interface Potential {
@@ -41,11 +43,12 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title={potential.name} />
-            
-            <div className="py-24 bg-white">
-                <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+
+            <div className="py-24 bg-white relative overflow-hidden">
+                <OrangeAccentTop className="right-0 top-0 opacity-100" />
+                <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                     {/* Back Button */}
-                    <Link 
+                    <Link
                         href={route('potentials')}
                         className="inline-flex items-center gap-2 text-slate-600 hover:text-[#EFA00B] transition-colors mb-8 group"
                     >
@@ -65,7 +68,7 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
                         <h1 className="text-3xl md:text-4xl font-medium text-slate-900 mb-4 tracking-tight">
                             {potential.name}
                         </h1>
-                        
+
                         {/* Info Meta */}
                         <div className="flex flex-wrap gap-4 text-sm text-slate-600">
                             {potential.location && (
@@ -81,7 +84,7 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
                                 </div>
                             )}
                         </div>
-                        
+
                         {/* Created Info */}
                         <div className="mt-4 pt-4 border-t border-slate-200">
                             <div className="flex flex-wrap gap-6 text-xs text-slate-500">
@@ -131,7 +134,7 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
                                 <h2 className="text-2xl font-medium text-slate-900 tracking-tight">
                                     Potensi Terkait
                                 </h2>
-                                <Link 
+                                <Link
                                     href={route('potentials')}
                                     className="text-sm text-[#EFA00B] hover:text-orange-600 font-medium inline-flex items-center gap-1 group"
                                 >
@@ -139,7 +142,7 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
                                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </div>
-                            
+
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {relatedPotentials.map((item) => (
                                     <Link
@@ -149,9 +152,9 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
                                     >
                                         <div className="bg-white rounded-xl overflow-hidden border border-slate-200 hover:border-orange-200 hover:shadow-md transition-all duration-300 h-full">
                                             <div className="h-40 bg-slate-50 overflow-hidden relative">
-                                                <img 
-                                                    src={item.image_path || placeholderImage} 
-                                                    alt={item.name} 
+                                                <img
+                                                    src={item.image_path || placeholderImage}
+                                                    alt={item.name}
                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                     onError={(e) => {
                                                         e.currentTarget.src = placeholderImage;
@@ -176,6 +179,9 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
                         </div>
                     )}
                 </div>
+                <OrangeAccentBottom className="left-0 bottom-0 opacity-100" />
+                <DotsPattern className="right-0 bottom-1/3 opacity-20" />
+                <AccentImage3 className="right-[-10%] top-[15%] w-[450px] opacity-10 -rotate-12" />
             </div>
         </PublicLayout>
     );

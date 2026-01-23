@@ -4,6 +4,8 @@ import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
 import SectionTitle from '@/components/SectionTitle';
 import { Users, ArrowLeft, Building2 } from 'lucide-react';
+import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
+import { AccentImage3 } from '@/components/ImageAccents';
 
 interface Member {
     id: number;
@@ -31,11 +33,12 @@ export default function InstitutionDetail({ villageInfo, institution }: Props) {
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title={institution.name} />
-            <div className="py-20 bg-slate-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="py-20 bg-slate-50 relative overflow-hidden">
+                <OrangeAccentTop className="right-0 top-0 opacity-100" />
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="mb-6">
-                        <Link 
-                            href="/sodong-basari" 
+                        <Link
+                            href="/sodong-basari"
                             className="inline-flex items-center text-orange-600 hover:text-orange-700 font-medium"
                         >
                             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -46,8 +49,8 @@ export default function InstitutionDetail({ villageInfo, institution }: Props) {
                     <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 mb-8">
                         <div className="flex items-start gap-6 mb-6">
                             {institution.logo_path ? (
-                                <img 
-                                    src={institution.logo_path} 
+                                <img
+                                    src={institution.logo_path}
                                     alt={institution.name}
                                     className="h-24 w-24 object-contain"
                                 />
@@ -63,7 +66,7 @@ export default function InstitutionDetail({ villageInfo, institution }: Props) {
                                 )}
                             </div>
                         </div>
-                        
+
                         <div className="prose max-w-none">
                             <p className="text-slate-600 leading-relaxed whitespace-pre-line">
                                 {institution.description}
@@ -77,7 +80,7 @@ export default function InstitutionDetail({ villageInfo, institution }: Props) {
                             <Users className="h-6 w-6 text-orange-600" />
                             <h3 className="text-2xl font-bold text-slate-800">Anggota {institution.name}</h3>
                         </div>
-                        
+
                         {institution.active_members && institution.active_members.length === 0 ? (
                             <div className="text-center py-12">
                                 <Users className="h-16 w-16 mx-auto text-gray-300 mb-4" />
@@ -90,8 +93,8 @@ export default function InstitutionDetail({ villageInfo, institution }: Props) {
                                         <div className="bg-gradient-to-br from-orange-50 to-white border-2 border-orange-100 rounded-2xl p-6 text-center hover:shadow-lg hover:border-orange-300 transition-all duration-300">
                                             <div className="mb-4">
                                                 {member.photo ? (
-                                                    <img 
-                                                        src={member.photo} 
+                                                    <img
+                                                        src={member.photo}
                                                         alt={member.name}
                                                         className="w-24 h-24 mx-auto rounded-full object-cover border-4 border-white shadow-md group-hover:scale-110 transition-transform duration-300"
                                                     />
@@ -110,6 +113,9 @@ export default function InstitutionDetail({ villageInfo, institution }: Props) {
                         )}
                     </div>
                 </div>
+                <OrangeAccentBottom className="left-0 bottom-0 opacity-100" />
+                <DotsPattern className="right-0 top-1/3 opacity-20" />
+                <AccentImage3 className="left-[-5%] top-[20%] w-[400px] opacity-5 rotate-12" />
             </div>
         </PublicLayout>
     );

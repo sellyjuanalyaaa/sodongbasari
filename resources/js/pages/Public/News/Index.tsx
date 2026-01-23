@@ -5,12 +5,17 @@ import { Head, Link } from '@inertiajs/react';
 import SectionTitle from '@/components/SectionTitle';
 import NewsCard from '@/components/NewsCard';
 import { TrendingUp, Eye } from 'lucide-react';
+import { OrangeAccentTop, DotsPattern } from '@/components/SvgDecorations';
+import { AccentImage3 } from '@/components/ImageAccents';
 
 export default function Index({ villageInfo, posts, mostTrending }) {
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Berita Desa" />
-            <div className="py-24 bg-white">
+            <div className="py-24 bg-white relative overflow-hidden">
+                <OrangeAccentTop className="right-0 top-0 opacity-100" />
+                <DotsPattern className="left-0 bottom-0 opacity-20" />
+                <AccentImage3 className="right-[-5%] top-[10%] w-[500px] opacity-10 -rotate-12" />
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                     <div className="text-center mb-16">
                         <div className="inline-block px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full mb-4">
@@ -49,8 +54,8 @@ export default function Index({ villageInfo, posts, mostTrending }) {
                                 {mostTrending && mostTrending.length > 0 ? (
                                     <div className="space-y-4">
                                         {mostTrending.map((post, index) => (
-                                            <Link 
-                                                key={post.id} 
+                                            <Link
+                                                key={post.id}
                                                 href={`/news/${post.slug}`}
                                                 className="block group"
                                             >
@@ -64,7 +69,7 @@ export default function Index({ villageInfo, posts, mostTrending }) {
                                                         </h4>
                                                         <div className="flex items-center gap-3 text-xs text-slate-500">
                                                             {post.category && (
-                                                                <span 
+                                                                <span
                                                                     className="px-2 py-0.5 rounded-full font-medium"
                                                                     style={{
                                                                         backgroundColor: `${post.category.color}20`,

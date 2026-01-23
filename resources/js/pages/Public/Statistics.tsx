@@ -3,6 +3,8 @@ import PublicLayout from '@/layouts/PublicLayout';
 import { Head } from '@inertiajs/react';
 import VillageMap from '@/components/VillageMap';
 import { Users, Home, MapPin, GraduationCap, Briefcase, Church, Building2, Heart, DollarSign, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
+import { AccentImage3 } from '@/components/ImageAccents';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -56,6 +58,24 @@ interface StatisticData {
     katolik: number;
     hindu: number;
     budha: number;
+    penduduk_datang?: number;
+    penduduk_keluar?: number;
+    masjid?: number;
+    mushola?: number;
+    gereja?: number;
+    pura?: number;
+    vihara?: number;
+    puskesmas?: number;
+    posyandu?: number;
+    klinik?: number;
+    lapangan_sepakbola?: number;
+    lapangan_voli?: number;
+    lapangan_badminton?: number;
+    gor?: number;
+    pantai?: number;
+    taman?: number;
+    cagar_budaya?: number;
+    wisata_alam?: number;
 }
 
 interface Props {
@@ -68,7 +88,9 @@ export default function Statistics({ villageInfo, statistics }: Props) {
         return (
             <PublicLayout villageInfo={villageInfo}>
                 <Head title="Statistik Desa" />
-                <div className="py-24 bg-white">
+                <div className="py-24 bg-white relative overflow-hidden">
+                    <OrangeAccentTop className="right-0 top-0 opacity-100" />
+                    <DotsPattern className="left-0 bottom-0 opacity-20" />
                     <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                         <div className="text-center mb-16">
                             <div className="inline-block px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full mb-4">
@@ -89,7 +111,12 @@ export default function Statistics({ villageInfo, statistics }: Props) {
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Statistik Desa" />
-            <div className="py-24 bg-white">
+            <div className="py-24 bg-white relative overflow-hidden">
+                <OrangeAccentTop className="right-0 top-0 opacity-100" />
+                <OrangeAccentBottom className="left-0 bottom-0 opacity-100" />
+                <DotsPattern className="left-10 top-20 opacity-30" />
+                <AccentImage3 className="left-[-5%] top-[10%] w-[500px] opacity-10 rotate-12" />
+                <AccentImage3 className="right-[-10%] bottom-[-5%] w-[600px] opacity-10 -rotate-45" />
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                     {/* Header dengan Data Utama */}
                     <div className="bg-gradient-to-br from-orange-50 via-white to-orange-50/50 rounded-2xl p-8 md:p-10 mb-6 border border-orange-100 shadow-sm shadow-orange-100/50">
@@ -571,8 +598,8 @@ export default function Statistics({ villageInfo, statistics }: Props) {
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 {statistics.infographic_image && (
                                     <div className="bg-white p-6 rounded-xl border border-slate-200">
-                                        <img 
-                                            src={statistics.infographic_image} 
+                                        <img
+                                            src={statistics.infographic_image}
                                             alt={`Infografis Anggaran ${statistics.year} - Kiri`}
                                             className="w-full h-auto rounded-lg"
                                         />
@@ -580,8 +607,8 @@ export default function Statistics({ villageInfo, statistics }: Props) {
                                 )}
                                 {statistics.infographic_image_right && (
                                     <div className="bg-white p-6 rounded-xl border border-slate-200">
-                                        <img 
-                                            src={statistics.infographic_image_right} 
+                                        <img
+                                            src={statistics.infographic_image_right}
                                             alt={`Infografis Anggaran ${statistics.year} - Kanan`}
                                             className="w-full h-auto rounded-lg"
                                         />

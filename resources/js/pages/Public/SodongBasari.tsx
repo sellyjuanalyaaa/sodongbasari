@@ -3,6 +3,8 @@ import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
 import { Users, Building2, ArrowRight } from 'lucide-react';
+import { AccentImage3 } from '@/components/ImageAccents';
+import { OrangeAccentTop, OrangeAccentBottom, DotsPattern, Blob1 } from '@/components/SvgDecorations';
 
 interface Official {
     id: number;
@@ -40,8 +42,11 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Sodong Basari" />
-            <div className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="py-24 bg-white relative overflow-hidden">
+                <OrangeAccentTop className="right-0 top-0 opacity-100" />
+                <AccentImage3 className="left-[-10%] bottom-[10%] w-[500px] opacity-10 rotate-[15deg]" />
+                <AccentImage3 className="right-[-5%] top-[20%] w-[400px] opacity-5 -rotate-45" />
+                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                     <div className="text-center mb-16">
                         <div className="inline-block px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full mb-4">
                             <span className="text-[#EFA00B] text-xs font-medium uppercase tracking-wide">Profil Desa</span>
@@ -49,13 +54,13 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                         <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Tentang Desa</h2>
                         <p className="text-slate-500 text-sm font-light">Sodong Basari</p>
                     </div>
-                    
+
                     {/* Visi & Misi */}
                     {(villageInfo?.vision || villageInfo?.mission) && (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                             {/* Debug - Hapus setelah testing */}
                             {console.log('Village Info:', villageInfo)}
-                            
+
                             {/* Visi */}
                             {villageInfo?.vision && (
                                 <div className="bg-gradient-to-br from-orange-50 to-white p-8 rounded-xl border border-orange-200 hover:shadow-lg transition-all">
@@ -77,7 +82,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                     </div>
                                 </div>
                             )}
-                            
+
                             {/* Misi */}
                             {villageInfo?.mission && (
                                 <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl border border-blue-200 hover:shadow-lg transition-all">
@@ -115,6 +120,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                         <p className="text-slate-600 text-[15px] leading-relaxed font-light">
                             Keberadaan regulasi tersebut menjadi landasan hukum yang kuat bagi penyelenggaraan pemerintahan desa dalam menciptakan tata kelola yang tertib dan teratur. Dengan adanya kepastian batas wilayah, pemerintah desa dapat melaksanakan perencanaan pembangunan dan memberikan pelayanan kepada masyarakat secara lebih optimal dan terarah.
                         </p>
+                        <DotsPattern className="right-0 top-0 opacity-30" />
                     </div>
 
                     {/* Letak dan Batas Wilayah */}
@@ -178,7 +184,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                 <div className="text-xs text-slate-400 mt-2 font-light tracking-wide">Struktur Wilayah</div>
                             </div>
                         </div>
-                        
+
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             <div className="bg-white border-l-4 border-[#EFA00B] rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
                                 <h4 className="font-medium text-slate-900 text-base mb-2">Dusun Sodong Barat</h4>
@@ -193,7 +199,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                 </p>
                             </div>
                         </div>
-                        
+
                         <p className="text-slate-500 text-sm font-light">
                             Pembagian dusun ini menjadi dasar dalam pengelolaan pemerintahan dan pelayanan masyarakat di tingkat lokal. Setiap dusun memiliki peran strategis dalam pembangunan desa dan peningkatan kesejahteraan masyarakat.
                         </p>
@@ -201,11 +207,12 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
 
                     {/* Struktur Organisasi */}
                     <div className="bg-slate-50 p-8 md:p-10 rounded-xl border border-slate-200">
-                        <div className="flex items-center gap-3 mb-8">
+                        <div className="flex items-center gap-3 mb-8 relative z-10">
                             <Users className="h-5 w-5 text-[#EFA00B]" />
                             <h3 className="text-xl md:text-2xl font-medium text-slate-900 tracking-tight">Struktur Organisasi dan Tata Kerja</h3>
                         </div>
-                        
+                        <Blob1 className="right-0 top-0 -translate-y-1/2 opacity-30 w-64 h-64" />
+
                         {officials.length === 0 ? (
                             <div className="text-center py-16">
                                 <Users className="h-16 w-16 mx-auto text-slate-200 mb-4" />
@@ -218,8 +225,8 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                         <div className="bg-white border border-slate-200 rounded-lg p-5 text-center hover:shadow-sm hover:border-slate-300 transition-all duration-300">
                                             <div className="mb-4">
                                                 {official.photo ? (
-                                                    <img 
-                                                        src={official.photo} 
+                                                    <img
+                                                        src={official.photo}
                                                         alt={official.name}
                                                         className="w-24 h-24 mx-auto rounded-full object-cover border-2 border-slate-100 group-hover:scale-105 transition-transform duration-300"
                                                     />
@@ -249,11 +256,11 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                 </div>
                                 <h3 className="text-xl md:text-2xl font-medium text-slate-900 tracking-tight">Riwayat Kepala Desa</h3>
                             </div>
-                            
+
                             <div className="relative">
                                 {/* Timeline Line */}
                                 <div className="absolute left-[23px] top-8 bottom-8 w-0.5 bg-gradient-to-b from-orange-200 via-orange-300 to-orange-200"></div>
-                                
+
                                 <div className="space-y-6">
                                     {formerHeads.map((head, index) => (
                                         <div key={head.id} className="relative pl-16 pb-8 last:pb-0">
@@ -261,21 +268,21 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                             <div className="absolute left-0 top-2 w-12 h-12 bg-gradient-to-br from-orange-500 to-[#EFA00B] rounded-full flex items-center justify-center text-white font-semibold shadow-lg shadow-orange-200 z-10">
                                                 {index + 1}
                                             </div>
-                                            
+
                                             {/* Content Card */}
                                             <div className="bg-white rounded-xl border border-slate-200 hover:border-orange-200 hover:shadow-lg transition-all duration-300 overflow-hidden">
                                                 <div className="flex flex-col md:flex-row">
                                                     {/* Photo */}
                                                     {head.photo && (
                                                         <div className="md:w-32 md:h-32 h-48 flex-shrink-0">
-                                                            <img 
+                                                            <img
                                                                 src={`/storage/${head.photo}`}
                                                                 alt={head.name}
                                                                 className="w-full h-full object-cover"
                                                             />
                                                         </div>
                                                     )}
-                                                    
+
                                                     {/* Info */}
                                                     <div className="flex-1 p-6">
                                                         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-3">
@@ -294,7 +301,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                                                 {head.start_year} - {head.end_year}
                                                             </div>
                                                         </div>
-                                                        
+
                                                         {head.achievement && (
                                                             <div className="mt-4">
                                                                 <h5 className="text-sm font-medium text-slate-700 mb-2">Prestasi & Pencapaian:</h5>
@@ -319,7 +326,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                             <Building2 className="h-5 w-5 text-[#EFA00B]" />
                             <h3 className="text-xl md:text-2xl font-medium text-slate-900 tracking-tight">Lembaga Desa</h3>
                         </div>
-                        
+
                         {institutions.length === 0 ? (
                             <div className="text-center py-16">
                                 <Building2 className="h-16 w-16 mx-auto text-slate-200 mb-4" />
@@ -328,16 +335,16 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {institutions.map((institution) => (
-                                    <Link 
-                                        key={institution.id} 
+                                    <Link
+                                        key={institution.id}
                                         href={`/lembaga/${institution.id}`}
                                         className="group"
                                     >
                                         <div className="bg-white border border-slate-200 rounded-lg p-6 hover:shadow-md hover:border-orange-200 transition-all duration-300 h-full">
                                             <div className="flex items-start gap-4 mb-4">
                                                 {institution.logo_path ? (
-                                                    <img 
-                                                        src={institution.logo_path} 
+                                                    <img
+                                                        src={institution.logo_path}
                                                         alt={institution.name}
                                                         className="w-14 h-14 object-contain"
                                                     />
@@ -371,6 +378,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                         )}
                     </div>
                 </div>
+                <OrangeAccentBottom className="left-0 bottom-0 opacity-100" />
             </div>
         </PublicLayout>
     );
