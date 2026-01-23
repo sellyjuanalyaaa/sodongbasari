@@ -10,51 +10,7 @@ import { AccentImage3 } from '@/components/ImageAccents';
 import { Head, Link } from '@inertiajs/react';
 import { route } from 'ziggy-js';
 
-// Data Statistik Slider
-const subStats = [
-    {
-        title: "Sarana Olahraga",
-        type: "budget",
-        data: [
-            { label: "Sudah Terealisasi", value: "Rp 120.000.000,00", color: "bg-[#71d338]", textColor: "text-slate-800" }, // Green
-            { label: "Belum Terealisasi", value: "Rp 123.000.000,00", color: "bg-[#e5459f]", textColor: "text-slate-800" }  // Pink
-        ]
-    },
-    {
-        title: "Objek Wisata",
-        type: "budget",
-        data: [
-            { label: "Sudah Terealisasi", value: "Rp 120.000.000,00", color: "bg-[#71d338]", textColor: "text-slate-800" },
-            { label: "Belum Terealisasi", value: "Rp 123.000.000,00", color: "bg-[#e5459f]", textColor: "text-slate-800" }
-        ]
-    },
-    {
-        title: "Sarana Pendidikan",
-        type: "budget",
-        data: [
-            { label: "Sudah Terealisasi", value: "Rp 120.000.000,00", color: "bg-[#71d338]", textColor: "text-slate-800" },
-            { label: "Belum Terealisasi", value: "Rp 123.000.000,00", color: "bg-[#e5459f]", textColor: "text-slate-800" }
-        ]
-    },
-    {
-        title: "Profil Desa Sodong",
-        subtitle: "Luas Wilayah",
-        type: "budget",
-        data: [
-            { label: "Sudah Terealisasi", value: "Rp 120.000.000,00", color: "bg-[#71d338]", textColor: "text-slate-800" },
-            { label: "Belum Terealisasi", value: "Rp 123.000.000,00", color: "bg-[#e5459f]", textColor: "text-slate-800" }
-        ]
-    },
-    {
-        title: "Tempat Ibadah",
-        type: "landmark",
-        image: "/images/mosque.png", // Local image
-        data: [
-            { label: "Masjid", value: "4", color: "bg-[#71d338]", textColor: "text-slate-900" },
-            { label: "Mushola", value: "13", color: "bg-[#e5459f]", textColor: "text-slate-900" }
-        ]
-    }
-];
+// Data Statistik Slider moved to Database
 
 // Helper component for counting up animation
 // Helper component for counting up animation
@@ -120,7 +76,9 @@ const AnimatedCounter = ({ value, duration = 2000 }: { value: any; duration?: nu
     return <span>{count.toLocaleString('id-ID')}</span>;
 };
 
-export default function Home({ villageInfo, heroImages = [], stats = {}, officials = [], latestNews = [] }: { villageInfo: any, heroImages?: any[], stats?: any, officials?: any[], latestNews?: any[] }) {
+// subStats removed, now using props
+
+export default function Home({ villageInfo, heroImages = [], stats = {}, officials = [], latestNews = [], homeStatistics = [] }: { villageInfo: any, heroImages?: any[], stats?: any, officials?: any[], latestNews?: any[], homeStatistics?: any[] }) {
     const [currentStat, setCurrentStat] = useState(0);
 
     const populationStat = {
@@ -130,7 +88,8 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
         data: []
     };
 
-    const displayStats = [populationStat, ...subStats];
+    // Combine static/computed stats with dynamic DB stats
+    const displayStats = [populationStat, ...homeStatistics];
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -278,7 +237,7 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                                             </p>
                                         </div>
                                     ) : (
-                                        displayStats[currentStat].data.map((item, idx) => (
+                                        displayStats[currentStat].data.map((item: any, idx: number) => (
                                             <div key={idx} className="flex flex-col group cursor-default">
                                                 <div className="flex items-center gap-3 mb-2">
                                                     <div className={`w-2.5 h-2.5 rounded-full ${item.color.replace('bg-[#71d338]', 'bg-emerald-400').replace('bg-[#e5459f]', 'bg-rose-400')} group-hover:scale-125 transition-transform duration-300`}></div>

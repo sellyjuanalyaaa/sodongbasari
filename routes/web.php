@@ -24,9 +24,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified']);
 
 // Admin Routes
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-    
+
     // CRUD Resources
     Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
@@ -40,24 +40,25 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('statistics', \App\Http\Controllers\Admin\StatisticController::class);
     Route::resource('officials', \App\Http\Controllers\Admin\VillageOfficialController::class);
     Route::resource('former-village-heads', \App\Http\Controllers\Admin\FormerVillageHeadController::class);
-    
+    Route::resource('home-statistics', \App\Http\Controllers\Admin\HomeStatisticController::class);
+
     // Visitors
     Route::get('/visitors', [\App\Http\Controllers\Admin\VisitorController::class, 'index'])->name('visitors.index');
-    
+
     // Notifications
     Route::get('/notifications', [\App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('notifications.index');
     Route::post('/notifications/{id}/mark-as-read', [\App\Http\Controllers\Admin\NotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
     Route::post('/notifications/mark-all-read', [\App\Http\Controllers\Admin\NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
     Route::delete('/notifications/{id}', [\App\Http\Controllers\Admin\NotificationController::class, 'destroy'])->name('notifications.destroy');
-    
+
     // Village Info
     Route::get('/village-info', [\App\Http\Controllers\Admin\VillageInfoController::class, 'edit'])->name('village-info.edit');
     Route::post('/village-info', [\App\Http\Controllers\Admin\VillageInfoController::class, 'update'])->name('village-info.update');
-    
+
     // Settings
     Route::get('/hero-settings', [\App\Http\Controllers\Admin\HeroController::class, 'edit'])->name('hero.edit');
     Route::post('/hero-settings', [\App\Http\Controllers\Admin\HeroController::class, 'store'])->name('hero.store'); // Changed to store for adding
     Route::delete('/hero-settings/{heroImage}', [\App\Http\Controllers\Admin\HeroController::class, 'destroy'])->name('hero.destroy');
 });
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';

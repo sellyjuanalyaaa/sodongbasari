@@ -48,7 +48,13 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
 
     const navItems = [
         { label: "Dashboard", routeName: "admin.dashboard", icon: LayoutDashboard },
-        { label: "Notifikasi", routeName: "admin.notifications.index", active: "admin.notifications.*", icon: Bell },
+        {
+            label: "Notifikasi",
+            routeName: "admin.notifications.index",
+            active: "admin.notifications.*",
+            icon: Bell,
+            badge: (usePage().props as any).unreadNotificationsCount // Add badge property
+        },
         { label: "Berita & Artikel", routeName: "admin.posts.index", active: "admin.posts.*", icon: FileText },
         { label: "Potensi Desa", routeName: "admin.potentials.index", active: "admin.potentials.*", icon: Mountain },
         { label: "Lembaga Desa", routeName: "admin.institutions.index", active: "admin.institutions.*", icon: Building2 },
@@ -58,6 +64,7 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
         { label: "Data Penduduk", routeName: "admin.demographics.index", active: "admin.demographics.*", icon: Users },
         { label: "Anggaran Desa", routeName: "admin.budgets.index", active: "admin.budgets.*", icon: Receipt },
         { label: "Statistik Desa", routeName: "admin.statistics.index", active: "admin.statistics.*", icon: BarChart3 },
+        { label: "Statistik Beranda", routeName: "admin.home-statistics.index", active: "admin.home-statistics.*", icon: BarChart3 },
         { label: "Pengaturan Slider", routeName: "admin.hero.edit", active: "admin.hero.*", icon: ImageIcon },
     ];
 
@@ -180,10 +187,15 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
                         </div>
                         <div className="flex-1"></div>
                         <div className="flex items-center gap-3">
-                            <div className="h-9 w-9 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-orange-600 hover:border-orange-100 cursor-pointer transition shadow-sm">
-                                <span className="sr-only">Notifications</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" /></svg>
-                            </div>
+                            <Link href={route('admin.notifications.index')}>
+                                <div className="h-9 w-9 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-orange-600 hover:border-orange-100 cursor-pointer transition shadow-sm relative">
+                                    <span className="sr-only">Notifications</span>
+                                    <Bell className="h-[18px] w-[18px]" />
+                                    {(usePage().props as any).unreadNotificationsCount > 0 && (
+                                        <div className="absolute top-0 right-0 h-2.5 w-2.5 rounded-full bg-red-500 border border-white"></div>
+                                    )}
+                                </div>
+                            </Link>
                         </div>
                     </header>
                     <div className="p-6 md:p-8 w-full max-w-7xl mx-auto space-y-8">

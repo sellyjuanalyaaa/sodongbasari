@@ -27,7 +27,7 @@ class PublicController extends Controller
     public function index()
     {
         $categories = PotentialCategory::where('is_active', true)->get()->keyBy('name');
-        
+
         return Inertia::render('Public/Home', array_merge($this->getCommonProps(), [
             'latestNews' => Post::with(['category', 'creator'])
                 ->latest('published_at')
@@ -35,9 +35,10 @@ class PublicController extends Controller
                 ->get(),
             'stats' => [
                 'population' => \App\Models\Demographic::orderBy('year', 'desc')->get()->first()?->total_male + \App\Models\Demographic::orderBy('year', 'desc')->get()->first()?->total_female ?? 0,
-                'area' => '1500 Ha', 
+                'area' => '1500 Ha',
             ],
             'heroImages' => \App\Models\HeroImage::where('is_active', true)->orderBy('order')->get(),
+            'homeStatistics' => \App\Models\HomeStatistic::where('is_active', true)->orderBy('order')->get(),
             'officials' => VillageOfficial::where('is_active', true)->orderBy('order')->take(8)->get(),
             'categoryColors' => $categories->mapWithKeys(function ($cat) {
                 return [$cat->name => $cat->color];
@@ -57,7 +58,7 @@ class PublicController extends Controller
     public function potentials()
     {
         $categories = PotentialCategory::where('is_active', true)->get()->keyBy('name');
-        
+
         return Inertia::render('Public/Potentials', array_merge($this->getCommonProps(), [
             'potentials' => Potential::all(),
             'categoryColors' => $categories->mapWithKeys(function ($cat) {
@@ -82,7 +83,7 @@ class PublicController extends Controller
     public function statistics()
     {
         $latestStatistic = Statistic::orderBy('year', 'desc')->first();
-        
+
         return Inertia::render('Public/Statistics', array_merge($this->getCommonProps(), [
             'statistics' => $latestStatistic,
             'demographics' => Demographic::all(),
@@ -113,7 +114,7 @@ class PublicController extends Controller
     public function newsShow($slug)
     {
         $post = Post::with(['category', 'creator'])->where('slug', $slug)->firstOrFail();
-        
+
         // Increment view count
         $post->incrementViewCount();
 
