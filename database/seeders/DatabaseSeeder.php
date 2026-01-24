@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
+            'role' => 'admin',
             'password' => bcrypt('password'),
         ]);
 
@@ -40,7 +41,7 @@ class DatabaseSeeder extends Seeder
             $title = fake()->sentence();
             Post::create([
                 'title' => $title,
-                'slug' => Str::slug($title).'-'.Str::random(5),
+                'slug' => Str::slug($title) . '-' . Str::random(5),
                 'content' => fake()->paragraphs(3, true),
                 'category' => fake()->randomElement(['news', 'announcement']),
                 'published_at' => fake()->dateTimeBetween('-1 year', 'now'),
