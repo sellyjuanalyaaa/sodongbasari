@@ -74,7 +74,7 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
 
     return (
         <SidebarProvider>
-            <div className="flex min-h-screen w-full bg-[#FCFCFC]">
+            <div className="flex min-h-screen w-full bg-[#FCFCFC] light" data-theme="light">
                 <Sidebar collapsible="icon" className="border-r border-gray-100 bg-white text-gray-700 shadow-[2px_0_20px_-10px_rgba(0,0,0,0.05)]">
                     <SidebarHeader className="border-b border-transparent bg-white p-5">
                         <div className="flex items-center gap-3">
