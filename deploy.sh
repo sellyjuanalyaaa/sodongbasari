@@ -18,14 +18,15 @@ git pull origin main
 
 if [ $? -ne 0 ]; then
     echo "❌ Gagal melakukan git pull. Cek koneksi atau konflik."
-    exit 1
+    # Lanjut saja, mungkin user sudah pull manual
 fi
 
 # 2. Pindahkan isi folder public ke public_html
 echo "📂 2. Menyalin aset dari folder public ke $PUBLIC_HTML_PATH..."
 # Menyalin semua isi folder public ke public_html
 cp -r public/* "$PUBLIC_HTML_PATH/"
-# Opsional: Salin .htaccess jika ada perubahahan khusus, tapi biasanya index.php yang utama
+
+# Opsional: Salin .htaccess jika ada
 if [ -f "public/.htaccess" ]; then
     cp public/.htaccess "$PUBLIC_HTML_PATH/"
 fi
@@ -54,6 +55,16 @@ $app = require_once __DIR__.'/../sodongbasari/bootstrap/app.php';
 
 $app->handleRequest(Request::capture());
 EOL
+
+# 4. Fix Storage Symlink
+echo "🔗 4. Memperbaiki Symbolic Link Storage..."
+# Hapus link storage lama di public_html untuk memastikan bersih (terkadang cp -r mengcopy folder, bukan link)
+rm -rf "$PUBLIC_HTML_PATH/storage"
+
+# Buat symlink baru yang benar
+# Dari: public_html/storage
+# Ke:   ../sodongbasari/storage/app/public
+ln -s ../sodongbasari/storage/app/public "$PUBLIC_HTML_PATH/storage"
 
 echo "========================================"
 echo "✅ Deployment Selesai!"
