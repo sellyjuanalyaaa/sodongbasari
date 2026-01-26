@@ -260,7 +260,7 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
 
                             {/* Facebook */}
                             <a 
-                                href="https://facebook.com/desasodongbasari" 
+                                href="https://www.facebook.com/share/16w46pdc25/" 
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300"
