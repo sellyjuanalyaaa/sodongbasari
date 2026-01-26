@@ -21,4 +21,9 @@ class Slider extends Model
         'is_active' => 'boolean',
         'order' => 'integer',
     ];
+
+    public function getImagePathAttribute($value)
+    {
+        return str_replace('/storage/app/public/', '/storage/', $value);
+    }
 }

@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Script Deploy Sodong Basari
+# Cara penggunaan: ./deploy.sh
+# Pastikan script ini dijalankan dari dalam root folder project (sodongbasari)
+
+# Konfigurasi Path (Sesuaikan jika perlu)
+# Asumsi: Folder project 'sodongbasari' dan 'public_html' berada di level yang sama
+PUBLIC_HTML_PATH="../public_html"
+
+echo "========================================"
+echo "🚀 Memulai Deployment Sodong Basari"
+echo "========================================"
+
+# 1. Git Pull
+echo "📥 1. Mengambil update terbaru dari Git..."
+git pull origin main
+
+if [ $? -ne 0 ]; then
+    echo "❌ Gagal melakukan git pull. Cek koneksi atau konflik."
+    exit 1
+fi
+
+# 2. Pindahkan isi folder public ke public_html
+echo "📂 2. Menyalin aset dari folder public ke $PUBLIC_HTML_PATH..."
+# Menyalin semua isi folder public ke public_html
+cp -r public/* "$PUBLIC_HTML_PATH/"
+# Opsional: Salin .htaccess jika ada perubahahan khusus, tapi biasanya index.php yang utama
+if [ -f "public/.htaccess" ]; then
+    cp public/.htaccess "$PUBLIC_HTML_PATH/"
+fi
+
+# 3. Update index.php
+echo "📝 3. Memperbaharui index.php di public_html..."
+cat > "$PUBLIC_HTML_PATH/index.php" << 'EOL'
+<?php
+
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
+
+define('LARAVEL_START', microtime(true));
+
+// Determine if the application is in maintenance mode...
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+    require $maintenance;
+}
+
+// Register the Composer autoloader...
+require __DIR__.'/../sodongbasari/vendor/autoload.php';
+
+// Bootstrap Laravel and handle the request...
+/** @var Application $app */
+$app = require_once __DIR__.'/../sodongbasari/bootstrap/app.php';
+
+$app->handleRequest(Request::capture());
+EOL
+
+echo "========================================"
+echo "✅ Deployment Selesai!"
+echo "========================================"
