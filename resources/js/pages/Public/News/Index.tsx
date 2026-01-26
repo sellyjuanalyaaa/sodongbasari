@@ -6,7 +6,7 @@ import SectionTitle from '@/components/SectionTitle';
 import NewsCard from '@/components/NewsCard';
 import { TrendingUp, Eye } from 'lucide-react';
 import { OrangeAccentTop, DotsPattern } from '@/components/SvgDecorations';
-import { AccentImage3 } from '@/components/ImageAccents';
+import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 
 export default function Index({ villageInfo, posts, mostTrending }) {
     return (
@@ -16,19 +16,22 @@ export default function Index({ villageInfo, posts, mostTrending }) {
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
                 <DotsPattern className="left-0 bottom-0 opacity-20" />
                 <AccentImage3 className="right-[-5%] top-[10%] w-[500px] opacity-10 -rotate-12" />
-                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-                    <div className="text-center mb-16">
-                        <div className="inline-block px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full mb-4">
+                <CloudAccent className="top-[35%] left-[10%] w-[195px] h-[195px] opacity-21 rotate-22 z-0" />
+                <CloudAccent className="bottom-[30%] right-[12%] w-[185px] h-[185px] opacity-20 -rotate-18 z-0" />
+                <CloudAccent className="top-[70%] left-[30%] w-[175px] h-[175px] opacity-19 rotate-25 z-0" />
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+                    <div className="text-center mb-12 sm:mb-16">
+                        <div className="inline-block px-3 sm:px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full mb-4">
                             <span className="text-[#EFA00B] text-xs font-medium uppercase tracking-wide">Kabar Terbaru</span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Info & Berita</h2>
-                        <p className="text-slate-500 text-sm font-light">Informasi & Perkembangan Desa</p>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Info & Berita</h2>
+                        <p className="text-slate-500 text-xs sm:text-sm font-light">Informasi & Perkembangan Desa</p>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8">
                         {/* Main News Grid */}
                         <div className="lg:col-span-3">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                                 {posts?.data?.length > 0 ? (
                                     posts.data.map((post) => (
                                         <NewsCard key={post.id} post={post} />

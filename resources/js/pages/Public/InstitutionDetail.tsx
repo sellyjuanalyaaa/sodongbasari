@@ -5,7 +5,7 @@ import { Head, Link } from '@inertiajs/react';
 import SectionTitle from '@/components/SectionTitle';
 import { Users, ArrowLeft, Building2 } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
-import { AccentImage3 } from '@/components/ImageAccents';
+import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 
 interface Member {
     id: number;
@@ -35,6 +35,9 @@ export default function InstitutionDetail({ villageInfo, institution }: Props) {
             <Head title={institution.name} />
             <div className="py-20 bg-slate-50 relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
+                <CloudAccent className="top-[30%] left-[12%] w-[160px] h-[160px] opacity-18 rotate-20" />
+                <CloudAccent className="bottom-[20%] right-[15%] w-[150px] h-[150px] opacity-17 -rotate-25" />
+                <CloudAccent className="top-[65%] left-[35%] w-[145px] h-[145px] opacity-16 rotate-18" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="mb-6">
                         <Link

@@ -51,3 +51,59 @@ export const OrangeAccentBottom = ({ className = "" }: { className?: string }) =
         <circle cx="280" cy="240" r="3" fill="#EFA00B" fillOpacity="0.2" />
     </svg>
 );
+
+export const CloudDecoration = ({ className = "" }: { className?: string }) => (
+    <svg className={`absolute pointer-events-none ${className}`} width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Main cloud shape - traditional style */}
+        <path d="M 80 150 
+                 C 80 140, 85 130, 95 130
+                 C 100 120, 110 115, 120 120
+                 C 125 110, 135 105, 145 110
+                 C 150 100, 165 100, 170 110
+                 C 180 105, 190 110, 195 120
+                 C 205 115, 215 120, 220 130
+                 C 230 130, 235 140, 235 150
+                 C 235 160, 230 170, 220 170
+                 L 95 170
+                 C 85 170, 80 160, 80 150 Z" 
+              stroke="#EFA00B" 
+              strokeWidth="4" 
+              fill="none" 
+              strokeLinecap="round"
+              strokeLinejoin="round" />
+        
+        {/* Inner decorative curves - swirls */}
+        <path d="M 110 145 C 115 140, 120 140, 125 145" 
+              stroke="#EFA00B" 
+              strokeWidth="3" 
+              fill="none" 
+              strokeLinecap="round" />
+        <path d="M 140 140 C 145 135, 150 135, 155 140" 
+              stroke="#EFA00B" 
+              strokeWidth="3" 
+              fill="none" 
+              strokeLinecap="round" />
+        <path d="M 170 145 C 175 140, 180 140, 185 145" 
+              stroke="#EFA00B" 
+              strokeWidth="3" 
+              fill="none" 
+              strokeLinecap="round" />
+        
+        {/* Small decorative elements */}
+        <circle cx="100" cy="155" r="4" fill="#EFA00B" opacity="0.5" />
+        <circle cx="150" cy="158" r="5" fill="#EFA00B" opacity="0.5" />
+        <circle cx="200" cy="155" r="4" fill="#EFA00B" opacity="0.5" />
+        
+        {/* Additional swirls */}
+        <path d="M 95 135 C 98 130, 102 130, 105 135" 
+              stroke="#EFA00B" 
+              strokeWidth="2.5" 
+              fill="none" 
+              strokeLinecap="round" />
+        <path d="M 210 135 C 213 130, 217 130, 220 135" 
+              stroke="#EFA00B" 
+              strokeWidth="2.5" 
+              fill="none" 
+              strokeLinecap="round" />
+    </svg>
+);

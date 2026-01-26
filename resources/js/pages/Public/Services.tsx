@@ -15,7 +15,7 @@ import {
     ArrowRight,
     CheckCircle2
 } from 'lucide-react';
-import { AccentImage3 } from '@/components/ImageAccents';
+import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 import { OrangeAccentBottom, OrangeAccentTop, DotsPattern, Blob2 } from '@/components/SvgDecorations';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -185,25 +185,29 @@ export default function Services({ villageInfo }: { villageInfo: any }) {
                 <Blob2 className="right-0 bottom-1/4 opacity-30 w-96 h-96" />
                 <AccentImage3 className="left-[-5%] bottom-[-5%] w-[600px] opacity-10 -rotate-12" />
                 <AccentImage3 className="right-[-10%] top-[40%] w-[500px] opacity-5 rotate-12" />
+                <CloudAccent className="top-[20%] left-[40%] w-[155px] h-[155px] opacity-17 rotate-30" />
+                <CloudAccent className="bottom-[50%] left-[25%] w-[145px] h-[145px] opacity-18 -rotate-20" />
+                <CloudAccent className="top-[55%] right-[28%] w-[160px] h-[160px] opacity-16 rotate-25" />
+                <CloudAccent className="bottom-[70%] left-[50%] w-[140px] h-[140px] opacity-19 -rotate-35" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <SectionTitle
                         title="Layanan Mandiri"
                         subtitle="Urus Surat Keterangan Tanpa Antri"
                     />
 
-                    <p className="max-w-2xl mx-auto text-center text-slate-600 mb-12 -mt-4">
+                    <p className="max-w-2xl mx-auto text-center text-slate-600 text-sm sm:text-base mb-8 sm:mb-12 -mt-4 px-4">
                         Pilih jenis layanan yang Anda butuhkan, isi formulirnya secara online,
                         dan kami akan memproses permintaan dokumen Anda secepatnya.
                     </p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         {services.map((service) => (
                             <div
                                 key={service.id}
                                 onClick={() => handleServiceClick(service)}
-                                className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-xl hover:bg-[#FAFAFA] hover:border-[#EFA00B]/30 transition-all duration-300 cursor-pointer group"
+                                className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-100 shadow-sm hover:shadow-xl hover:bg-[#FAFAFA] hover:border-[#EFA00B]/30 transition-all duration-300 cursor-pointer group"
                             >
-                                <div className={`w-14 h-14 ${service.bgColor} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                                <div className={`w-12 h-12 sm:w-14 sm:h-14 ${service.bgColor} rounded-xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}>
                                     <service.icon className={`w-7 h-7 ${service.color}`} />
                                 </div>
 

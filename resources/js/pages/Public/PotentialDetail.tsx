@@ -3,7 +3,7 @@ import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
 import { MapPin, Phone, Tag, ArrowLeft, ArrowRight, Calendar, User } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
-import { AccentImage3 } from '@/components/ImageAccents';
+import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 import { route } from 'ziggy-js';
 
 interface Potential {
@@ -46,6 +46,9 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
 
             <div className="py-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
+                <CloudAccent className="top-[20%] right-[10%] w-[170px] h-[170px] opacity-18 rotate-15" />
+                <CloudAccent className="bottom-[25%] left-[8%] w-[155px] h-[155px] opacity-17 -rotate-20" />
+                <CloudAccent className="top-[60%] right-[22%] w-[140px] h-[140px] opacity-16 rotate-28" />
                 <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                     {/* Back Button */}
                     <Link
@@ -57,20 +60,20 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
                     </Link>
 
                     {/* Header Section */}
-                    <div className="mb-8">
+                    <div className="mb-6 sm:mb-8">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="bg-gradient-to-r from-orange-500 to-[#EFA00B] px-4 py-1.5 rounded-lg shadow-sm shadow-orange-200">
-                                <span className="text-white text-sm font-medium uppercase tracking-wide">
+                            <div className="bg-gradient-to-r from-orange-500 to-[#EFA00B] px-3 sm:px-4 py-1.5 rounded-lg shadow-sm shadow-orange-200">
+                                <span className="text-white text-xs sm:text-sm font-medium uppercase tracking-wide">
                                     {getCategoryLabel(potential.category)}
                                 </span>
                             </div>
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-medium text-slate-900 mb-4 tracking-tight">
+                        <h1 className="text-2xl sm:text-3xl md:text-4xl font-medium text-slate-900 mb-4 tracking-tight leading-tight">
                             {potential.name}
                         </h1>
 
                         {/* Info Meta */}
-                        <div className="flex flex-wrap gap-4 text-sm text-slate-600">
+                        <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-slate-600">
                             {potential.location && (
                                 <div className="flex items-center gap-2">
                                     <MapPin className="h-4 w-4 text-[#EFA00B]" />

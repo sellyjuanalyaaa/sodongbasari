@@ -5,7 +5,7 @@ import { route } from 'ziggy-js';
 import NewsCard from '@/components/NewsCard';
 import { Calendar, User, ArrowLeft, ArrowRight, Share2 } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
-import { AccentImage3 } from '@/components/ImageAccents';
+import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 
 export default function Show({ villageInfo, post, related }: { villageInfo: any; post: any; related: any[] }) {
     const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'%3E%3Crect fill='%23f1f5f9' width='1200' height='400'/%3E%3Cg fill='%2394a3b8'%3E%3Cpath d='M480 160h240v80H480zm-120 120h480v32H360z'/%3E%3Ccircle cx='560' cy='120' r='40'/%3E%3C/g%3E%3Ctext x='600' y='250' font-family='system-ui' font-size='32' fill='%23475569' text-anchor='middle'%3EBerita%3C/text%3E%3C/svg%3E";
@@ -17,6 +17,9 @@ export default function Show({ villageInfo, post, related }: { villageInfo: any;
             <div className="py-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
                 <AccentImage3 className="left-[-10%] top-[15%] w-[500px] opacity-10 rotate-12" />
+                <CloudAccent className="top-[25%] right-[8%] w-[175px] h-[175px] opacity-19 -rotate-15" />
+                <CloudAccent className="bottom-[30%] left-[15%] w-[160px] h-[160px] opacity-18 rotate-28" />
+                <CloudAccent className="top-[65%] right-[20%] w-[150px] h-[150px] opacity-17 -rotate-22" />
                 <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
                     {/* Back Button */}
                     <Link

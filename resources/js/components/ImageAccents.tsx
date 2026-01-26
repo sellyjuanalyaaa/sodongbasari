@@ -34,3 +34,13 @@ export const AccentImage3 = ({ className = "", style }: AccentProps) => (
         style={style}
     />
 );
+
+export const CloudAccent = ({ className = "", style }: AccentProps) => (
+    <img
+        src="/images/accent4.jpeg"
+        alt="Cloud Decoration"
+        aria-hidden="true"
+        className={`absolute pointer-events-none select-none ${className}`}
+        style={style}
+    />
+);

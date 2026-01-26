@@ -5,7 +5,7 @@ import HeroSection from '@/components/HeroSection';
 import NewsCard from '@/components/NewsCard';
 import { Users } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom } from '@/components/SvgDecorations';
-import { AccentImage3 } from '@/components/ImageAccents';
+import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 
 import { Head, Link } from '@inertiajs/react';
 import { route } from 'ziggy-js';
@@ -112,6 +112,9 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
             <section className="py-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
                 <AccentImage3 className="left-[-5%] bottom-[-10%] w-[400px] opacity-15 -rotate-12" />
+                <CloudAccent className="top-[20%] right-[12%] w-[145px] h-[145px] opacity-17 -rotate-25" />
+                <CloudAccent className="bottom-[30%] right-[22%] w-[135px] h-[135px] opacity-16 rotate-32" />
+                <CloudAccent className="top-[45%] right-[8%] w-[170px] h-[170px] opacity-18 rotate-20" />
                 <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                     <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-20">
                         {/* Avatar Side */}
@@ -269,6 +272,9 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
             <section className="py-24 bg-white relative overflow-hidden">
                 <OrangeAccentBottom className="left-0 top-0 w-[600px] -translate-x-1/3 -translate-y-1/4 opacity-100" />
                 <AccentImage3 className="right-[-5%] bottom-[-10%] w-[500px] opacity-10 rotate-[-15deg]" />
+                <CloudAccent className="top-[40%] right-[15%] w-[190px] h-[190px] opacity-20 -rotate-18" />
+                <CloudAccent className="bottom-[25%] left-[40%] w-[155px] h-[155px] opacity-18 rotate-28" />
+                <CloudAccent className="top-[65%] right-[35%] w-[140px] h-[140px] opacity-17 -rotate-22" />
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Struktur Organisasi</h2>
@@ -318,8 +324,11 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
             </section>
             {/* Latest News Section */}
             <section className="py-24 bg-slate-50 relative overflow-hidden">
-                <AccentImage3 className="left-[-10%] top-1/2 w-[600px] -translate-y-1/2 opacity-10 rotate-[30deg]" />
-                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+                <AccentImage3 className="left-[-10%] top-1/2 w-[600px] -translate-y-1/2 opacity-10 rotate-[30deg] z-0" />
+                <CloudAccent className="top-[25%] right-[8%] w-[230px] h-[230px] opacity-22 rotate-15 z-0" />
+                <CloudAccent className="bottom-[20%] right-[25%] w-[195px] h-[195px] opacity-21 -rotate-20 z-0" />
+                <CloudAccent className="top-[60%] right-[15%] w-[180px] h-[180px] opacity-20 rotate-30 z-0" />
+                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Kabar & Kegiatan</h2>
                         <p className="text-slate-500 text-sm font-light">Berita Terkini</p>

@@ -3,7 +3,7 @@ import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
 import { Users, Building2, ArrowRight } from 'lucide-react';
-import { AccentImage3 } from '@/components/ImageAccents';
+import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern, Blob1 } from '@/components/SvgDecorations';
 
 interface Official {
@@ -46,18 +46,22 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
                 <AccentImage3 className="left-[-10%] bottom-[10%] w-[500px] opacity-10 rotate-[15deg]" />
                 <AccentImage3 className="right-[-5%] top-[20%] w-[400px] opacity-5 -rotate-45" />
-                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-                    <div className="text-center mb-16">
-                        <div className="inline-block px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full mb-4">
+                <CloudAccent className="bottom-[45%] left-[10%] w-[175px] h-[175px] opacity-19 rotate-28" />
+                <CloudAccent className="top-[35%] left-[35%] w-[160px] h-[160px] opacity-18 -rotate-15" />
+                <CloudAccent className="bottom-[65%] right-[20%] w-[145px] h-[145px] opacity-17 rotate-25" />
+                <CloudAccent className="top-[70%] left-[18%] w-[135px] h-[135px] opacity-16 -rotate-32" />
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+                    <div className="text-center mb-12 sm:mb-16">
+                        <div className="inline-block px-3 sm:px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full mb-4">
                             <span className="text-[#EFA00B] text-xs font-medium uppercase tracking-wide">Profil Desa</span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Tentang Desa</h2>
-                        <p className="text-slate-500 text-sm font-light">Sodong Basari</p>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Tentang Desa</h2>
+                        <p className="text-slate-500 text-xs sm:text-sm font-light">Sodong Basari</p>
                     </div>
 
                     {/* Visi & Misi */}
                     {(villageInfo?.vision || villageInfo?.mission) && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                             {/* Debug - Hapus setelah testing */}
                             {console.log('Village Info:', villageInfo)}
 
@@ -135,7 +139,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                     <div className="w-9 h-9 bg-gradient-to-br from-slate-900 to-slate-700 rounded-full flex items-center justify-center text-white text-sm font-medium group-hover:from-orange-500 group-hover:to-[#EFA00B] transition-all">U</div>
                                     <h4 className="font-medium text-slate-900">Sebelah Utara</h4>
                                 </div>
-                                <p className="text-slate-600 text-sm ml-12 font-light">Desa Kalisaeh, Kecamatan Belik</p>
+                                <p className="text-slate-600 text-sm ml-12 font-light">Desa Kalisaeh & Desa Sikasur, Kecamatan Belik</p>
                             </div>
                             <div className="bg-white border border-slate-200 rounded-lg p-5 hover:border-orange-200 hover:shadow-sm transition-all group">
                                 <div className="flex items-center gap-3 mb-2">
@@ -156,7 +160,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                     <div className="w-9 h-9 bg-gradient-to-br from-slate-900 to-slate-700 rounded-full flex items-center justify-center text-white text-sm font-medium group-hover:from-orange-500 group-hover:to-[#EFA00B] transition-all">T</div>
                                     <h4 className="font-medium text-slate-900">Sebelah Timur</h4>
                                 </div>
-                                <p className="text-slate-600 text-sm ml-12 font-light">Desa Sikasur, Kecamatan Belik</p>
+                                <p className="text-slate-600 text-sm ml-12 font-light">Desa Mendelem, Kecamatan Belik</p>
                             </div>
                         </div>
                         <p className="text-slate-500 text-xs mt-6 font-light italic">

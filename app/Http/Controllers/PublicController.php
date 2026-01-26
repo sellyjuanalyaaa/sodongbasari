@@ -58,11 +58,33 @@ class PublicController extends Controller
     public function potentials()
     {
         $categories = PotentialCategory::where('is_active', true)->get()->keyBy('name');
+        
+        // Map Tailwind gradient to solid hex color
+        $colorMap = [
+            'from-emerald-500 to-teal-500' => '#10b981', // Emerald-500
+            'from-yellow-500 to-amber-500' => '#eab308', // Yellow-500
+            'from-green-600 to-lime-600' => '#16a34a', // Green-600
+            'from-purple-500 to-indigo-500' => '#a855f7', // Purple-500
+            'from-red-500 to-rose-500' => '#ef4444', // Red-500
+        ];
+        
+        $potentials = Potential::all()->map(function ($potential) use ($categories, $colorMap) {
+            $category = $categories->get($potential->category);
+            $hexColor = '#EFA00B'; // Default orange
+            
+            if ($category && isset($colorMap[$category->color])) {
+                $hexColor = $colorMap[$category->color];
+            }
+            
+            return array_merge($potential->toArray(), [
+                'category_color' => $hexColor
+            ]);
+        });
 
         return Inertia::render('Public/Potentials', array_merge($this->getCommonProps(), [
-            'potentials' => Potential::all(),
-            'categoryColors' => $categories->mapWithKeys(function ($cat) {
-                return [$cat->name => $cat->color];
+            'potentials' => $potentials,
+            'categoryColors' => $categories->mapWithKeys(function ($cat) use ($colorMap) {
+                return [$cat->name => $colorMap[$cat->color] ?? '#EFA00B'];
             }),
         ]));
     }

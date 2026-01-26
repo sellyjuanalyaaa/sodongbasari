@@ -4,7 +4,7 @@ import { Head } from '@inertiajs/react';
 import VillageMap from '@/components/VillageMap';
 import { Users, Home, MapPin, GraduationCap, Briefcase, Church, Building2, Heart, DollarSign, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
-import { AccentImage3 } from '@/components/ImageAccents';
+import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -91,16 +91,16 @@ export default function Statistics({ villageInfo, statistics }: Props) {
                 <div className="py-24 bg-white relative overflow-hidden">
                     <OrangeAccentTop className="right-0 top-0 opacity-100" />
                     <DotsPattern className="left-0 bottom-0 opacity-20" />
-                    <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-                        <div className="text-center mb-16">
-                            <div className="inline-block px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full mb-4">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+                        <div className="text-center mb-12 sm:mb-16">
+                            <div className="inline-block px-3 sm:px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full mb-4">
                                 <span className="text-[#EFA00B] text-xs font-medium uppercase tracking-wide">Data & Informasi</span>
                             </div>
-                            <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Statistik Desa</h2>
-                            <p className="text-slate-500 text-sm font-light">Tahun Terkini</p>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Statistik Desa</h2>
+                            <p className="text-slate-500 text-xs sm:text-sm font-light">Tahun Terkini</p>
                         </div>
-                        <div className="bg-slate-50 p-12 rounded-lg border border-slate-200 text-center text-slate-400">
-                            <p className="text-sm">Data statistik belum tersedia.</p>
+                        <div className="bg-slate-50 p-6 sm:p-12 rounded-lg border border-slate-200 text-center text-slate-400">
+                            <p className="text-xs sm:text-sm">Data statistik belum tersedia.</p>
                         </div>
                     </div>
                 </div>
@@ -112,12 +112,18 @@ export default function Statistics({ villageInfo, statistics }: Props) {
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Statistik Desa" />
             <div className="py-24 bg-white relative overflow-hidden">
-                <OrangeAccentTop className="right-0 top-0 opacity-100" />
-                <OrangeAccentBottom className="left-0 bottom-0 opacity-100" />
-                <DotsPattern className="left-10 top-20 opacity-30" />
-                <AccentImage3 className="left-[-5%] top-[10%] w-[500px] opacity-10 rotate-12" />
-                <AccentImage3 className="right-[-10%] bottom-[-5%] w-[600px] opacity-10 -rotate-45" />
-                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+                <OrangeAccentTop className="right-0 top-0 opacity-100 z-0" />
+                <OrangeAccentBottom className="left-0 bottom-0 opacity-100 z-0" />
+                <DotsPattern className="left-10 top-20 opacity-30 z-0" />
+                <AccentImage3 className="left-[-5%] top-[10%] w-[500px] opacity-10 rotate-12 z-0" />
+                <AccentImage3 className="right-[-10%] bottom-[-5%] w-[600px] opacity-10 -rotate-45 z-0" />
+                <CloudAccent className="top-[50%] left-[15%] w-[180px] h-[180px] opacity-18 rotate-25 z-0" />
+                <CloudAccent className="bottom-[35%] right-[12%] w-[160px] h-[160px] opacity-20 -rotate-15 z-0" />
+                <CloudAccent className="top-[15%] left-[45%] w-[140px] h-[140px] opacity-16 rotate-35 z-0" />
+                <CloudAccent className="bottom-[60%] right-[25%] w-[150px] h-[150px] opacity-19 -rotate-28 z-0" />
+                <CloudAccent className="top-[75%] left-[35%] w-[130px] h-[130px] opacity-17 rotate-18 z-0" />
+                
+                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                     {/* Header dengan Data Utama */}
                     <div className="bg-gradient-to-br from-orange-50 via-white to-orange-50/50 rounded-2xl p-8 md:p-10 mb-6 border border-orange-100 shadow-sm shadow-orange-100/50">
                         <div className="flex items-center justify-center md:justify-start">

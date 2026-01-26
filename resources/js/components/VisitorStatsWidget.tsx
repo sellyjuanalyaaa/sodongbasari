@@ -24,55 +24,63 @@ export default function VisitorStatsWidget({ stats }: { stats: VisitorStats }) {
     ];
 
     return (
-        <div className="fixed bottom-6 left-6 z-40">
+        <div className="fixed bottom-6 left-6 z-50">
             {/* Collapsed Button */}
             {!isExpanded && (
                 <button
                     onClick={() => setIsExpanded(true)}
-                    className="flex items-center gap-2 bg-gradient-to-br from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-5 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group backdrop-blur-sm"
+                    className="flex items-center gap-3 bg-white/95 backdrop-blur-md border border-slate-200 hover:border-[#EFA00B] text-slate-700 px-4 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
                 >
-                    <Eye className="h-4 w-4 group-hover:scale-110 transition-transform" />
-                    <span className="text-sm font-medium">Kunjungan</span>
-                    <span className="bg-white/25 px-2 py-0.5 rounded-full text-xs font-semibold">
-                        {stats.today}
-                    </span>
-                    <span className="text-xs opacity-90">Hari Ini</span>
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#EFA00B] to-orange-600 rounded-lg flex items-center justify-center">
+                        <Eye className="h-4 w-4 text-white group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div className="flex flex-col items-start">
+                        <span className="text-xs text-slate-500 font-medium">Pengunjung</span>
+                        <div className="flex items-baseline gap-1.5">
+                            <span className="text-lg font-bold text-slate-900">{stats.today}</span>
+                            <span className="text-xs text-slate-400">hari ini</span>
+                        </div>
+                    </div>
                 </button>
             )}
 
             {/* Expanded Card */}
             {isExpanded && (
-                <div className="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-2xl shadow-2xl p-6 min-w-[280px] animate-in slide-in-from-bottom-4 duration-300 backdrop-blur-sm">
-                    <div className="flex items-center justify-between mb-5">
-                        <h3 className="font-semibold text-lg flex items-center gap-2">
-                            <Eye className="h-5 w-5" />
-                            Jumlah Kunjungan
-                        </h3>
+                <div className="bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-xl p-5 min-w-[300px] animate-in slide-in-from-bottom-4 duration-300">
+                    <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                        <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 bg-gradient-to-br from-[#EFA00B] to-orange-600 rounded-lg flex items-center justify-center">
+                                <Eye className="h-4 w-4 text-white" />
+                            </div>
+                            <h3 className="font-semibold text-base text-slate-900">
+                                Statistik Kunjungan
+                            </h3>
+                        </div>
                         <button
                             onClick={() => setIsExpanded(false)}
-                            className="text-white/80 hover:text-white hover:bg-white/10 rounded-full p-1 transition-all"
+                            className="text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full p-1 transition-all"
                         >
-                            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
                     </div>
 
-                    <div className="space-y-3">
+                    <div className="space-y-2.5">
                         {statsData.map((stat, index) => (
                             <div 
                                 key={index}
-                                className="flex justify-between items-center py-2 border-b border-white/10 last:border-0"
+                                className="flex justify-between items-center py-2 px-3 rounded-lg hover:bg-slate-50 transition-colors"
                             >
-                                <span className="text-sm text-white/90">{stat.label}</span>
-                                <span className="text-base font-semibold">{stat.value.toLocaleString('id-ID')}</span>
+                                <span className="text-sm text-slate-600">{stat.label}</span>
+                                <span className="text-sm font-semibold text-slate-900">{stat.value.toLocaleString('id-ID')}</span>
                             </div>
                         ))}
                         
                         {/* Total */}
-                        <div className="flex justify-between items-center pt-3 border-t-2 border-white/30 mt-3">
-                            <span className="text-sm font-semibold text-white">Total Kunjungan</span>
-                            <span className="text-lg font-bold">{stats.total.toLocaleString('id-ID')}</span>
+                        <div className="flex justify-between items-center pt-3 mt-2 border-t border-slate-200 px-3">
+                            <span className="text-sm font-semibold text-slate-700">Total Kunjungan</span>
+                            <span className="text-lg font-bold text-[#EFA00B]">{stats.total.toLocaleString('id-ID')}</span>
                         </div>
                     </div>
                 </div>
