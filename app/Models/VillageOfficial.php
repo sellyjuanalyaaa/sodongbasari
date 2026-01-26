@@ -17,4 +17,12 @@ class VillageOfficial extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function getPhotoAttribute($value)
+    {
+        if (!$value)
+            return null;
+        // Clean up path if it contains duplicate /storage prefixes or absolute paths
+        return str_replace('/storage/app/public/', '/storage/', $value);
+    }
 }
