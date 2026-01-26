@@ -66,6 +66,10 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
         { label: "Statistik Desa", routeName: "admin.statistics.index", active: "admin.statistics.*", icon: BarChart3 },
         { label: "Statistik Beranda", routeName: "admin.home-statistics.index", active: "admin.home-statistics.*", icon: BarChart3 },
         { label: "Pengaturan Slider", routeName: "admin.hero.edit", active: "admin.hero.*", icon: ImageIcon },
+        // Add User Management for Super Admin
+        ...(user.role === 'super_admin' ? [
+            { label: "Manajemen User", routeName: "admin.users.index", active: "admin.users.*", icon: Users } // Using Users icon again, or maybe Shield
+        ] : [])
     ];
 
     return (

@@ -20,11 +20,14 @@ Route::controller(PublicController::class)->group(function () {
 // Admin/Auth Routes
 // Fix default redirect to /dashboard
 Route::get('/dashboard', function () {
-    return redirect()->route('admin.dashboard');
+    if (auth()->user()->isAdmin()) {
+        return redirect()->route('admin.dashboard');
+    }
+    return redirect()->route('home');
 })->middleware(['auth', 'verified']);
 
 // Admin Routes
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
     // CRUD Resources
@@ -59,6 +62,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('/hero-settings', [\App\Http\Controllers\Admin\HeroController::class, 'edit'])->name('hero.edit');
     Route::post('/hero-settings', [\App\Http\Controllers\Admin\HeroController::class, 'store'])->name('hero.store'); // Changed to store for adding
     Route::delete('/hero-settings/{heroImage}', [\App\Http\Controllers\Admin\HeroController::class, 'destroy'])->name('hero.destroy');
+    // User Management (Super Admin Only)
+    Route::get('/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
+    Route::patch('/users/{user}/role', [\App\Http\Controllers\Admin\UserController::class, 'updateRole'])->name('users.update-role');
 });
 
 require __DIR__ . '/settings.php';

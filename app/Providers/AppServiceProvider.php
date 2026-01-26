@@ -27,5 +27,12 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\VillageInfo::observe(\App\Observers\NotificationObserver::class);
         \App\Models\Budget::observe(\App\Observers\NotificationObserver::class);
         \App\Models\Demographic::observe(\App\Observers\NotificationObserver::class);
+        \App\Models\Category::observe(\App\Observers\NotificationObserver::class);
+        \App\Models\FormerVillageHead::observe(\App\Observers\NotificationObserver::class);
+        \App\Models\HeroImage::observe(\App\Observers\NotificationObserver::class);
+        \App\Models\HomeStatistic::observe(\App\Observers\NotificationObserver::class);
+        \App\Models\InstitutionMember::observe(\App\Observers\NotificationObserver::class);
+        \App\Models\PotentialCategory::observe(\App\Observers\NotificationObserver::class);
+        \App\Models\Statistic::observe(\App\Observers\NotificationObserver::class);
     }
 }

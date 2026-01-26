@@ -27,32 +27,68 @@ class NotificationObserver
         }
     }
 
+    /**
+     * Handle the Model "deleted" event.
+     */
+    public function deleted(Model $model): void
+    {
+        $this->createNotification($model, 'deleted');
+    }
+
     private function createNotification(Model $model, string $action): void
     {
         $modelName = class_basename($model);
         $readableName = Str::title(Str::snake($modelName, ' '));
-        $title = "Data {$readableName} " . ($action === 'created' ? 'Ditambahkan' : 'Diperbaharui');
+
+        $actionVerb = match ($action) {
+            'created' => 'Ditambahkan',
+            'updated' => 'Diperbaharui',
+            'deleted' => 'Dihapus',
+            default => 'Unknown'
+        };
+
+        $title = "Data {$readableName} {$actionVerb}";
 
         // Try to get a recognizable name from the model
         $itemName = $model->name ?? $model->title ?? $model->id;
 
-        $message = "Data {$readableName} \"{$itemName}\" telah " . ($action === 'created' ? 'ditambahkan' : 'diperbaharui') . ".";
+        $message = "Data {$readableName} \"{$itemName}\" telah " . strtolower($actionVerb) . ".";
 
-        // Determine action URL (simplified)
-        // Adjust these route names based on your actual route structure
         $pluralModel = Str::plural(Str::kebab($modelName));
-        $url = route("admin.{$pluralModel}.edit", $model->id);
 
-        // Fallback if route might not exist or for index
-        if (!\Illuminate\Support\Facades\Route::has("admin.{$pluralModel}.edit")) {
-            $url = route("admin.{$pluralModel}.index");
+        // Map specific models to their route resources if they don't follow the plural-kebab-case convention
+        $routeMap = [
+            'VillageOfficial' => 'officials',
+            'FormerVillageHead' => 'former-village-heads',
+            'HomeStatistic' => 'home-statistics',
+            'InstitutionMember' => 'institutions.members',
+            'PotentialCategory' => 'potential-categories',
+            'HeroImage' => 'hero-settings',
+        ];
+
+        $resourceName = $routeMap[$modelName] ?? $pluralModel;
+
+        $url = route('admin.dashboard');
+
+        // Only try to link to edit/view if not deleted
+        if ($action !== 'deleted') {
+            if (\Illuminate\Support\Facades\Route::has("admin.{$resourceName}.edit")) {
+                $url = route("admin.{$resourceName}.edit", $model->id);
+            } elseif (\Illuminate\Support\Facades\Route::has("admin.{$resourceName}.index")) {
+                $url = route("admin.{$resourceName}.index");
+            }
+        } else {
+            // If deleted, try to link to index
+            if (\Illuminate\Support\Facades\Route::has("admin.{$resourceName}.index")) {
+                $url = route("admin.{$resourceName}.index");
+            }
         }
 
         Notification::create([
             'title' => $title,
             'message' => $message,
-            'type' => 'info', // or 'success', 'warning'
-            'action_text' => 'Lihat Detail',
+            'type' => $action === 'deleted' ? 'warning' : 'info',
+            'action_text' => $action === 'deleted' ? 'Lihat Daftar' : 'Lihat Detail',
             'action_url' => $url,
             'is_read' => false,
         ]);
