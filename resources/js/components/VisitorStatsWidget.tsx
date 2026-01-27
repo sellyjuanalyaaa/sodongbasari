@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Eye } from 'lucide-react';
 
 interface VisitorStats {
@@ -13,6 +13,38 @@ interface VisitorStats {
 
 export default function VisitorStatsWidget({ stats }: { stats: VisitorStats }) {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [bottomOffset, setBottomOffset] = useState(24);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const footer = document.querySelector('footer');
+            if (footer) {
+                const footerRect = footer.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                // Check if footer is entered the viewport
+                if (footerRect.top < windowHeight) {
+                    // Calculate overlap (how much pixel of footer is visible)
+                    const overlap = windowHeight - footerRect.top;
+                    // Push the widget up by overlap amount + base padding (24px)
+                    setBottomOffset(overlap + 24);
+                } else {
+                    // Reset to default bottom-6 (24px)
+                    setBottomOffset(24);
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll);
+        // Initial check
+        handleScroll();
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleScroll);
+        };
+    }, []);
 
     const statsData = [
         { label: 'Hari Ini', value: stats.today },
@@ -24,7 +56,10 @@ export default function VisitorStatsWidget({ stats }: { stats: VisitorStats }) {
     ];
 
     return (
-        <div className="fixed bottom-6 left-6 z-50">
+        <div
+            className="fixed left-6 z-50 transition-all duration-100 ease-out"
+            style={{ bottom: `${bottomOffset}px` }}
+        >
             {/* Collapsed Button */}
             {!isExpanded && (
                 <button
@@ -68,7 +103,7 @@ export default function VisitorStatsWidget({ stats }: { stats: VisitorStats }) {
 
                     <div className="space-y-2.5">
                         {statsData.map((stat, index) => (
-                            <div 
+                            <div
                                 key={index}
                                 className="flex justify-between items-center py-2 px-3 rounded-lg hover:bg-slate-50 transition-colors"
                             >
@@ -76,7 +111,7 @@ export default function VisitorStatsWidget({ stats }: { stats: VisitorStats }) {
                                 <span className="text-sm font-semibold text-slate-900">{stat.value.toLocaleString('id-ID')}</span>
                             </div>
                         ))}
-                        
+
                         {/* Total */}
                         <div className="flex justify-between items-center pt-3 mt-2 border-t border-slate-200 px-3">
                             <span className="text-sm font-semibold text-slate-700">Total Kunjungan</span>
