@@ -251,75 +251,83 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
 
                     {/* Riwayat Kepala Desa */}
                     {formerHeads && formerHeads.length > 0 && (
-                        <div className="bg-gradient-to-br from-slate-50 to-white p-8 md:p-10 rounded-xl border border-slate-200 mt-8">
-                            <div className="flex items-center gap-3 mb-10">
-                                <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-[#EFA00B] rounded-lg flex items-center justify-center text-white shadow-md">
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="mt-12 bg-white rounded-2xl border border-slate-100 shadow-sm md:p-12 p-6 relative overflow-hidden">
+                            {/* Background accent */}
+                            <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+                                <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 0C44.7715 0 0 44.7715 0 100C0 155.228 44.7715 200 100 200C155.228 200 200 155.228 200 100C200 44.7715 155.228 0 100 0Z" fill="currentColor" className="text-orange-500" />
+                                </svg>
+                            </div>
+
+                            <div className="flex items-center gap-4 mb-8 relative z-10">
+                                <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center border border-orange-100">
+                                    <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-medium text-slate-900 tracking-tight">Riwayat Kepala Desa</h3>
+                                <div>
+                                    <h3 className="text-2xl font-semibold text-slate-900 tracking-tight">Riwayat Kepala Desa</h3>
+                                    <p className="text-slate-500 text-sm font-light">Dedikasi pemimpin dari masa ke masa</p>
+                                </div>
                             </div>
 
-                            <div className="relative">
-                                {/* Timeline Line */}
-                                <div className="absolute left-[23px] top-8 bottom-8 w-0.5 bg-gradient-to-b from-orange-200 via-orange-300 to-orange-200"></div>
-
-                                <div className="space-y-6">
+                            {/* Horizontal Carousel Container */}
+                            <div className="relative group">
+                                <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-2 px-1 -mx-1 scrollbar-hide" style={{ scrollBehavior: 'smooth' }}>
                                     {formerHeads.map((head, index) => (
-                                        <div key={head.id} className="relative pl-16 pb-8 last:pb-0">
-                                            {/* Timeline Dot */}
-                                            <div className="absolute left-0 top-2 w-12 h-12 bg-gradient-to-br from-orange-500 to-[#EFA00B] rounded-full flex items-center justify-center text-white font-semibold shadow-lg shadow-orange-200 z-10">
-                                                {index + 1}
-                                            </div>
-
-                                            {/* Content Card */}
-                                            <div className="bg-white rounded-xl border border-slate-200 hover:border-orange-200 hover:shadow-lg transition-all duration-300 overflow-hidden">
-                                                <div className="flex flex-col md:flex-row">
-                                                    {/* Photo */}
-                                                    {head.photo && (
-                                                        <div className="md:w-32 md:h-32 h-48 flex-shrink-0">
-                                                            <img
-                                                                src={`/storage/${head.photo}`}
-                                                                alt={head.name}
-                                                                className="w-full h-full object-cover"
-                                                            />
+                                        <div
+                                            key={head.id}
+                                            className="snap-center flex-shrink-0 w-full md:w-[400px] bg-white rounded-xl border border-slate-200 hover:border-orange-300 hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden group/card"
+                                        >
+                                            {/* Header with Photo & Name */}
+                                            <div className="p-6 pb-0 flex items-center gap-4">
+                                                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-slate-100 overflow-hidden flex-shrink-0 shadow-sm">
+                                                    {head.photo ? (
+                                                        <img
+                                                            src={`/storage/${head.photo}`}
+                                                            alt={head.name}
+                                                            className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500"
+                                                        />
+                                                    ) : (
+                                                        <div className="w-full h-full bg-slate-100 flex items-center justify-center">
+                                                            <Users className="w-8 h-8 text-slate-300" />
                                                         </div>
                                                     )}
-
-                                                    {/* Info */}
-                                                    <div className="flex-1 p-6">
-                                                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-3">
-                                                            <div>
-                                                                <h4 className="text-lg font-semibold text-slate-900 mb-1">{head.name}</h4>
-                                                                <div className="flex items-center gap-2 text-sm">
-                                                                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
-                                                                        Kepala Desa
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div className="flex items-center gap-2 text-sm font-medium text-slate-600 bg-slate-50 px-4 py-2 rounded-lg">
-                                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                                </svg>
-                                                                {head.start_year} - {head.end_year}
-                                                            </div>
-                                                        </div>
-
-                                                        {head.achievement && (
-                                                            <div className="mt-4">
-                                                                <h5 className="text-sm font-medium text-slate-700 mb-2">Prestasi & Pencapaian:</h5>
-                                                                <p className="text-sm text-slate-600 leading-relaxed font-light">
-                                                                    {head.achievement}
-                                                                </p>
-                                                            </div>
-                                                        )}
-                                                    </div>
                                                 </div>
+                                                <div>
+                                                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-orange-50 text-orange-600 text-[10px] font-bold uppercase tracking-wider mb-1">
+                                                        Periode {index + 1}
+                                                    </span>
+                                                    <h4 className="text-lg font-bold text-slate-900 leading-tight capitalize group-hover/card:text-orange-600 transition-colors">
+                                                        {head.name}
+                                                    </h4>
+                                                    <p className="text-sm text-slate-500 mt-1 flex items-center gap-1.5">
+                                                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                        {head.start_year} - {head.end_year}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            {/* Content Body */}
+                                            <div className="p-6 flex-1 flex flex-col">
+                                                <div className="w-full h-px bg-slate-100 mb-4"></div>
+                                                {head.achievement ? (
+                                                    <div className="relative pl-3 border-l-2 border-orange-200">
+                                                        <p className="text-sm text-slate-600 italic font-light leading-relaxed line-clamp-4">
+                                                            "{head.achievement}"
+                                                        </p>
+                                                    </div>
+                                                ) : (
+                                                    <div className="text-center py-6 text-slate-400 text-sm font-light italic">
+                                                        - Tidak ada data prestasi -
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     ))}
                                 </div>
+                                {/* Hint overlay for horizontal scroll on desktop if needed, usually scrollbar is enough or trackpad */}
+                                <div className="absolute right-0 top-0 bottom-8 w-12 bg-gradient-to-l from-white to-transparent pointer-events-none md:hidden"></div>
                             </div>
                         </div>
                     )}

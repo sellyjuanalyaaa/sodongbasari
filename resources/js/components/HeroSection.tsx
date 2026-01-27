@@ -79,20 +79,7 @@ export default function HeroSection({ villageInfo, heroImages = [] }: { villageI
                     </Link>
                 </div>
 
-                {/* Carousel Indicators */}
-                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-2.5 z-20">
-                    {images.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setSlide(index)}
-                            className={`rounded-full transition-all duration-300 focus:outline-none ${index === currentImageIndex
-                                ? 'bg-white w-8 h-2'
-                                : 'bg-white/40 hover:bg-white/60 w-2 h-2'
-                                }`}
-                            aria-label={`Go to slide ${index + 1}`}
-                        />
-                    ))}
-                </div>
+                {/* Carousel Indicators removed as requested */}
             </div>
         </div>
     );

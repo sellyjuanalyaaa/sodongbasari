@@ -76,11 +76,11 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
 
                         <Button
                             type="submit"
-                            className="mt-4 w-full"
+                            className="mt-4 w-full bg-[#EFA00B] hover:bg-orange-600 text-white"
                             disabled={processing}
                             data-test="reset-password-button"
                         >
-                            {processing && <Spinner />}
+                            {processing && <Spinner className="mr-2" />}
                             Reset password
                         </Button>
                     </div>

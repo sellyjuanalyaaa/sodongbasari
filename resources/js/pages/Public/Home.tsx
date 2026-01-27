@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import HeroSection from '@/components/HeroSection';
@@ -10,9 +9,6 @@ import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 import { Head, Link } from '@inertiajs/react';
 import { route } from 'ziggy-js';
 
-// Data Statistik Slider moved to Database
-
-// Helper component for counting up animation
 // Helper component for counting up animation
 const AnimatedCounter = ({ value, duration = 2000 }: { value: any; duration?: number }) => {
     const [count, setCount] = useState(0);
@@ -20,6 +16,7 @@ const AnimatedCounter = ({ value, duration = 2000 }: { value: any; duration?: nu
     // Robust parser for IDR format (e.g., "Rp 120.000.000,00") and standard numbers
     const parseValue = (val: any) => {
         if (typeof val === 'number') return val;
+        if (!val) return 0; // Safeguard against null/undefined
         // Remove "Rp" and whitespace
         const cleanVal = val.toString().replace(/Rp|\s/g, '');
         let clean = cleanVal;
@@ -76,20 +73,41 @@ const AnimatedCounter = ({ value, duration = 2000 }: { value: any; duration?: nu
     return <span>{count.toLocaleString('id-ID')}</span>;
 };
 
-// subStats removed, now using props
-
 export default function Home({ villageInfo, heroImages = [], stats = {}, officials = [], latestNews = [], homeStatistics = [] }: { villageInfo: any, heroImages?: any[], stats?: any, officials?: any[], latestNews?: any[], homeStatistics?: any[] }) {
     const [currentStat, setCurrentStat] = useState(0);
 
+    // 1. Population Stat
     const populationStat = {
         title: "Total Penduduk",
-        subtitle: stats?.population ? `${Number(stats.population).toLocaleString('id-ID')} Jiwa` : "Data Belum Tersedia",
+        rawValue: stats?.population || 0,
         type: "count",
-        data: []
+        icon: <Users className="w-10 h-10 text-orange-600" />
     };
 
-    // Combine static/computed stats with dynamic DB stats
-    const displayStats = [populationStat, ...homeStatistics];
+    // 2. Families Stat
+    const familiesStat = {
+        title: "Kepala Keluarga",
+        rawValue: stats?.families || 0,
+        type: "count",
+        icon: <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    };
+
+    // 3. Area Stat
+    const areaStat = {
+        title: "Luas Wilayah",
+        value: stats?.area || '1500 Ha',
+        type: "static",
+        icon: <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path></svg>
+    };
+
+    // 4. Normalize dynamic stats and combine
+    const processedHomeStatistics = homeStatistics.map((stat: any) => ({
+        ...stat,
+        rawValue: stat.data?.[0]?.value || 0,
+        // Ensure type doesn't conflict if needed, or rely on properties
+    }));
+
+    const displayStats = [populationStat, familiesStat, areaStat, ...processedHomeStatistics];
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -150,82 +168,106 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                 </div>
             </section>
 
-            {/* Statistics Section Grid */}
-            <section className="py-24 bg-slate-50 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Statistik Desa</h2>
-                        <p className="text-slate-500 text-sm font-light">Data Terkini Desa Sodong Basari</p>
-                    </div>
+            {/* Statistics Section Carousel - Premium Orange */}
+            <section className="relative overflow-hidden bg-gradient-to-br from-orange-500 to-amber-600 text-white">
+                {/* Background Patterns */}
+                <div className="absolute inset-0 opacity-10">
+                    <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
+                    </svg>
+                </div>
+                <CloudAccent className="top-[10%] right-[5%] w-[300px] h-[300px] opacity-20 rotate-12 mix-blend-overlay text-white" />
+                <CloudAccent className="bottom-[10%] left-[5%] w-[250px] h-[250px] opacity-20 -rotate-12 mix-blend-overlay text-white" />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-                        {/* Total Population Card */}
-                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-                            <div className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:bg-orange-100 transition-colors">
-                                <Users className="w-7 h-7 text-orange-600" />
+                <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 py-24 md:py-32">
+                    <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-24">
+
+                        {/* Left: Text Content & Navigation */}
+                        <div className="w-full md:w-1/2 text-center md:text-left">
+                            <div className="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-md border border-white/30 rounded-full mb-6">
+                                <span className="text-white text-sm font-medium tracking-wider uppercase">Info Desa Terkini</span>
                             </div>
-                            <h3 className="text-4xl font-bold text-slate-900 mb-2">
-                                <AnimatedCounter value={stats?.population || 0} />
-                            </h3>
-                            <p className="text-slate-500 font-medium text-sm tracking-wide">TOTAL PENDUDUK</p>
+                            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
+                                Statistik <br />
+                                <span className="text-amber-200">Desa Sodong Basari</span>
+                            </h2>
+                            <p className="text-orange-50 text-lg mb-10 font-light max-w-lg mx-auto md:mx-0 leading-relaxed">
+                                Transparansi data untuk kemajuan bersama. Berikut adalah data terbaru kondisi demografi dan wilayah desa kami.
+                            </p>
+
+                            {/* Navigation Buttons */}
+                            <div className="flex items-center justify-center md:justify-start gap-4">
+                                <button
+                                    onClick={prevStat}
+                                    className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-orange-600 transition-all duration-300 group"
+                                >
+                                    <svg className="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                                </button>
+                                <div className="flex gap-2">
+                                    {displayStats.map((_, idx) => (
+                                        <button
+                                            key={idx}
+                                            onClick={() => setCurrentStat(idx)}
+                                            className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentStat ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/60'}`}
+                                        />
+                                    ))}
+                                </div>
+                                <button
+                                    onClick={nextStat}
+                                    className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-orange-600 transition-all duration-300 group"
+                                >
+                                    <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                                </button>
+                            </div>
                         </div>
 
-                        {/* Total Families Card */}
-                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-                            <div className="bg-emerald-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:bg-emerald-100 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                            </div>
-                            <h3 className="text-4xl font-bold text-slate-900 mb-2">
-                                <AnimatedCounter value={stats?.families || 0} />
-                            </h3>
-                            <p className="text-slate-500 font-medium text-sm tracking-wide">KEPALA KELUARGA</p>
-                        </div>
+                        {/* Right: Active Statistic Card */}
+                        <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+                            <div key={currentStat} className="relative w-full max-w-md aspect-square md:aspect-auto md:h-[450px] bg-white rounded-[2.5rem] shadow-2xl overflow-hidden animate-in slide-in-from-right-8 fade-in duration-700 ease-out">
+                                {/* Decorative blob inside card */}
+                                <div className="absolute -top-20 -right-20 w-60 h-60 bg-orange-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+                                <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-orange-50/50 to-transparent pointer-events-none"></div>
 
-                        {/* Area Card */}
-                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-                            <div className="bg-blue-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                            </div>
-                            <h3 className="text-4xl font-bold text-slate-900 mb-2">
-                                {stats?.area || '1500 Ha'}
-                            </h3>
-                            <p className="text-slate-500 font-medium text-sm tracking-wide">LUAS WILAYAH</p>
-                        </div>
-
-                        {/* Dynamic Stats Loop - taking first active one or placeholder */}
-                        {homeStatistics.length > 0 ? (
-                            homeStatistics.slice(0, 1).map((stat: any, index: number) => (
-                                <div key={index} className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-                                    <div className="bg-purple-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:bg-purple-100 transition-colors">
-                                        <span className="text-2xl text-purple-600">📊</span>
+                                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 md:p-12 text-center h-full">
+                                    {/* Icon Container */}
+                                    <div className="w-24 h-24 rounded-3xl bg-orange-100 flex items-center justify-center mb-8 shadow-inner shadow-orange-200/50">
+                                        {displayStats[currentStat].type === 'static' ? (
+                                            displayStats[currentStat].icon
+                                        ) : displayStats[currentStat].type === 'count' ? (
+                                            <Users className="w-10 h-10 text-orange-600" />
+                                        ) : (
+                                            <span className="text-4xl">📊</span>
+                                        )}
                                     </div>
-                                    <h3 className="text-4xl font-bold text-slate-900 mb-2">
-                                        <AnimatedCounter value={stat.data?.[0]?.value || 0} />
-                                    </h3>
-                                    <p className="text-slate-500 font-medium text-sm tracking-wide uppercase">{stat.title}</p>
+
+                                    {/* Value */}
+                                    <div className="mb-4">
+                                        <h3 className="text-5xl md:text-6xl font-bold text-slate-900 tracking-tighter">
+                                            {displayStats[currentStat].type === 'count' ? (
+                                                <AnimatedCounter value={displayStats[currentStat].rawValue} />
+                                            ) : displayStats[currentStat].type === 'static' ? (
+                                                displayStats[currentStat].value
+                                            ) : (
+                                                <AnimatedCounter value={displayStats[currentStat].data?.[0]?.value || 0} />
+                                            )}
+                                        </h3>
+                                    </div>
+
+                                    {/* Label */}
+                                    <p className="text-lg text-slate-500 font-medium uppercase tracking-widest mb-8">
+                                        {displayStats[currentStat].title}
+                                    </p>
+
+                                    <Link href={route('statistics')} className="inline-flex items-center text-orange-600 font-semibold hover:text-orange-700 transition-colors group">
+                                        Lihat Detail
+                                        <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                        </svg>
+                                    </Link>
                                 </div>
-                            ))
-                        ) : (
-                            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-                                <div className="bg-purple-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:bg-purple-100 transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20v-6M6 20V10M18 20V4"></path></svg>
-                                </div>
-                                <h3 className="text-4xl font-bold text-slate-900 mb-2">
-                                    28
-                                </h3>
-                                <p className="text-slate-500 font-medium text-sm tracking-wide">TOTAL RT</p>
                             </div>
-                        )}
+                        </div>
 
-                    </div>
-
-                    <div className="mt-16 text-center">
-                        <Link href={route('statistics')} className="inline-flex items-center px-8 py-3.5 rounded-full bg-white border border-slate-200 text-slate-900 hover:bg-slate-50 hover:border-slate-300 font-medium text-sm transition-all duration-300 shadow-sm hover:shadow-md">
-                            Lihat Statistik Lengkap
-                            <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </Link>
                     </div>
                 </div>
             </section>

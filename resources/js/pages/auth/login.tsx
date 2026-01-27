@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import AuthSplitLayout from '@/layouts/auth/auth-split-layout';
 import { Head, useForm } from '@inertiajs/react';
+import { Mail, Lock } from 'lucide-react';
 import React from 'react';
 
 interface LoginProps {
@@ -36,8 +37,8 @@ export default function Login({
 
     return (
         <AuthSplitLayout
-            title="Log in"
-            description="Welcome back to your account"
+            title="Masuk Dashboard"
+            description="Selamat datang kembali di Sistem Informasi Desa Sodong Basari"
         >
             <Head title="Log in" />
 
@@ -47,49 +48,58 @@ export default function Login({
                 </div>
             )}
 
+
             <form onSubmit={submit} className="flex flex-col gap-6">
                 <div className="grid gap-6">
                     <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            name="email"
-                            value={data.email}
-                            onChange={(e) => setData('email', e.target.value)}
-                            required
-                            autoFocus
-                            tabIndex={1}
-                            autoComplete="username"
-                            placeholder="email@example.com"
-                        />
+                        <Label htmlFor="email" className="text-slate-900 font-medium">Alamat Email</Label>
+                        <div className="relative">
+                            <Mail className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+                            <Input
+                                id="email"
+                                type="email"
+                                name="email"
+                                value={data.email}
+                                onChange={(e) => setData('email', e.target.value)}
+                                className="pl-10"
+                                required
+                                autoFocus
+                                tabIndex={1}
+                                autoComplete="username"
+                                placeholder="nama@contoh.com"
+                            />
+                        </div>
                         <InputError message={errors.email} />
                     </div>
 
                     <div className="grid gap-2">
                         <div className="flex items-center">
-                            <Label htmlFor="password">Password</Label>
+                            <Label htmlFor="password" className="text-slate-900 font-medium">Kata Sandi</Label>
                             {canResetPassword && (
                                 <TextLink
                                     href={route('password.request')}
-                                    className="ml-auto text-sm"
+                                    className="ml-auto text-sm text-orange-600 hover:text-orange-700 font-medium"
                                     tabIndex={5}
                                 >
-                                    Forgot password?
+                                    Lupa kata sandi?
                                 </TextLink>
                             )}
                         </div>
-                        <Input
-                            id="password"
-                            type="password"
-                            name="password"
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            required
-                            tabIndex={2}
-                            autoComplete="current-password"
-                            placeholder="Password"
-                        />
+                        <div className="relative">
+                            <Lock className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+                            <Input
+                                id="password"
+                                type="password"
+                                name="password"
+                                value={data.password}
+                                onChange={(e) => setData('password', e.target.value)}
+                                className="pl-10"
+                                required
+                                tabIndex={2}
+                                autoComplete="current-password"
+                                placeholder="Masukkan kata sandi"
+                            />
+                        </div>
                         <InputError message={errors.password} />
                     </div>
 
@@ -101,7 +111,7 @@ export default function Login({
                             onCheckedChange={(checked) => setData('remember', checked as boolean)}
                             tabIndex={3}
                         />
-                        <Label htmlFor="remember">Remember me</Label>
+                        <Label htmlFor="remember">Ingat saya</Label>
                     </div>
 
                     <Button
@@ -112,7 +122,7 @@ export default function Login({
                         data-test="login-button"
                     >
                         {processing && <Spinner className="mr-2" />}
-                        Log in
+                        Masuk
                     </Button>
                 </div>
 
