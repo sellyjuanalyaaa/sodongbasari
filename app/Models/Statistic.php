@@ -56,6 +56,8 @@ class Statistic extends Model
         // Migrasi Penduduk
         'penduduk_datang',
         'penduduk_keluar',
+        'kelahiran',
+        'kematian',
     ];
 
     protected $casts = [
@@ -106,5 +108,7 @@ class Statistic extends Model
         // Migrasi Penduduk
         'penduduk_datang' => 'integer',
         'penduduk_keluar' => 'integer',
+        'kelahiran' => 'integer',
+        'kematian' => 'integer',
     ];
 }

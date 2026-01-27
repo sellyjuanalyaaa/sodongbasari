@@ -54,8 +54,11 @@ interface StatisticFormData {
     cagar_budaya: string;
     wisata_alam: string;
     // Migrasi Penduduk
+    // Migrasi Penduduk
     penduduk_datang: string;
     penduduk_keluar: string;
+    kelahiran: string;
+    kematian: string;
 }
 
 interface Props {
@@ -113,6 +116,8 @@ export default function Form({ statistic }: Props) {
         // Migrasi Penduduk
         penduduk_datang: statistic?.penduduk_datang || '',
         penduduk_keluar: statistic?.penduduk_keluar || '',
+        kelahiran: statistic?.kelahiran || '',
+        kematian: statistic?.kematian || '',
     });
 
     const [imagePreview, setImagePreview] = useState<string | null>(
@@ -129,7 +134,7 @@ export default function Form({ statistic }: Props) {
         if (type === 'file' && files && files[0]) {
             const file = files[0];
             setFormData(prev => ({ ...prev, [name]: file }));
-            
+
             if (name === 'infographic_image') {
                 setImagePreview(URL.createObjectURL(file));
             } else if (name === 'infographic_image_right') {
@@ -495,9 +500,9 @@ export default function Form({ statistic }: Props) {
                     </div>
                 </div>
 
-                {/* Migrasi Penduduk */}
+                {/* Migrasi Penduduk & Dinamika */}
                 <div className="rounded-lg border border-gray-100 bg-white shadow-sm p-6">
-                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Data Migrasi Penduduk</h2>
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Migrasi & Dinamika Penduduk</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <Label htmlFor="penduduk_datang" className="text-gray-900 font-semibold">Penduduk Datang *</Label>
@@ -506,6 +511,14 @@ export default function Form({ statistic }: Props) {
                         <div>
                             <Label htmlFor="penduduk_keluar" className="text-gray-900 font-semibold">Penduduk Keluar *</Label>
                             <Input id="penduduk_keluar" name="penduduk_keluar" type="number" required value={formData.penduduk_keluar} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="kelahiran" className="text-gray-900 font-semibold">Kelahiran *</Label>
+                            <Input id="kelahiran" name="kelahiran" type="number" required value={formData.kelahiran} onChange={handleChange} className="mt-1" />
+                        </div>
+                        <div>
+                            <Label htmlFor="kematian" className="text-gray-900 font-semibold">Kematian *</Label>
+                            <Input id="kematian" name="kematian" type="number" required value={formData.kematian} onChange={handleChange} className="mt-1" />
                         </div>
                     </div>
                 </div>

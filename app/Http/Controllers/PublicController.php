@@ -58,7 +58,7 @@ class PublicController extends Controller
     public function potentials()
     {
         $categories = PotentialCategory::where('is_active', true)->get()->keyBy('name');
-        
+
         // Map Tailwind gradient to solid hex color
         $colorMap = [
             'from-emerald-500 to-teal-500' => '#10b981', // Emerald-500
@@ -67,15 +67,15 @@ class PublicController extends Controller
             'from-purple-500 to-indigo-500' => '#a855f7', // Purple-500
             'from-red-500 to-rose-500' => '#ef4444', // Red-500
         ];
-        
+
         $potentials = Potential::all()->map(function ($potential) use ($categories, $colorMap) {
             $category = $categories->get($potential->category);
             $hexColor = '#EFA00B'; // Default orange
-            
+
             if ($category && isset($colorMap[$category->color])) {
                 $hexColor = $colorMap[$category->color];
             }
-            
+
             return array_merge($potential->toArray(), [
                 'category_color' => $hexColor
             ]);
@@ -105,9 +105,11 @@ class PublicController extends Controller
     public function statistics()
     {
         $latestStatistic = Statistic::orderBy('year', 'desc')->first();
+        $historicalStatistics = Statistic::orderBy('year', 'asc')->take(5)->get(); // Get up to 5 years data
 
         return Inertia::render('Public/Statistics', array_merge($this->getCommonProps(), [
             'statistics' => $latestStatistic,
+            'historicalStatistics' => $historicalStatistics,
             'demographics' => Demographic::all(),
             'budgets' => Budget::orderBy('year', 'desc')->get(),
         ]));

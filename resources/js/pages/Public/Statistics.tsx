@@ -60,6 +60,8 @@ interface StatisticData {
     budha: number;
     penduduk_datang?: number;
     penduduk_keluar?: number;
+    kelahiran?: number;
+    kematian?: number;
     masjid?: number;
     mushola?: number;
     gereja?: number;
@@ -81,9 +83,10 @@ interface StatisticData {
 interface Props {
     villageInfo: any;
     statistics: StatisticData | null;
+    historicalStatistics: StatisticData[];
 }
 
-export default function Statistics({ villageInfo, statistics }: Props) {
+export default function Statistics({ villageInfo, statistics, historicalStatistics = [] }: Props) {
     if (!statistics) {
         return (
             <PublicLayout villageInfo={villageInfo}>
@@ -108,6 +111,17 @@ export default function Statistics({ villageInfo, statistics }: Props) {
         );
     }
 
+    // Prepare data for charts
+    const sortedStats = historicalStatistics?.length > 0
+        ? [...historicalStatistics].sort((a, b) => a.year - b.year)
+        : [statistics];
+
+    const chartLabels = sortedStats.map(s => s.year.toString());
+    const dataDatang = sortedStats.map(s => s.penduduk_datang || 0);
+    const dataKeluar = sortedStats.map(s => s.penduduk_keluar || 0);
+    const dataKelahiran = sortedStats.map(s => s.kelahiran || 0);
+    const dataKematian = sortedStats.map(s => s.kematian || 0);
+
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Statistik Desa" />
@@ -122,7 +136,7 @@ export default function Statistics({ villageInfo, statistics }: Props) {
                 <CloudAccent className="top-[15%] left-[45%] w-[140px] h-[140px] opacity-16 rotate-35 z-0" />
                 <CloudAccent className="bottom-[60%] right-[25%] w-[150px] h-[150px] opacity-19 -rotate-28 z-0" />
                 <CloudAccent className="top-[75%] left-[35%] w-[130px] h-[130px] opacity-17 rotate-18 z-0" />
-                
+
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                     {/* Header dengan Data Utama */}
                     <div className="bg-gradient-to-br from-orange-50 via-white to-orange-50/50 rounded-2xl p-8 md:p-10 mb-6 border border-orange-100 shadow-sm shadow-orange-100/50">
@@ -464,20 +478,20 @@ export default function Statistics({ villageInfo, statistics }: Props) {
 
                         {/* Grafik Migrasi - span 2 cols */}
                         <div className="md:col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <h3 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Migrasi Penduduk (5 Tahun)</h3>
+                            <h3 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Migrasi Penduduk ({chartLabels.length > 0 ? `${chartLabels[0]}-${chartLabels[chartLabels.length - 1]}` : 'Tahun Terakhir'})</h3>
                             <div className="bg-white rounded-lg p-5">
                                 <Bar
                                     data={{
-                                        labels: ['2021', '2022', '2023', '2024', '2025'],
+                                        labels: chartLabels,
                                         datasets: [
                                             {
                                                 label: 'Datang',
-                                                data: [95, 110, 105, 130, 125],
+                                                data: dataDatang,
                                                 backgroundColor: 'rgba(34, 197, 94, 0.8)',
                                             },
                                             {
                                                 label: 'Keluar',
-                                                data: [75, 80, 70, 92, 87],
+                                                data: dataKeluar,
                                                 backgroundColor: 'rgba(239, 68, 68, 0.8)',
                                             }
                                         ]
@@ -510,22 +524,22 @@ export default function Statistics({ villageInfo, statistics }: Props) {
 
                         {/* Grafik Kematian & Kelahiran - span 2 cols */}
                         <div className="md:col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <h3 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Kematian & Kelahiran (5 Tahun)</h3>
+                            <h3 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Kematian & Kelahiran ({chartLabels.length > 0 ? `${chartLabels[0]}-${chartLabels[chartLabels.length - 1]}` : 'Tahun Terakhir'})</h3>
                             <div className="bg-white rounded-lg p-5">
                                 <Line
                                     data={{
-                                        labels: ['2021', '2022', '2023', '2024', '2025'],
+                                        labels: chartLabels,
                                         datasets: [
                                             {
                                                 label: 'Kelahiran',
-                                                data: [45, 52, 48, 55, 50],
+                                                data: dataKelahiran,
                                                 borderColor: 'rgb(34, 197, 94)',
                                                 backgroundColor: 'rgba(34, 197, 94, 0.1)',
                                                 tension: 0.4,
                                             },
                                             {
                                                 label: 'Kematian',
-                                                data: [12, 15, 11, 14, 13],
+                                                data: dataKematian,
                                                 borderColor: 'rgb(239, 68, 68)',
                                                 backgroundColor: 'rgba(239, 68, 68, 0.1)',
                                                 tension: 0.4,
@@ -592,8 +606,6 @@ export default function Statistics({ villageInfo, statistics }: Props) {
                         </div>
 
                     </div>
-
-
 
                     {/* Infografis Anggaran - Di bagian bawah */}
                     {(statistics.infographic_image || statistics.infographic_image_right) && (
