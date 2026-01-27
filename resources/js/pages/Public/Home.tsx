@@ -150,120 +150,82 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                 </div>
             </section>
 
-            {/* Statistics Section Carousel */}
-            <section className="py-24 bg-slate-50 overflow-hidden relative">
+            {/* Statistics Section Grid */}
+            <section className="py-24 bg-slate-50 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-                    <div className="flex flex-col md:flex-row items-center justify-between relative gap-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Statistik Desa</h2>
+                        <p className="text-slate-500 text-sm font-light">Data Terkini Desa Sodong Basari</p>
+                    </div>
 
-                        {/* Left Navigation Button */}
-                        <button
-                            onClick={prevStat}
-                            className="hidden md:flex flex-shrink-0 w-11 h-11 bg-white/80 backdrop-blur-sm rounded-full border border-slate-200 items-center justify-center text-slate-400 hover:text-slate-900 hover:border-slate-300 hover:bg-white transition-all duration-300 z-20"
-                        >
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                        </button>
-
-                        {/* Main Content Area */}
-                        <div className="flex-1 flex flex-col md:flex-row items-center w-full min-h-[320px]">
-
-                            {/* Static Main Title */}
-                            <div className="w-full md:w-1/4 mb-10 md:mb-0 md:pr-10 text-center md:text-left">
-                                <h2 className="text-[2.5rem] md:text-5xl font-light text-slate-900 leading-[1.1] tracking-tight">
-                                    Statistik <br />
-                                    <span className="font-medium">Desa</span>
-                                </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+                        {/* Total Population Card */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                            <div className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:bg-orange-100 transition-colors">
+                                <Users className="w-7 h-7 text-orange-600" />
                             </div>
-
-                            {/* Dynamic Content Wrapper - Animated */}
-                            <div key={currentStat} className="flex-1 flex flex-col md:flex-row items-center justify-between w-full animate-in fade-in slide-in-from-bottom-2 duration-700 ease-out">
-
-                                {/* 1. Stat Title & Subtitle */}
-                                <div className="w-full md:w-1/3 text-center md:text-left mb-10 md:mb-0">
-                                    <h3 className="text-2xl md:text-3xl font-medium text-slate-900 leading-tight">
-                                        {displayStats[currentStat].title}
-                                    </h3>
-                                    {displayStats[currentStat].subtitle && (
-                                        <p className="text-lg text-slate-600 font-normal mt-3">
-                                            {displayStats[currentStat].subtitle}
-                                        </p>
-                                    )}
-                                    {!displayStats[currentStat].subtitle && (
-                                        <p className="text-sm text-slate-400 mt-3 font-light tracking-wide">Data Terkini 2024</p>
-                                    )}
-                                </div>
-
-                                {/* 2. Visual Chart (Center) */}
-                                <div className="w-full md:w-1/3 flex justify-center mb-10 md:mb-0 relative">
-                                    <div className="w-48 h-48 md:w-52 md:h-52 relative animate-in zoom-in-95 duration-700 ease-out fill-mode-both" style={{ animationDelay: '150ms' }}>
-                                        {displayStats[currentStat].type === 'landmark' ? (
-                                            <div className="w-full h-full flex items-center justify-center bg-white rounded-full p-2 shadow-sm border border-slate-100">
-                                                <img src={displayStats[currentStat].image} className="w-full h-full object-contain drop-shadow-md transform transition-transform scale-150 hover:scale-[1.55] duration-300" alt="Landmark" />
-                                            </div>
-                                        ) : displayStats[currentStat].type === 'count' ? (
-                                            <div className="relative w-full h-full flex items-center justify-center">
-                                                <div className="absolute inset-6 bg-slate-900/5 rounded-full blur-2xl"></div>
-                                                <div className="w-full h-full rounded-full border-[3px] border-slate-900 flex items-center justify-center bg-white shadow-sm">
-                                                    <span className="text-5xl">👥</span>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div className="relative w-full h-full">
-                                                <svg viewBox="0 0 36 36" className="w-full h-full block transform -rotate-90 drop-shadow-sm">
-                                                    {/* Background Ring */}
-                                                    <path className="text-slate-200" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3.5" />
-                                                    {/* Green Segment */}
-                                                    <path className="text-emerald-400 transition-all duration-1000 ease-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3.5" strokeDasharray="60, 100" strokeLinecap="round" />
-                                                    {/* Pink Segment */}
-                                                    <path className="text-rose-400 transition-all duration-1000 ease-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3.5" strokeDasharray="30, 100" strokeDashoffset="-65" strokeLinecap="round" />
-                                                </svg>
-                                                {/* Inner Circle for Donut Effect */}
-                                                <div className="absolute inset-0 flex items-center justify-center">
-                                                    <div className="w-28 h-28 bg-white rounded-full shadow-sm flex items-center justify-center border border-slate-100">
-                                                        <div className="w-20 h-20 bg-slate-50 rounded-full"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-
-                                {/* 3. Legend Data (Right) */}
-                                <div className="w-full md:w-1/3 flex flex-col justify-center gap-7 pl-0 md:pl-10 animate-in slide-in-from-right-4 duration-500 ease-out" style={{ animationDelay: '250ms' }}>
-                                    {displayStats[currentStat].type === 'count' ? (
-                                        <div className="flex flex-col">
-                                            <div className="flex items-center gap-3 mb-2">
-                                                <div className="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
-                                                <span className="text-slate-500 text-xs font-medium tracking-wider uppercase">Populasi Desa</span>
-                                            </div>
-                                            <p className="text-2xl font-semibold text-slate-900 pl-5">
-                                                {displayStats[currentStat].subtitle ? displayStats[currentStat].subtitle.split(' ')[0] : '3.500'}
-                                            </p>
-                                        </div>
-                                    ) : (
-                                        displayStats[currentStat].data.map((item: any, idx: number) => (
-                                            <div key={idx} className="flex flex-col group cursor-default">
-                                                <div className="flex items-center gap-3 mb-2">
-                                                    <div className={`w-2.5 h-2.5 rounded-full ${item.color.replace('bg-[#71d338]', 'bg-emerald-400').replace('bg-[#e5459f]', 'bg-rose-400')} group-hover:scale-125 transition-transform duration-300`}></div>
-                                                    <span className="text-slate-500 text-xs font-medium tracking-wider uppercase">{item.label}</span>
-                                                </div>
-                                                <p className="text-2xl font-semibold text-slate-900 pl-5">
-                                                    <AnimatedCounter value={item.value} />
-                                                </p>
-                                            </div>
-                                        ))
-                                    )}
-                                </div>
-
-                            </div>
+                            <h3 className="text-4xl font-bold text-slate-900 mb-2">
+                                <AnimatedCounter value={stats?.population || 0} />
+                            </h3>
+                            <p className="text-slate-500 font-medium text-sm tracking-wide">TOTAL PENDUDUK</p>
                         </div>
 
-                        {/* Right Navigation Button */}
-                        <button
-                            onClick={nextStat}
-                            className="hidden md:flex flex-shrink-0 w-11 h-11 bg-white/80 backdrop-blur-sm rounded-full border border-slate-200 items-center justify-center text-slate-400 hover:text-slate-900 hover:border-slate-300 hover:bg-white transition-all duration-300 z-20"
-                        >
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                        </button>
+                        {/* Total Families Card */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                            <div className="bg-emerald-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:bg-emerald-100 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            </div>
+                            <h3 className="text-4xl font-bold text-slate-900 mb-2">
+                                <AnimatedCounter value={stats?.families || 0} />
+                            </h3>
+                            <p className="text-slate-500 font-medium text-sm tracking-wide">KEPALA KELUARGA</p>
+                        </div>
+
+                        {/* Area Card */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                            <div className="bg-blue-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            </div>
+                            <h3 className="text-4xl font-bold text-slate-900 mb-2">
+                                {stats?.area || '1500 Ha'}
+                            </h3>
+                            <p className="text-slate-500 font-medium text-sm tracking-wide">LUAS WILAYAH</p>
+                        </div>
+
+                        {/* Dynamic Stats Loop - taking first active one or placeholder */}
+                        {homeStatistics.length > 0 ? (
+                            homeStatistics.slice(0, 1).map((stat: any, index: number) => (
+                                <div key={index} className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                                    <div className="bg-purple-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:bg-purple-100 transition-colors">
+                                        <span className="text-2xl text-purple-600">📊</span>
+                                    </div>
+                                    <h3 className="text-4xl font-bold text-slate-900 mb-2">
+                                        <AnimatedCounter value={stat.data?.[0]?.value || 0} />
+                                    </h3>
+                                    <p className="text-slate-500 font-medium text-sm tracking-wide uppercase">{stat.title}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                                <div className="bg-purple-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:bg-purple-100 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20v-6M6 20V10M18 20V4"></path></svg>
+                                </div>
+                                <h3 className="text-4xl font-bold text-slate-900 mb-2">
+                                    28
+                                </h3>
+                                <p className="text-slate-500 font-medium text-sm tracking-wide">TOTAL RT</p>
+                            </div>
+                        )}
+
+                    </div>
+
+                    <div className="mt-16 text-center">
+                        <Link href={route('statistics')} className="inline-flex items-center px-8 py-3.5 rounded-full bg-white border border-slate-200 text-slate-900 hover:bg-slate-50 hover:border-slate-300 font-medium text-sm transition-all duration-300 shadow-sm hover:shadow-md">
+                            Lihat Statistik Lengkap
+                            <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </Link>
                     </div>
                 </div>
             </section>

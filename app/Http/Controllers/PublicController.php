@@ -28,14 +28,17 @@ class PublicController extends Controller
     {
         $categories = PotentialCategory::where('is_active', true)->get()->keyBy('name');
 
+        $latestStat = \App\Models\Statistic::orderBy('year', 'desc')->first();
+
         return Inertia::render('Public/Home', array_merge($this->getCommonProps(), [
             'latestNews' => Post::with(['category', 'creator'])
                 ->latest('published_at')
                 ->take(3)
                 ->get(),
             'stats' => [
-                'population' => \App\Models\Demographic::orderBy('year', 'desc')->get()->first()?->total_male + \App\Models\Demographic::orderBy('year', 'desc')->get()->first()?->total_female ?? 0,
-                'area' => '1500 Ha',
+                'population' => $latestStat ? ($latestStat->male_population + $latestStat->female_population) : 0,
+                'families' => $latestStat ? $latestStat->total_families : 0,
+                'area' => '1500 Ha', // You might want to make this dynamic later or keep it static
             ],
             'heroImages' => \App\Models\HeroImage::where('is_active', true)->orderBy('order')->get(),
             'homeStatistics' => \App\Models\HomeStatistic::where('is_active', true)->orderBy('order')->get(),
