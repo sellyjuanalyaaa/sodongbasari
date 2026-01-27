@@ -154,113 +154,113 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                     </div>
 
                     {/* Grid Layout Sama Rata */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                         {/* Total Penduduk */}
-                        <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 border border-orange-200 hover:shadow-lg transition-all">
-                            <div className="flex items-center justify-between">
+                        <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 sm:p-6 border border-orange-200 hover:shadow-lg transition-all">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                                 <div>
-                                    <p className="text-xs text-orange-700 font-medium uppercase tracking-wide mb-2">Total Penduduk</p>
-                                    <h4 className="text-3xl font-bold text-orange-900">{statistics.male_population + statistics.female_population}</h4>
+                                    <p className="text-[10px] sm:text-xs text-orange-700 font-medium uppercase tracking-wide mb-1 sm:mb-2">Total Penduduk</p>
+                                    <h4 className="text-xl sm:text-3xl font-bold text-orange-900">{statistics.male_population + statistics.female_population}</h4>
                                 </div>
-                                <div className="bg-orange-200 rounded-full p-3">
-                                    <Users className="h-6 w-6 text-orange-700" />
+                                <div className="bg-orange-200 rounded-full p-2 sm:p-3 self-end sm:self-center">
+                                    <Users className="h-4 w-4 sm:h-6 sm:w-6 text-orange-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Laki-laki */}
-                        <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <div className="flex items-center justify-between">
+                        <div className="bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-200 hover:shadow-lg transition-all">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                                 <div>
-                                    <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-2">Laki-Laki</p>
-                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.male_population}</h4>
+                                    <p className="text-[10px] sm:text-xs text-slate-600 font-medium uppercase tracking-wide mb-1 sm:mb-2">Laki-Laki</p>
+                                    <h4 className="text-xl sm:text-3xl font-bold text-slate-900">{statistics.male_population}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-3">
-                                    <Users className="h-6 w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-2 sm:p-3 self-end sm:self-center">
+                                    <Users className="h-4 w-4 sm:h-6 sm:w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Perempuan */}
-                        <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <div className="flex items-center justify-between">
+                        <div className="bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-200 hover:shadow-lg transition-all">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                                 <div>
-                                    <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-2">Perempuan</p>
-                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.female_population}</h4>
+                                    <p className="text-[10px] sm:text-xs text-slate-600 font-medium uppercase tracking-wide mb-1 sm:mb-2">Perempuan</p>
+                                    <h4 className="text-xl sm:text-3xl font-bold text-slate-900">{statistics.female_population}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-3">
-                                    <Users className="h-6 w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-2 sm:p-3 self-end sm:self-center">
+                                    <Users className="h-4 w-4 sm:h-6 sm:w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Kepala Keluarga */}
-                        <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <div className="flex items-center justify-between">
+                        <div className="bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-200 hover:shadow-lg transition-all">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                                 <div>
-                                    <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-2">Kepala Keluarga</p>
-                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.total_families}</h4>
+                                    <p className="text-[10px] sm:text-xs text-slate-600 font-medium uppercase tracking-wide mb-1 sm:mb-2">Kepala Keluarga</p>
+                                    <h4 className="text-xl sm:text-3xl font-bold text-slate-900">{statistics.total_families}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-3">
-                                    <Users className="h-6 w-6 text-orange-600" />
+                                <div className="bg-white rounded-full p-2 sm:p-3 self-end sm:self-center">
+                                    <Users className="h-4 w-4 sm:h-6 sm:w-6 text-orange-600" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Penduduk Datang */}
-                        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200 hover:shadow-lg transition-all">
-                            <div className="flex items-center justify-between">
+                        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 sm:p-6 border border-green-200 hover:shadow-lg transition-all">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                                 <div>
-                                    <p className="text-xs text-green-700 font-medium uppercase tracking-wide mb-2">Penduduk Datang</p>
-                                    <h4 className="text-3xl font-bold text-green-900">{statistics.penduduk_datang || 0}</h4>
+                                    <p className="text-[10px] sm:text-xs text-green-700 font-medium uppercase tracking-wide mb-1 sm:mb-2">Penduduk Datang</p>
+                                    <h4 className="text-xl sm:text-3xl font-bold text-green-900">{statistics.penduduk_datang || 0}</h4>
                                 </div>
-                                <div className="bg-green-200 rounded-full p-3">
-                                    <ArrowUpRight className="h-6 w-6 text-green-700" />
+                                <div className="bg-green-200 rounded-full p-2 sm:p-3 self-end sm:self-center">
+                                    <ArrowUpRight className="h-4 w-4 sm:h-6 sm:w-6 text-green-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Penduduk Keluar */}
-                        <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-6 border border-red-200 hover:shadow-lg transition-all">
-                            <div className="flex items-center justify-between">
+                        <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-4 sm:p-6 border border-red-200 hover:shadow-lg transition-all">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                                 <div>
-                                    <p className="text-xs text-red-700 font-medium uppercase tracking-wide mb-2">Penduduk Keluar</p>
-                                    <h4 className="text-3xl font-bold text-red-900">{statistics.penduduk_keluar || 0}</h4>
+                                    <p className="text-[10px] sm:text-xs text-red-700 font-medium uppercase tracking-wide mb-1 sm:mb-2">Penduduk Keluar</p>
+                                    <h4 className="text-xl sm:text-3xl font-bold text-red-900">{statistics.penduduk_keluar || 0}</h4>
                                 </div>
-                                <div className="bg-red-200 rounded-full p-3">
-                                    <ArrowDownRight className="h-6 w-6 text-red-700" />
+                                <div className="bg-red-200 rounded-full p-2 sm:p-3 self-end sm:self-center">
+                                    <ArrowDownRight className="h-4 w-4 sm:h-6 sm:w-6 text-red-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Penduduk Usia Kerja */}
-                        <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <div className="flex items-center justify-between">
+                        <div className="bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-200 hover:shadow-lg transition-all">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                                 <div>
-                                    <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-2">Usia Kerja (15-64)</p>
-                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.petani + statistics.pedagang + statistics.pns + statistics.wiraswasta}</h4>
+                                    <p className="text-[10px] sm:text-xs text-slate-600 font-medium uppercase tracking-wide mb-1 sm:mb-2">Usia Kerja (15-64)</p>
+                                    <h4 className="text-xl sm:text-3xl font-bold text-slate-900">{statistics.petani + statistics.pedagang + statistics.pns + statistics.wiraswasta}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-3">
-                                    <Briefcase className="h-6 w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-2 sm:p-3 self-end sm:self-center">
+                                    <Briefcase className="h-4 w-4 sm:h-6 sm:w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Perguruan Tinggi */}
-                        <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <div className="flex items-center justify-between">
+                        <div className="bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-200 hover:shadow-lg transition-all">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                                 <div>
-                                    <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-2">Perguruan Tinggi</p>
-                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.sarjana + statistics.diploma}</h4>
+                                    <p className="text-[10px] sm:text-xs text-slate-600 font-medium uppercase tracking-wide mb-1 sm:mb-2">Perguruan Tinggi</p>
+                                    <h4 className="text-xl sm:text-3xl font-bold text-slate-900">{statistics.sarjana + statistics.diploma}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-3">
-                                    <GraduationCap className="h-6 w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-2 sm:p-3 self-end sm:self-center">
+                                    <GraduationCap className="h-4 w-4 sm:h-6 sm:w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Peta - span 2 cols */}
-                        <div className="md:col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
+                        <div className="col-span-2 md:col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
                             <div className="flex items-center gap-2 mb-5">
                                 <MapPin className="h-5 w-5 text-[#EFA00B]" />
                                 <h3 className="text-base font-medium text-slate-900">Wilayah Desa</h3>
@@ -283,7 +283,7 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                         </div>
 
                         {/* Agama */}
-                        <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
+                        <div className="col-span-2 md:col-span-1 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
                             <h3 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Agama</h3>
                             <div className="bg-white rounded-lg p-4">
                                 <div className="space-y-2">
@@ -312,7 +312,7 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                         </div>
 
                         {/* Pekerjaan */}
-                        <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
+                        <div className="col-span-2 md:col-span-1 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
                             <h3 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Pekerjaan</h3>
                             <div className="bg-white rounded-lg p-4">
                                 <div className="space-y-2">
@@ -337,7 +337,7 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                         </div>
 
                         {/* Fasilitas Umum */}
-                        <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all col-span-2">
+                        <div className="col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
                             <h3 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Fasilitas Umum</h3>
                             <div className="bg-white rounded-lg p-4">
                                 <div className="grid grid-cols-2 gap-4">
@@ -477,7 +477,7 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                         </div>
 
                         {/* Grafik Migrasi - span 2 cols */}
-                        <div className="md:col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
+                        <div className="col-span-2 md:col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
                             <h3 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Migrasi Penduduk ({chartLabels.length > 0 ? `${chartLabels[0]}-${chartLabels[chartLabels.length - 1]}` : 'Tahun Terakhir'})</h3>
                             <div className="bg-white rounded-lg p-5">
                                 <Bar
@@ -523,7 +523,7 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                         </div>
 
                         {/* Grafik Kematian & Kelahiran - span 2 cols */}
-                        <div className="md:col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
+                        <div className="col-span-2 md:col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
                             <h3 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Kematian & Kelahiran ({chartLabels.length > 0 ? `${chartLabels[0]}-${chartLabels[chartLabels.length - 1]}` : 'Tahun Terakhir'})</h3>
                             <div className="bg-white rounded-lg p-5">
                                 <Line
@@ -573,7 +573,7 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                         </div>
 
                         {/* Pendidikan - span 2 cols */}
-                        <div className="md:col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
+                        <div className="col-span-2 md:col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
                             <h4 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Pendidikan</h4>
                             <div className="bg-white rounded-lg p-5">
                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
