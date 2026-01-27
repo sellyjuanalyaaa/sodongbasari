@@ -76,48 +76,32 @@ const AnimatedCounter = ({ value, duration = 2000 }: { value: any; duration?: nu
 export default function Home({ villageInfo, heroImages = [], stats = {}, officials = [], latestNews = [], homeStatistics = [] }: { villageInfo: any, heroImages?: any[], stats?: any, officials?: any[], latestNews?: any[], homeStatistics?: any[] }) {
     const [currentStat, setCurrentStat] = useState(0);
 
-    // 1. Population Stat
-    const populationStat = {
-        title: "Total Penduduk",
-        rawValue: stats?.population || 0,
-        type: "count",
-        icon: <Users className="w-10 h-10 text-orange-600" />
-    };
-
-    // 2. Families Stat
-    const familiesStat = {
-        title: "Kepala Keluarga",
-        rawValue: stats?.families || 0,
-        type: "count",
-        icon: <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-    };
-
-    // 3. Area Stat
-    const areaStat = {
-        title: "Luas Wilayah",
-        value: stats?.area || '1500 Ha',
-        type: "static",
-        icon: <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path></svg>
-    };
-
-    // 4. Normalize dynamic stats and combine
+    // Normalize dynamic stats
     const processedHomeStatistics = homeStatistics.map((stat: any) => ({
         ...stat,
         rawValue: stat.data?.[0]?.value || 0,
-        // Ensure type doesn't conflict if needed, or rely on properties
     }));
 
-    const displayStats = [populationStat, familiesStat, areaStat, ...processedHomeStatistics];
+    // Use ONLY homeStatistics for displayStats as requested
+    const displayStats = processedHomeStatistics.length > 0 ? processedHomeStatistics : [];
 
     useEffect(() => {
+        if (displayStats.length === 0) return;
         const timer = setInterval(() => {
             setCurrentStat((prev) => (prev + 1) % displayStats.length);
         }, 5000);
         return () => clearInterval(timer);
-    }, [displayStats.length]); // Add dependency
+    }, [displayStats.length]);
 
-    const nextStat = () => setCurrentStat((prev) => (prev + 1) % displayStats.length);
-    const prevStat = () => setCurrentStat((prev) => (prev - 1 + displayStats.length) % displayStats.length);
+    const nextStat = () => {
+        if (displayStats.length === 0) return;
+        setCurrentStat((prev) => (prev + 1) % displayStats.length);
+    };
+
+    const prevStat = () => {
+        if (displayStats.length === 0) return;
+        setCurrentStat((prev) => (prev - 1 + displayStats.length) % displayStats.length);
+    };
 
     return (
         <PublicLayout villageInfo={villageInfo}>
@@ -138,30 +122,34 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                         {/* Avatar Side */}
                         <div className="flex-shrink-0 relative">
                             <div className="w-72 h-72 md:w-96 md:h-96 relative">
-                                <img
-                                    src="/images/kepala-desa.png"
-                                    alt="Kepala Desa"
-                                    className="w-full h-full object-contain filter drop-shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out"
-                                />
+                                {villageInfo?.head_of_village_photo ? (
+                                    <img
+                                        src={villageInfo.head_of_village_photo}
+                                        alt={villageInfo.head_of_village_name}
+                                        className="w-full h-full object-cover rounded-3xl md:rounded-[2.5rem] shadow-2xl transition-transform duration-500 hover:scale-[1.02]"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full bg-slate-100 flex items-center justify-center rounded-3xl md:rounded-[2.5rem] shadow-xl">
+                                        <Users className="w-24 h-24 text-slate-300" />
+                                    </div>
+                                )}
                             </div>
                             {/* Subtle decorative element */}
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-amber-50 rounded-full blur-3xl -z-10 opacity-60"></div>
                         </div>
 
                         {/* Text Side */}
-                        <div className="flex-1 max-w-xl">
+                        <div className="flex-1 max-w-xl text-center md:text-left">
                             <div className="relative mb-10">
-                                <span className="text-7xl text-orange-600/20 font-serif leading-none block mb-6 select-none">"</span>
-                                <p className="text-slate-600 text-[15px] leading-[1.8] -mt-12 font-light">
-                                    Selamat datang di Website Resmi Desa Sodong Basari, Belik, Kabupaten Pemalang.
-                                    <br /><br />
-                                    Website ini menjadi pusat informasi dan layanan desa untuk mendukung keterbukaan, pelayanan publik, dan kemajuan masyarakat. Terima kasih telah berkunjung — kritik dan saran selalu kami harapkan demi Sodong Basari yang lebih baik.
+                                <span className="text-7xl text-orange-600/20 font-serif leading-none block mb-6 select-none hidden md:block">"</span>
+                                <p className="text-slate-600 text-[15px] leading-[1.8] md:-mt-12 font-light">
+                                    {villageInfo?.welcome_message || "Selamat datang di Website Resmi Desa Sodong Basari. Website ini menjadi pusat informasi dan layanan desa untuk mendukung keterbukaan, pelayanan publik, dan kemajuan masyarakat. Terima kasih telah berkunjung — kritik dan saran selalu kami harapkan demi Desa yang lebih baik."}
                                 </p>
                             </div>
 
-                            <div className="border-l-2 border-slate-900 pl-6">
-                                <h3 className="text-base font-semibold text-slate-900 tracking-wide">SUWARNO, S.H.</h3>
-                                <p className="text-slate-500 text-sm mt-1.5">PJ Kepala Desa Sodong Basari</p>
+                            <div className="border-t-2 md:border-t-0 md:border-l-2 border-slate-900 pt-6 md:pt-0 md:pl-6 inline-block md:block">
+                                <h3 className="text-base font-semibold text-slate-900 tracking-wide uppercase">{villageInfo?.head_of_village_name || 'Kepala Desa'}</h3>
+                                <p className="text-slate-500 text-sm mt-1.5">Kepala Desa Sodong Basari</p>
                             </div>
                         </div>
                     </div>
@@ -196,76 +184,84 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                             </p>
 
                             {/* Navigation Buttons */}
-                            <div className="flex items-center justify-center md:justify-start gap-4">
-                                <button
-                                    onClick={prevStat}
-                                    className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-orange-600 transition-all duration-300 group"
-                                >
-                                    <svg className="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                                </button>
-                                <div className="flex gap-2">
-                                    {displayStats.map((_, idx) => (
-                                        <button
-                                            key={idx}
-                                            onClick={() => setCurrentStat(idx)}
-                                            className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentStat ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/60'}`}
-                                        />
-                                    ))}
+                            {displayStats.length > 0 && (
+                                <div className="flex items-center justify-center md:justify-start gap-4">
+                                    <button
+                                        onClick={prevStat}
+                                        className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-orange-600 transition-all duration-300 group"
+                                    >
+                                        <svg className="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                                    </button>
+                                    <div className="flex gap-2">
+                                        {displayStats.map((_, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => setCurrentStat(idx)}
+                                                className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentStat ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/60'}`}
+                                            />
+                                        ))}
+                                    </div>
+                                    <button
+                                        onClick={nextStat}
+                                        className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-orange-600 transition-all duration-300 group"
+                                    >
+                                        <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                                    </button>
                                 </div>
-                                <button
-                                    onClick={nextStat}
-                                    className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-orange-600 transition-all duration-300 group"
-                                >
-                                    <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                                </button>
-                            </div>
+                            )}
                         </div>
 
                         {/* Right: Active Statistic Card */}
                         <div className="w-full md:w-1/2 flex justify-center md:justify-end">
-                            <div key={currentStat} className="relative w-full max-w-md aspect-square md:aspect-auto md:h-[450px] bg-white rounded-[2.5rem] shadow-2xl overflow-hidden animate-in slide-in-from-right-8 fade-in duration-700 ease-out">
-                                {/* Decorative blob inside card */}
-                                <div className="absolute -top-20 -right-20 w-60 h-60 bg-orange-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
-                                <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-orange-50/50 to-transparent pointer-events-none"></div>
+                            {displayStats.length > 0 ? (
+                                <div key={currentStat} className="relative w-full max-w-md aspect-square md:aspect-auto md:h-[450px] bg-white rounded-[2.5rem] shadow-2xl overflow-hidden animate-in slide-in-from-right-8 fade-in duration-700 ease-out">
+                                    {/* Decorative blob inside card */}
+                                    <div className="absolute -top-20 -right-20 w-60 h-60 bg-orange-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+                                    <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-orange-50/50 to-transparent pointer-events-none"></div>
 
-                                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 md:p-12 text-center h-full">
-                                    {/* Icon Container */}
-                                    <div className="w-24 h-24 rounded-3xl bg-orange-100 flex items-center justify-center mb-8 shadow-inner shadow-orange-200/50">
-                                        {displayStats[currentStat].type === 'static' ? (
-                                            displayStats[currentStat].icon
-                                        ) : displayStats[currentStat].type === 'count' ? (
-                                            <Users className="w-10 h-10 text-orange-600" />
-                                        ) : (
-                                            <span className="text-4xl">📊</span>
-                                        )}
-                                    </div>
-
-                                    {/* Value */}
-                                    <div className="mb-4">
-                                        <h3 className="text-5xl md:text-6xl font-bold text-slate-900 tracking-tighter">
-                                            {displayStats[currentStat].type === 'count' ? (
-                                                <AnimatedCounter value={displayStats[currentStat].rawValue} />
-                                            ) : displayStats[currentStat].type === 'static' ? (
-                                                displayStats[currentStat].value
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8 md:p-12 text-center h-full">
+                                        {/* Icon Container */}
+                                        <div className="w-24 h-24 rounded-3xl bg-orange-100 flex items-center justify-center mb-8 shadow-inner shadow-orange-200/50">
+                                            {displayStats[currentStat].type === 'static' ? (
+                                                displayStats[currentStat].icon
+                                            ) : displayStats[currentStat].type === 'count' ? (
+                                                <Users className="w-10 h-10 text-orange-600" />
                                             ) : (
-                                                <AnimatedCounter value={displayStats[currentStat].data?.[0]?.value || 0} />
+                                                <span className="text-4xl">📊</span>
                                             )}
-                                        </h3>
+                                        </div>
+
+                                        {/* Value */}
+                                        <div className="mb-4">
+                                            <h3 className="text-5xl md:text-6xl font-bold text-slate-900 tracking-tighter">
+                                                {displayStats[currentStat].type === 'count' ? (
+                                                    <AnimatedCounter value={displayStats[currentStat].rawValue} />
+                                                ) : displayStats[currentStat].type === 'static' ? (
+                                                    displayStats[currentStat].value
+                                                ) : (
+                                                    <AnimatedCounter value={displayStats[currentStat].data?.[0]?.value || 0} />
+                                                )}
+                                            </h3>
+                                        </div>
+
+                                        {/* Label */}
+                                        <p className="text-lg text-slate-500 font-medium uppercase tracking-widest mb-8">
+                                            {displayStats[currentStat].title}
+                                        </p>
+
+                                        <Link href={route('statistics')} className="inline-flex items-center text-orange-600 font-semibold hover:text-orange-700 transition-colors group">
+                                            Lihat Detail
+                                            <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                            </svg>
+                                        </Link>
                                     </div>
-
-                                    {/* Label */}
-                                    <p className="text-lg text-slate-500 font-medium uppercase tracking-widest mb-8">
-                                        {displayStats[currentStat].title}
-                                    </p>
-
-                                    <Link href={route('statistics')} className="inline-flex items-center text-orange-600 font-semibold hover:text-orange-700 transition-colors group">
-                                        Lihat Detail
-                                        <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                        </svg>
-                                    </Link>
                                 </div>
-                            </div>
+                            ) : (
+                                <div className="h-[450px] w-full max-w-md bg-white/10 backdrop-blur-md rounded-[2.5rem] border border-white/20 flex items-center justify-center">
+                                    <p className="text-white text-lg">Data statistik belum tersedia</p>
+                                </div>
+                            )}
                         </div>
 
                     </div>
@@ -326,6 +322,7 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                     )}
                 </div>
             </section>
+
             {/* Latest News Section */}
             <section className="py-24 bg-slate-50 relative overflow-hidden">
                 <AccentImage3 className="left-[-10%] top-1/2 w-[600px] -translate-y-1/2 opacity-10 rotate-[30deg] z-0" />

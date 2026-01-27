@@ -105,15 +105,35 @@ class PublicController extends Controller
         ]));
     }
 
-    public function statistics()
+    public function statistics(\Illuminate\Http\Request $request)
     {
-        $latestStatistic = Statistic::orderBy('year', 'desc')->first();
-        $historicalStatistics = Statistic::orderBy('year', 'asc')->take(5)->get(); // Get up to 5 years data
+        $year = $request->input('year');
+
+        // Get available years for archive list
+        $availableYears = Statistic::orderBy('year', 'desc')->pluck('year');
+
+        // Determine which statistic to show
+        if ($year) {
+            $statistic = Statistic::where('year', $year)->first();
+        } else {
+            $statistic = Statistic::orderBy('year', 'desc')->first();
+        }
+
+        // If requested year not found, fallback to latest
+        if (!$statistic && $availableYears->isNotEmpty()) {
+            $statistic = Statistic::where('year', $availableYears->first())->first();
+        }
+
+        $historicalStatistics = Statistic::orderBy('year', 'asc')->get(); // All data for charts
+
+        $demographics = Demographic::orderBy('year', 'desc')->get(); // Archive data for "Data Kependudukan"
 
         return Inertia::render('Public/Statistics', array_merge($this->getCommonProps(), [
-            'statistics' => $latestStatistic,
+            'statistics' => $statistic,
             'historicalStatistics' => $historicalStatistics,
-            'demographics' => Demographic::all(),
+            'availableYears' => $availableYears,
+            'selectedYear' => $statistic ? $statistic->year : null,
+            'demographics' => $demographics,
             'budgets' => Budget::orderBy('year', 'desc')->get(),
         ]));
     }

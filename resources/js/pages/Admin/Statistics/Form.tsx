@@ -293,32 +293,32 @@ export default function Form({ statistic }: Props) {
                     <h2 className="text-xl font-semibold text-gray-900 mb-4">Data Penduduk</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <Label htmlFor="total_population" className="text-gray-900 font-semibold">Total Penduduk *</Label>
-                            <Input id="total_population" name="total_population" type="number" required value={formData.total_population} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="total_population" className="text-gray-900 font-semibold">Total Penduduk</Label>
+                            <Input id="total_population" name="total_population" type="number" value={formData.total_population} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="total_families" className="text-gray-900 font-semibold">Total Kepala Keluarga *</Label>
-                            <Input id="total_families" name="total_families" type="number" required value={formData.total_families} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="total_families" className="text-gray-900 font-semibold">Total Kepala Keluarga</Label>
+                            <Input id="total_families" name="total_families" type="number" value={formData.total_families} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="male_population" className="text-gray-900 font-semibold">Penduduk Laki-laki *</Label>
-                            <Input id="male_population" name="male_population" type="number" required value={formData.male_population} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="male_population" className="text-gray-900 font-semibold">Penduduk Laki-laki</Label>
+                            <Input id="male_population" name="male_population" type="number" value={formData.male_population} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="female_population" className="text-gray-900 font-semibold">Penduduk Perempuan *</Label>
-                            <Input id="female_population" name="female_population" type="number" required value={formData.female_population} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="female_population" className="text-gray-900 font-semibold">Penduduk Perempuan</Label>
+                            <Input id="female_population" name="female_population" type="number" value={formData.female_population} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="total_rt" className="text-gray-900 font-semibold">Total RT *</Label>
-                            <Input id="total_rt" name="total_rt" type="number" required value={formData.total_rt} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="total_rt" className="text-gray-900 font-semibold">Total RT</Label>
+                            <Input id="total_rt" name="total_rt" type="number" value={formData.total_rt} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="total_rw" className="text-gray-900 font-semibold">Total RW *</Label>
-                            <Input id="total_rw" name="total_rw" type="number" required value={formData.total_rw} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="total_rw" className="text-gray-900 font-semibold">Total RW</Label>
+                            <Input id="total_rw" name="total_rw" type="number" value={formData.total_rw} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="total_dusun" className="text-gray-900 font-semibold">Total Dusun *</Label>
-                            <Input id="total_dusun" name="total_dusun" type="number" required value={formData.total_dusun} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="total_dusun" className="text-gray-900 font-semibold">Total Dusun</Label>
+                            <Input id="total_dusun" name="total_dusun" type="number" value={formData.total_dusun} onChange={handleChange} className="mt-1" />
                         </div>
                     </div>
                 </div>
@@ -328,28 +328,28 @@ export default function Form({ statistic }: Props) {
                     <h2 className="text-xl font-semibold text-gray-900 mb-4">Data Pendidikan</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
-                            <Label htmlFor="tidak_sekolah" className="text-gray-900 font-semibold">Tidak Sekolah *</Label>
-                            <Input id="tidak_sekolah" name="tidak_sekolah" type="number" required value={formData.tidak_sekolah} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="tidak_sekolah" className="text-gray-900 font-semibold">Tidak Sekolah</Label>
+                            <Input id="tidak_sekolah" name="tidak_sekolah" type="number" value={formData.tidak_sekolah} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="sd_sederajat" className="text-gray-900 font-semibold">SD/Sederajat *</Label>
-                            <Input id="sd_sederajat" name="sd_sederajat" type="number" required value={formData.sd_sederajat} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="sd_sederajat" className="text-gray-900 font-semibold">SD/Sederajat</Label>
+                            <Input id="sd_sederajat" name="sd_sederajat" type="number" value={formData.sd_sederajat} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="smp_sederajat" className="text-gray-900 font-semibold">SMP/Sederajat *</Label>
-                            <Input id="smp_sederajat" name="smp_sederajat" type="number" required value={formData.smp_sederajat} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="smp_sederajat" className="text-gray-900 font-semibold">SMP/Sederajat</Label>
+                            <Input id="smp_sederajat" name="smp_sederajat" type="number" value={formData.smp_sederajat} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="sma_sederajat" className="text-gray-900 font-semibold">SMA/Sederajat *</Label>
-                            <Input id="sma_sederajat" name="sma_sederajat" type="number" required value={formData.sma_sederajat} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="sma_sederajat" className="text-gray-900 font-semibold">SMA/Sederajat</Label>
+                            <Input id="sma_sederajat" name="sma_sederajat" type="number" value={formData.sma_sederajat} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="diploma" className="text-gray-900 font-semibold">Diploma *</Label>
-                            <Input id="diploma" name="diploma" type="number" required value={formData.diploma} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="diploma" className="text-gray-900 font-semibold">Diploma</Label>
+                            <Input id="diploma" name="diploma" type="number" value={formData.diploma} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="sarjana" className="text-gray-900 font-semibold">Sarjana *</Label>
-                            <Input id="sarjana" name="sarjana" type="number" required value={formData.sarjana} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="sarjana" className="text-gray-900 font-semibold">Sarjana</Label>
+                            <Input id="sarjana" name="sarjana" type="number" value={formData.sarjana} onChange={handleChange} className="mt-1" />
                         </div>
                     </div>
                 </div>
@@ -359,24 +359,24 @@ export default function Form({ statistic }: Props) {
                     <h2 className="text-xl font-semibold text-gray-900 mb-4">Data Pekerjaan</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <Label htmlFor="petani" className="text-gray-900 font-semibold">Petani *</Label>
-                            <Input id="petani" name="petani" type="number" required value={formData.petani} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="petani" className="text-gray-900 font-semibold">Petani</Label>
+                            <Input id="petani" name="petani" type="number" value={formData.petani} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="pedagang" className="text-gray-900 font-semibold">Pedagang *</Label>
-                            <Input id="pedagang" name="pedagang" type="number" required value={formData.pedagang} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="pedagang" className="text-gray-900 font-semibold">Pedagang</Label>
+                            <Input id="pedagang" name="pedagang" type="number" value={formData.pedagang} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="pns" className="text-gray-900 font-semibold">PNS *</Label>
-                            <Input id="pns" name="pns" type="number" required value={formData.pns} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="pns" className="text-gray-900 font-semibold">PNS</Label>
+                            <Input id="pns" name="pns" type="number" value={formData.pns} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="wiraswasta" className="text-gray-900 font-semibold">Wiraswasta *</Label>
-                            <Input id="wiraswasta" name="wiraswasta" type="number" required value={formData.wiraswasta} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="wiraswasta" className="text-gray-900 font-semibold">Wiraswasta</Label>
+                            <Input id="wiraswasta" name="wiraswasta" type="number" value={formData.wiraswasta} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="lainnya" className="text-gray-900 font-semibold">Lainnya *</Label>
-                            <Input id="lainnya" name="lainnya" type="number" required value={formData.lainnya} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="lainnya" className="text-gray-900 font-semibold">Lainnya</Label>
+                            <Input id="lainnya" name="lainnya" type="number" value={formData.lainnya} onChange={handleChange} className="mt-1" />
                         </div>
                     </div>
                 </div>
@@ -386,24 +386,24 @@ export default function Form({ statistic }: Props) {
                     <h2 className="text-xl font-semibold text-gray-900 mb-4">Data Agama</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <Label htmlFor="islam" className="text-gray-900 font-semibold">Islam *</Label>
-                            <Input id="islam" name="islam" type="number" required value={formData.islam} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="islam" className="text-gray-900 font-semibold">Islam</Label>
+                            <Input id="islam" name="islam" type="number" value={formData.islam} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="kristen" className="text-gray-900 font-semibold">Kristen *</Label>
-                            <Input id="kristen" name="kristen" type="number" required value={formData.kristen} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="kristen" className="text-gray-900 font-semibold">Kristen</Label>
+                            <Input id="kristen" name="kristen" type="number" value={formData.kristen} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="katolik" className="text-gray-900 font-semibold">Katolik *</Label>
-                            <Input id="katolik" name="katolik" type="number" required value={formData.katolik} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="katolik" className="text-gray-900 font-semibold">Katolik</Label>
+                            <Input id="katolik" name="katolik" type="number" value={formData.katolik} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="hindu" className="text-gray-900 font-semibold">Hindu *</Label>
-                            <Input id="hindu" name="hindu" type="number" required value={formData.hindu} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="hindu" className="text-gray-900 font-semibold">Hindu</Label>
+                            <Input id="hindu" name="hindu" type="number" value={formData.hindu} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="budha" className="text-gray-900 font-semibold">Budha *</Label>
-                            <Input id="budha" name="budha" type="number" required value={formData.budha} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="budha" className="text-gray-900 font-semibold">Budha</Label>
+                            <Input id="budha" name="budha" type="number" value={formData.budha} onChange={handleChange} className="mt-1" />
                         </div>
                     </div>
                 </div>
@@ -413,24 +413,24 @@ export default function Form({ statistic }: Props) {
                     <h2 className="text-xl font-semibold text-gray-900 mb-4">Tempat Ibadah</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <Label htmlFor="masjid" className="text-gray-900 font-semibold">Masjid *</Label>
-                            <Input id="masjid" name="masjid" type="number" required value={formData.masjid} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="masjid" className="text-gray-900 font-semibold">Masjid</Label>
+                            <Input id="masjid" name="masjid" type="number" value={formData.masjid} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="mushola" className="text-gray-900 font-semibold">Mushola *</Label>
-                            <Input id="mushola" name="mushola" type="number" required value={formData.mushola} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="mushola" className="text-gray-900 font-semibold">Mushola</Label>
+                            <Input id="mushola" name="mushola" type="number" value={formData.mushola} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="gereja" className="text-gray-900 font-semibold">Gereja *</Label>
-                            <Input id="gereja" name="gereja" type="number" required value={formData.gereja} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="gereja" className="text-gray-900 font-semibold">Gereja</Label>
+                            <Input id="gereja" name="gereja" type="number" value={formData.gereja} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="pura" className="text-gray-900 font-semibold">Pura *</Label>
-                            <Input id="pura" name="pura" type="number" required value={formData.pura} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="pura" className="text-gray-900 font-semibold">Pura</Label>
+                            <Input id="pura" name="pura" type="number" value={formData.pura} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="vihara" className="text-gray-900 font-semibold">Vihara *</Label>
-                            <Input id="vihara" name="vihara" type="number" required value={formData.vihara} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="vihara" className="text-gray-900 font-semibold">Vihara</Label>
+                            <Input id="vihara" name="vihara" type="number" value={formData.vihara} onChange={handleChange} className="mt-1" />
                         </div>
                     </div>
                 </div>
@@ -440,16 +440,16 @@ export default function Form({ statistic }: Props) {
                     <h2 className="text-xl font-semibold text-gray-900 mb-4">Fasilitas Kesehatan</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
-                            <Label htmlFor="puskesmas" className="text-gray-900 font-semibold">Puskesmas *</Label>
-                            <Input id="puskesmas" name="puskesmas" type="number" required value={formData.puskesmas} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="puskesmas" className="text-gray-900 font-semibold">Puskesmas</Label>
+                            <Input id="puskesmas" name="puskesmas" type="number" value={formData.puskesmas} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="posyandu" className="text-gray-900 font-semibold">Posyandu *</Label>
-                            <Input id="posyandu" name="posyandu" type="number" required value={formData.posyandu} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="posyandu" className="text-gray-900 font-semibold">Posyandu</Label>
+                            <Input id="posyandu" name="posyandu" type="number" value={formData.posyandu} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="klinik" className="text-gray-900 font-semibold">Klinik *</Label>
-                            <Input id="klinik" name="klinik" type="number" required value={formData.klinik} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="klinik" className="text-gray-900 font-semibold">Klinik</Label>
+                            <Input id="klinik" name="klinik" type="number" value={formData.klinik} onChange={handleChange} className="mt-1" />
                         </div>
                     </div>
                 </div>
@@ -459,20 +459,20 @@ export default function Form({ statistic }: Props) {
                     <h2 className="text-xl font-semibold text-gray-900 mb-4">Fasilitas Olahraga</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <Label htmlFor="lapangan_sepakbola" className="text-gray-900 font-semibold">Lapangan Sepakbola *</Label>
-                            <Input id="lapangan_sepakbola" name="lapangan_sepakbola" type="number" required value={formData.lapangan_sepakbola} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="lapangan_sepakbola" className="text-gray-900 font-semibold">Lapangan Sepakbola</Label>
+                            <Input id="lapangan_sepakbola" name="lapangan_sepakbola" type="number" value={formData.lapangan_sepakbola} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="lapangan_voli" className="text-gray-900 font-semibold">Lapangan Voli *</Label>
-                            <Input id="lapangan_voli" name="lapangan_voli" type="number" required value={formData.lapangan_voli} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="lapangan_voli" className="text-gray-900 font-semibold">Lapangan Voli</Label>
+                            <Input id="lapangan_voli" name="lapangan_voli" type="number" value={formData.lapangan_voli} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="lapangan_badminton" className="text-gray-900 font-semibold">Lapangan Badminton *</Label>
-                            <Input id="lapangan_badminton" name="lapangan_badminton" type="number" required value={formData.lapangan_badminton} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="lapangan_badminton" className="text-gray-900 font-semibold">Lapangan Badminton</Label>
+                            <Input id="lapangan_badminton" name="lapangan_badminton" type="number" value={formData.lapangan_badminton} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="gor" className="text-gray-900 font-semibold">GOR (Gedung Olahraga) *</Label>
-                            <Input id="gor" name="gor" type="number" required value={formData.gor} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="gor" className="text-gray-900 font-semibold">GOR (Gedung Olahraga)</Label>
+                            <Input id="gor" name="gor" type="number" value={formData.gor} onChange={handleChange} className="mt-1" />
                         </div>
                     </div>
                 </div>
@@ -482,20 +482,20 @@ export default function Form({ statistic }: Props) {
                     <h2 className="text-xl font-semibold text-gray-900 mb-4">Fasilitas Wisata</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <Label htmlFor="pantai" className="text-gray-900 font-semibold">Pantai *</Label>
-                            <Input id="pantai" name="pantai" type="number" required value={formData.pantai} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="pantai" className="text-gray-900 font-semibold">Pantai</Label>
+                            <Input id="pantai" name="pantai" type="number" value={formData.pantai} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="taman" className="text-gray-900 font-semibold">Taman *</Label>
-                            <Input id="taman" name="taman" type="number" required value={formData.taman} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="taman" className="text-gray-900 font-semibold">Taman</Label>
+                            <Input id="taman" name="taman" type="number" value={formData.taman} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="cagar_budaya" className="text-gray-900 font-semibold">Cagar Budaya *</Label>
-                            <Input id="cagar_budaya" name="cagar_budaya" type="number" required value={formData.cagar_budaya} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="cagar_budaya" className="text-gray-900 font-semibold">Cagar Budaya</Label>
+                            <Input id="cagar_budaya" name="cagar_budaya" type="number" value={formData.cagar_budaya} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="wisata_alam" className="text-gray-900 font-semibold">Wisata Alam *</Label>
-                            <Input id="wisata_alam" name="wisata_alam" type="number" required value={formData.wisata_alam} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="wisata_alam" className="text-gray-900 font-semibold">Wisata Alam</Label>
+                            <Input id="wisata_alam" name="wisata_alam" type="number" value={formData.wisata_alam} onChange={handleChange} className="mt-1" />
                         </div>
                     </div>
                 </div>
@@ -505,20 +505,20 @@ export default function Form({ statistic }: Props) {
                     <h2 className="text-xl font-semibold text-gray-900 mb-4">Migrasi & Dinamika Penduduk</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <Label htmlFor="penduduk_datang" className="text-gray-900 font-semibold">Penduduk Datang *</Label>
-                            <Input id="penduduk_datang" name="penduduk_datang" type="number" required value={formData.penduduk_datang} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="penduduk_datang" className="text-gray-900 font-semibold">Penduduk Datang</Label>
+                            <Input id="penduduk_datang" name="penduduk_datang" type="number" value={formData.penduduk_datang} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="penduduk_keluar" className="text-gray-900 font-semibold">Penduduk Keluar *</Label>
-                            <Input id="penduduk_keluar" name="penduduk_keluar" type="number" required value={formData.penduduk_keluar} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="penduduk_keluar" className="text-gray-900 font-semibold">Penduduk Keluar</Label>
+                            <Input id="penduduk_keluar" name="penduduk_keluar" type="number" value={formData.penduduk_keluar} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="kelahiran" className="text-gray-900 font-semibold">Kelahiran *</Label>
-                            <Input id="kelahiran" name="kelahiran" type="number" required value={formData.kelahiran} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="kelahiran" className="text-gray-900 font-semibold">Kelahiran</Label>
+                            <Input id="kelahiran" name="kelahiran" type="number" value={formData.kelahiran} onChange={handleChange} className="mt-1" />
                         </div>
                         <div>
-                            <Label htmlFor="kematian" className="text-gray-900 font-semibold">Kematian *</Label>
-                            <Input id="kematian" name="kematian" type="number" required value={formData.kematian} onChange={handleChange} className="mt-1" />
+                            <Label htmlFor="kematian" className="text-gray-900 font-semibold">Kematian</Label>
+                            <Input id="kematian" name="kematian" type="number" value={formData.kematian} onChange={handleChange} className="mt-1" />
                         </div>
                     </div>
                 </div>
@@ -536,3 +536,4 @@ export default function Form({ statistic }: Props) {
         </AdminLayout>
     );
 }
+

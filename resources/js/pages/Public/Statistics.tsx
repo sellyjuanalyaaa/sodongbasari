@@ -1,6 +1,6 @@
 import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import VillageMap from '@/components/VillageMap';
 import { Users, Home, MapPin, GraduationCap, Briefcase, Church, Building2, Heart, DollarSign, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
@@ -78,15 +78,37 @@ interface StatisticData {
     taman?: number;
     cagar_budaya?: number;
     wisata_alam?: number;
+    visited_data?: any; // Add generic if needed or keep loose
+}
+
+interface DemographicData {
+    id: number;
+    year: number;
+    total_male: number;
+    total_female: number;
+    total_families: number;
+    mutation_in?: number;
+    mutation_out?: number;
+}
+
+interface BudgetData {
+    id: number;
+    year: number;
+    type: string;
+    amount: number;
 }
 
 interface Props {
     villageInfo: any;
     statistics: StatisticData | null;
     historicalStatistics: StatisticData[];
+    availableYears?: number[];
+    selectedYear?: number;
+    demographics?: DemographicData[];
+    budgets?: BudgetData[];
 }
 
-export default function Statistics({ villageInfo, statistics, historicalStatistics = [] }: Props) {
+export default function Statistics({ villageInfo, statistics, historicalStatistics = [], availableYears = [], selectedYear, demographics = [], budgets = [] }: Props) {
     if (!statistics) {
         return (
             <PublicLayout villageInfo={villageInfo}>
@@ -100,7 +122,25 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                                 <span className="text-[#EFA00B] text-xs font-medium uppercase tracking-wide">Data & Informasi</span>
                             </div>
                             <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Statistik Desa</h2>
-                            <p className="text-slate-500 text-xs sm:text-sm font-light">Tahun Terkini</p>
+                            <p className="text-slate-500 text-xs sm:text-sm font-light">
+                                {selectedYear ? `Tahun ${selectedYear}` : 'Tahun Terkini'}
+                            </p>
+
+                            {/* Year Selector */}
+                            {availableYears.length > 0 && (
+                                <div className="mt-6 flex justify-center">
+                                    <select
+                                        value={selectedYear || ''}
+                                        onChange={(e) => router.get(route('public.statistics'), { year: e.target.value })}
+                                        className="appearance-none bg-white border border-gray-200 rounded-lg py-2 pl-4 pr-10 text-sm font-medium text-slate-700 shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-200 cursor-pointer"
+                                    >
+                                        <option value="" disabled>Pilih Tahun</option>
+                                        {availableYears.map(year => (
+                                            <option key={year} value={year}>{year}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            )}
                         </div>
                         <div className="bg-slate-50 p-6 sm:p-12 rounded-lg border border-slate-200 text-center text-slate-400">
                             <p className="text-xs sm:text-sm">Data statistik belum tersedia.</p>
@@ -140,13 +180,13 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                     {/* Header dengan Data Utama */}
                     <div className="bg-gradient-to-br from-orange-50 via-white to-orange-50/50 rounded-2xl p-8 md:p-10 mb-6 border border-orange-100 shadow-sm shadow-orange-100/50">
-                        <div className="flex items-center justify-center md:justify-start">
-                            <div className="flex items-center gap-4">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div className="flex items-center gap-4 self-start md:self-center">
                                 <div className="bg-gradient-to-br from-orange-500 to-[#EFA00B] rounded-full p-3 shadow-lg shadow-orange-200">
                                     <Building2 className="h-10 w-10 text-white" />
                                 </div>
                                 <div>
-                                    <h1 className="text-xl md:text-2xl font-medium text-slate-900 tracking-tight">Pemerintah Desa Sodong Basari</h1>
+                                    <h1 className="text-xl md:text-2xl font-medium text-slate-900 tracking-tight">Statistik Desa Sodong Basari</h1>
                                     <p className="text-slate-600 text-sm font-light mt-1">Kecamatan Belik, Kabupaten Pemalang</p>
                                 </div>
                             </div>
@@ -638,8 +678,88 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                             </div>
                         </div>
                     )}
+                    {/* Arsip Data Kependudukan Section */}
+                    {demographics.length > 0 && (
+                        <div className="mt-16 sm:mt-24">
+                            <h3 className="text-2xl md:text-3xl font-light text-slate-900 mb-8 text-center tracking-tight">
+                                Arsip Data Kependudukan
+                            </h3>
+                            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-sm text-left">
+                                        <thead className="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                                            <tr>
+                                                <th scope="col" className="px-6 py-4 font-medium">Tahun</th>
+                                                <th scope="col" className="px-6 py-4 font-medium text-center">Laki-laki</th>
+                                                <th scope="col" className="px-6 py-4 font-medium text-center">Perempuan</th>
+                                                <th scope="col" className="px-6 py-4 font-medium text-center">Total Keluarga (KK)</th>
+                                                <th scope="col" className="px-6 py-4 font-medium text-center">Mutasi Masuk</th>
+                                                <th scope="col" className="px-6 py-4 font-medium text-center">Mutasi Keluar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-100">
+                                            {demographics.map((item) => (
+                                                <tr key={item.id} className="hover:bg-slate-50 transition-colors">
+                                                    <td className="px-6 py-4 font-medium text-slate-900">{item.year}</td>
+                                                    <td className="px-6 py-4 text-center text-slate-600">{item.total_male}</td>
+                                                    <td className="px-6 py-4 text-center text-slate-600">{item.total_female}</td>
+                                                    <td className="px-6 py-4 text-center text-slate-600">{item.total_families}</td>
+                                                    <td className="px-6 py-4 text-center text-green-600 font-medium">
+                                                        {item.mutation_in ? `+${item.mutation_in}` : '-'}
+                                                    </td>
+                                                    <td className="px-6 py-4 text-center text-red-600 font-medium">
+                                                        {item.mutation_out ? `-${item.mutation_out}` : '-'}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Transparansi Anggaran Section */}
+                    {budgets.length > 0 && (
+                        <div className="mt-16 sm:mt-24">
+                            <h3 className="text-2xl md:text-3xl font-light text-slate-900 mb-8 text-center tracking-tight">
+                                Transparansi Anggaran Desa
+                            </h3>
+                            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-sm text-left">
+                                        <thead className="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                                            <tr>
+                                                <th scope="col" className="px-6 py-4 font-medium">Tahun</th>
+                                                <th scope="col" className="px-6 py-4 font-medium">Kategori</th>
+                                                <th scope="col" className="px-6 py-4 font-medium text-right">Nominal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-100">
+                                            {budgets.map((item) => (
+                                                <tr key={item.id} className="hover:bg-slate-50 transition-colors">
+                                                    <td className="px-6 py-4 font-medium text-slate-900">{item.year}</td>
+                                                    <td className="px-6 py-4">
+                                                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.type === 'Pendapatan' ? 'bg-green-100 text-green-800' :
+                                                            item.type === 'Belanja' ? 'bg-red-100 text-red-800' :
+                                                                'bg-blue-100 text-blue-800'
+                                                            }`}>
+                                                            {item.type}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-6 py-4 text-right font-medium text-slate-700">
+                                                        {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(item.amount)}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
-        </PublicLayout>
+        </PublicLayout >
     );
 }

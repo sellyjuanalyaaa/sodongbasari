@@ -59,56 +59,70 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                         <p className="text-slate-500 text-xs sm:text-sm font-light">Sodong Basari</p>
                     </div>
 
-                    {/* Visi & Misi */}
+                    {/* Visi & Misi - Unified Card */}
                     {(villageInfo?.vision || villageInfo?.mission) && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
-                            {/* Debug - Hapus setelah testing */}
-                            {console.log('Village Info:', villageInfo)}
+                        <div className="bg-white rounded-3xl border border-orange-100 shadow-xl overflow-hidden mb-8 md:mb-12 flex flex-col md:flex-row relative group hover:shadow-2xl transition-all duration-500">
+                            {/* Decorative Abstract Blobs */}
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-50 rounded-full blur-3xl opacity-50 pointer-events-none -mr-16 -mt-16"></div>
+                            <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber-50 rounded-full blur-2xl opacity-50 pointer-events-none -ml-12 -mb-12"></div>
 
-                            {/* Visi */}
+                            {/* Visi Section - Left/Top Side */}
                             {villageInfo?.vision && (
-                                <div className="bg-gradient-to-br from-orange-50 to-white p-8 rounded-xl border border-orange-200 hover:shadow-lg transition-all">
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-[#EFA00B] rounded-lg flex items-center justify-center text-white shadow-md">
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                            </svg>
-                                        </div>
-                                        <h3 className="text-xl font-semibold text-slate-900">Visi Desa</h3>
+                                <div className="w-full md:w-5/12 p-8 md:p-12 bg-gradient-to-br from-orange-500 to-amber-600 text-white relative overflow-hidden flex flex-col justify-center">
+                                    {/* Background Pattern */}
+                                    <div className="absolute inset-0 opacity-10">
+                                        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                            <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
+                                        </svg>
                                     </div>
-                                    <div className="relative">
-                                        <div className="absolute left-0 top-0 text-6xl text-orange-200 font-serif leading-none">"</div>
-                                        <p className="text-slate-700 text-[15px] leading-relaxed pl-8 pt-6 font-light italic">
-                                            {villageInfo.vision}
-                                        </p>
-                                        <div className="absolute right-0 bottom-0 text-6xl text-orange-200 font-serif leading-none">"</div>
+
+                                    <div className="relative z-10">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30 shadow-inner">
+                                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-2xl font-bold tracking-tight text-white">Visi Desa</h3>
+                                        </div>
+
+                                        <div className="relative">
+                                            <span className="absolute -top-4 -left-2 text-6xl text-orange-200 opacity-40 font-serif leading-none select-none">"</span>
+                                            <p className="text-lg md:text-xl font-medium leading-relaxed italic text-orange-50 pl-4 relative z-10">
+                                                {villageInfo.vision}
+                                            </p>
+                                            <span className="absolute -bottom-6 right-0 text-6xl text-orange-200 opacity-40 font-serif leading-none select-none rotate-180">"</span>
+                                        </div>
                                     </div>
                                 </div>
                             )}
 
-                            {/* Misi */}
+                            {/* Misi Section - Right/Bottom Side */}
                             {villageInfo?.mission && (
-                                <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl border border-blue-200 hover:shadow-lg transition-all">
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white shadow-md">
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                            </svg>
-                                        </div>
-                                        <h3 className="text-xl font-semibold text-slate-900">Misi Desa</h3>
-                                    </div>
-                                    <div className="space-y-3">
-                                        {villageInfo.mission.split('\n').filter((item: string) => item.trim()).map((item: string, index: number) => (
-                                            <div key={index} className="flex gap-3">
-                                                <div className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-semibold mt-0.5">
-                                                    {index + 1}
-                                                </div>
-                                                <p className="text-slate-700 text-[15px] leading-relaxed font-light flex-1">
-                                                    {item.replace(/^\d+\.\s*/, '')}
-                                                </p>
+                                <div className="w-full md:w-7/12 p-8 md:p-12 bg-white relative">
+                                    <div className="relative z-10">
+                                        <div className="flex items-center gap-3 mb-8">
+                                            <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center border border-orange-200">
+                                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
+                                                </svg>
                                             </div>
-                                        ))}
+                                            <h3 className="text-2xl font-bold tracking-tight text-slate-900 leading-none">Misi Desa</h3>
+                                        </div>
+
+                                        <div className="space-y-4">
+                                            {villageInfo.mission.split('\n').filter((item: string) => item.trim()).map((item: string, index: number) => (
+                                                <div key={index} className="flex gap-4 p-3 rounded-lg hover:bg-orange-50 transition-colors duration-300">
+                                                    <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-sm mt-0.5">
+                                                        {index + 1}
+                                                    </div>
+                                                    <p className="text-slate-600 text-[15px] leading-relaxed font-light flex-1">
+                                                        {item.replace(/^\d+\.\s*/, '')}
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             )}
