@@ -153,112 +153,115 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                         </div>
                     </div>
 
-                    {/* Grid Layout Sama Rata */}
-                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                    {/* Horizontal Scroll Layout for Mobile / Grid for Desktop */}
+                    <div className="flex overflow-x-auto pb-6 -mx-6 px-6 sm:mx-0 sm:px-0 sm:pb-0 gap-4 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible">
                         {/* Total Penduduk */}
-                        <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 sm:p-6 border border-orange-200 hover:shadow-lg transition-all">
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+                        <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-5 border border-orange-200 shadow-sm hover:shadow-md transition-all">
+                            <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-[10px] sm:text-xs text-orange-700 font-medium uppercase tracking-wide mb-1 sm:mb-2">Total Penduduk</p>
-                                    <h4 className="text-xl sm:text-3xl font-bold text-orange-900">{statistics.male_population + statistics.female_population}</h4>
+                                    <p className="text-xs text-orange-700 font-medium uppercase tracking-wide mb-1">Total Penduduk</p>
+                                    <h4 className="text-3xl font-bold text-orange-900">{statistics.male_population + statistics.female_population}</h4>
                                 </div>
-                                <div className="bg-orange-200 rounded-full p-2 sm:p-3 self-end sm:self-center">
-                                    <Users className="h-4 w-4 sm:h-6 sm:w-6 text-orange-700" />
+                                <div className="bg-orange-200 rounded-full p-3">
+                                    <Users className="h-6 w-6 text-orange-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Laki-laki */}
-                        <div className="bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+                        <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                            <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-[10px] sm:text-xs text-slate-600 font-medium uppercase tracking-wide mb-1 sm:mb-2">Laki-Laki</p>
-                                    <h4 className="text-xl sm:text-3xl font-bold text-slate-900">{statistics.male_population}</h4>
+                                    <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-1">Laki-Laki</p>
+                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.male_population}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-2 sm:p-3 self-end sm:self-center">
-                                    <Users className="h-4 w-4 sm:h-6 sm:w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-3">
+                                    <Users className="h-6 w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Perempuan */}
-                        <div className="bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+                        <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                            <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-[10px] sm:text-xs text-slate-600 font-medium uppercase tracking-wide mb-1 sm:mb-2">Perempuan</p>
-                                    <h4 className="text-xl sm:text-3xl font-bold text-slate-900">{statistics.female_population}</h4>
+                                    <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-1">Perempuan</p>
+                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.female_population}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-2 sm:p-3 self-end sm:self-center">
-                                    <Users className="h-4 w-4 sm:h-6 sm:w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-3">
+                                    <Users className="h-6 w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Kepala Keluarga */}
-                        <div className="bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+                        <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                            <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-[10px] sm:text-xs text-slate-600 font-medium uppercase tracking-wide mb-1 sm:mb-2">Kepala Keluarga</p>
-                                    <h4 className="text-xl sm:text-3xl font-bold text-slate-900">{statistics.total_families}</h4>
+                                    <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-1">Kepala Keluarga</p>
+                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.total_families}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-2 sm:p-3 self-end sm:self-center">
-                                    <Users className="h-4 w-4 sm:h-6 sm:w-6 text-orange-600" />
+                                <div className="bg-white rounded-full p-3">
+                                    <Users className="h-6 w-6 text-orange-600" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Penduduk Datang */}
-                        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 sm:p-6 border border-green-200 hover:shadow-lg transition-all">
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+                        <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-5 border border-green-200 shadow-sm hover:shadow-md transition-all">
+                            <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-[10px] sm:text-xs text-green-700 font-medium uppercase tracking-wide mb-1 sm:mb-2">Penduduk Datang</p>
-                                    <h4 className="text-xl sm:text-3xl font-bold text-green-900">{statistics.penduduk_datang || 0}</h4>
+                                    <p className="text-xs text-green-700 font-medium uppercase tracking-wide mb-1">Penduduk Datang</p>
+                                    <h4 className="text-3xl font-bold text-green-900">{statistics.penduduk_datang || 0}</h4>
                                 </div>
-                                <div className="bg-green-200 rounded-full p-2 sm:p-3 self-end sm:self-center">
-                                    <ArrowUpRight className="h-4 w-4 sm:h-6 sm:w-6 text-green-700" />
+                                <div className="bg-green-200 rounded-full p-3">
+                                    <ArrowUpRight className="h-6 w-6 text-green-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Penduduk Keluar */}
-                        <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-4 sm:p-6 border border-red-200 hover:shadow-lg transition-all">
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+                        <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-5 border border-red-200 shadow-sm hover:shadow-md transition-all">
+                            <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-[10px] sm:text-xs text-red-700 font-medium uppercase tracking-wide mb-1 sm:mb-2">Penduduk Keluar</p>
-                                    <h4 className="text-xl sm:text-3xl font-bold text-red-900">{statistics.penduduk_keluar || 0}</h4>
+                                    <p className="text-xs text-red-700 font-medium uppercase tracking-wide mb-1">Penduduk Keluar</p>
+                                    <h4 className="text-3xl font-bold text-red-900">{statistics.penduduk_keluar || 0}</h4>
                                 </div>
-                                <div className="bg-red-200 rounded-full p-2 sm:p-3 self-end sm:self-center">
-                                    <ArrowDownRight className="h-4 w-4 sm:h-6 sm:w-6 text-red-700" />
+                                <div className="bg-red-200 rounded-full p-3">
+                                    <ArrowDownRight className="h-6 w-6 text-red-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Penduduk Usia Kerja */}
-                        <div className="bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+                        <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                            <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-[10px] sm:text-xs text-slate-600 font-medium uppercase tracking-wide mb-1 sm:mb-2">Usia Kerja (15-64)</p>
-                                    <h4 className="text-xl sm:text-3xl font-bold text-slate-900">{statistics.petani + statistics.pedagang + statistics.pns + statistics.wiraswasta}</h4>
+                                    <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-1">Usia Kerja (15-64)</p>
+                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.petani + statistics.pedagang + statistics.pns + statistics.wiraswasta}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-2 sm:p-3 self-end sm:self-center">
-                                    <Briefcase className="h-4 w-4 sm:h-6 sm:w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-3">
+                                    <Briefcase className="h-6 w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Perguruan Tinggi */}
-                        <div className="bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-200 hover:shadow-lg transition-all">
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+                        <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                            <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-[10px] sm:text-xs text-slate-600 font-medium uppercase tracking-wide mb-1 sm:mb-2">Perguruan Tinggi</p>
-                                    <h4 className="text-xl sm:text-3xl font-bold text-slate-900">{statistics.sarjana + statistics.diploma}</h4>
+                                    <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-1">Perguruan Tinggi</p>
+                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.sarjana + statistics.diploma}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-2 sm:p-3 self-end sm:self-center">
-                                    <GraduationCap className="h-4 w-4 sm:h-6 sm:w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-3">
+                                    <GraduationCap className="h-6 w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
+                    </div>
 
+                    {/* Grid for remaining cards */}
+                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 sm:mt-6">
                         {/* Peta - span 2 cols */}
                         <div className="col-span-2 md:col-span-2 bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all">
                             <div className="flex items-center gap-2 mb-5">
