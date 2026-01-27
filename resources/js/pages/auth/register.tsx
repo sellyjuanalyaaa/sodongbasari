@@ -15,10 +15,10 @@ import { User, Mail, Lock } from 'lucide-react';
 export default function Register() {
     return (
         <AuthSplitLayout
-            title="Create an account"
-            description="Enter your details below to create your account"
+            title="Buat Akun"
+            description="Masukkan data diri Anda untuk membuat akun"
         >
-            <Head title="Register" />
+            <Head title="Daftar" />
             <Form
                 {...store.form()}
                 resetOnSuccess={['password', 'password_confirmation']}
@@ -29,7 +29,7 @@ export default function Register() {
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="name" className="text-slate-900 font-medium">Nama Lengkap</Label>
                                 <div className="relative">
                                     <User className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
                                     <Input
@@ -40,7 +40,7 @@ export default function Register() {
                                         tabIndex={1}
                                         autoComplete="name"
                                         name="name"
-                                        placeholder="Full name"
+                                        placeholder="Nama lengkap"
                                         className="pl-10"
                                     />
                                 </div>
@@ -51,7 +51,7 @@ export default function Register() {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email" className="text-slate-900 font-medium">Alamat Email</Label>
                                 <div className="relative">
                                     <Mail className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
                                     <Input
@@ -61,7 +61,7 @@ export default function Register() {
                                         tabIndex={2}
                                         autoComplete="email"
                                         name="email"
-                                        placeholder="email@example.com"
+                                        placeholder="nama@contoh.com"
                                         className="pl-10"
                                     />
                                 </div>
@@ -69,7 +69,7 @@ export default function Register() {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="password">Password</Label>
+                                <Label htmlFor="password" className="text-slate-900 font-medium">Kata Sandi</Label>
                                 <div className="relative">
                                     <Lock className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
                                     <Input
@@ -79,7 +79,7 @@ export default function Register() {
                                         tabIndex={3}
                                         autoComplete="new-password"
                                         name="password"
-                                        placeholder="Password"
+                                        placeholder="Kata sandi"
                                         className="pl-10"
                                     />
                                 </div>
@@ -87,8 +87,8 @@ export default function Register() {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="password_confirmation">
-                                    Confirm password
+                                <Label htmlFor="password_confirmation" className="text-slate-900 font-medium">
+                                    Konfirmasi Kata Sandi
                                 </Label>
                                 <div className="relative">
                                     <Lock className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
@@ -99,7 +99,7 @@ export default function Register() {
                                         tabIndex={4}
                                         autoComplete="new-password"
                                         name="password_confirmation"
-                                        placeholder="Confirm password"
+                                        placeholder="Konfirmasi kata sandi"
                                         className="pl-10"
                                     />
                                 </div>
@@ -115,14 +115,14 @@ export default function Register() {
                                 data-test="register-user-button"
                             >
                                 {processing && <Spinner className="mr-2" />}
-                                Create account
+                                Buat Akun
                             </Button>
                         </div>
 
                         <div className="text-center text-sm text-muted-foreground">
-                            Already have an account?{' '}
+                            Sudah punya akun?{' '}
                             <TextLink href={login()} tabIndex={6}>
-                                Log in
+                                Masuk
                             </TextLink>
                         </div>
                     </>

@@ -20,7 +20,7 @@ class HeroController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:15360', // 15MB
             'title' => 'nullable|string|max:255',
         ]);
 

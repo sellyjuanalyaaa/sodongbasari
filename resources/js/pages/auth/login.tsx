@@ -37,17 +37,16 @@ export default function Login({
 
     return (
         <AuthSplitLayout
-            title="Masuk Dashboard"
+            title="Masuk"
             description="Selamat datang kembali di Sistem Informasi Desa Sodong Basari"
         >
-            <Head title="Log in" />
+            <Head title="Masuk" />
 
             {status && (
                 <div className="mb-4 text-center text-sm font-medium text-green-600">
                     {status}
                 </div>
             )}
-
 
             <form onSubmit={submit} className="flex flex-col gap-6">
                 <div className="grid gap-6">
@@ -128,9 +127,9 @@ export default function Login({
 
                 {canRegister && (
                     <div className="text-center text-sm text-muted-foreground">
-                        Don't have an account?{' '}
+                        Belum punya akun?{' '}
                         <TextLink href={route('register')} tabIndex={5}>
-                            Sign up
+                            Daftar
                         </TextLink>
                     </div>
                 )}

@@ -46,30 +46,49 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
     const { auth } = usePage().props as any;
     const user = auth.user;
 
-    const navItems = [
-        { label: "Dashboard", routeName: "admin.dashboard", icon: LayoutDashboard },
+    const navGroups = [
         {
-            label: "Notifikasi",
-            routeName: "admin.notifications.index",
-            active: "admin.notifications.*",
-            icon: Bell,
-            badge: (usePage().props as any).unreadNotificationsCount // Add badge property
+            label: "Utama",
+            items: [
+                { label: "Dashboard", routeName: "admin.dashboard", icon: LayoutDashboard },
+                {
+                    label: "Notifikasi",
+                    routeName: "admin.notifications.index",
+                    active: "admin.notifications.*",
+                    icon: Bell,
+                    badge: (usePage().props as any).unreadNotificationsCount
+                },
+                { label: "Pengaturan Slider", routeName: "admin.hero.edit", active: "admin.hero.*", icon: ImageIcon },
+                ...(user.role === 'super_admin' ? [
+                    { label: "Manajemen User", routeName: "admin.users.index", active: "admin.users.*", icon: Users }
+                ] : [])
+            ]
         },
-        { label: "Berita & Artikel", routeName: "admin.posts.index", active: "admin.posts.*", icon: FileText },
-        { label: "Potensi Desa", routeName: "admin.potentials.index", active: "admin.potentials.*", icon: Mountain },
-        { label: "Lembaga Desa", routeName: "admin.institutions.index", active: "admin.institutions.*", icon: Building2 },
-        { label: "Perangkat Desa", routeName: "admin.officials.index", active: "admin.officials.*", icon: Users },
-        { label: "Riwayat Kepala Desa", routeName: "admin.former-village-heads.index", active: "admin.former-village-heads.*", icon: History },
-        { label: "Visi & Misi Desa", routeName: "admin.village-info.edit", active: "admin.village-info.*", icon: Target },
-        { label: "Data Penduduk", routeName: "admin.demographics.index", active: "admin.demographics.*", icon: Users },
-        { label: "Anggaran Desa", routeName: "admin.budgets.index", active: "admin.budgets.*", icon: Receipt },
-        { label: "Statistik Desa", routeName: "admin.statistics.index", active: "admin.statistics.*", icon: BarChart3 },
-        { label: "Statistik Beranda", routeName: "admin.home-statistics.index", active: "admin.home-statistics.*", icon: BarChart3 },
-        { label: "Pengaturan Slider", routeName: "admin.hero.edit", active: "admin.hero.*", icon: ImageIcon },
-        // Add User Management for Super Admin
-        ...(user.role === 'super_admin' ? [
-            { label: "Manajemen User", routeName: "admin.users.index", active: "admin.users.*", icon: Users } // Using Users icon again, or maybe Shield
-        ] : [])
+        {
+            label: "Konten & Informasi",
+            items: [
+                { label: "Berita & Artikel", routeName: "admin.posts.index", active: "admin.posts.*", icon: FileText },
+                { label: "Visi & Misi Desa", routeName: "admin.village-info.edit", active: "admin.village-info.*", icon: Target },
+            ]
+        },
+        {
+            label: "Data Desa",
+            items: [
+                { label: "Potensi Desa", routeName: "admin.potentials.index", active: "admin.potentials.*", icon: Mountain },
+                { label: "Lembaga Desa", routeName: "admin.institutions.index", active: "admin.institutions.*", icon: Building2 },
+                { label: "Perangkat Desa", routeName: "admin.officials.index", active: "admin.officials.*", icon: Users },
+                { label: "Riwayat Kepala Desa", routeName: "admin.former-village-heads.index", active: "admin.former-village-heads.*", icon: History },
+                { label: "Data Penduduk", routeName: "admin.demographics.index", active: "admin.demographics.*", icon: Users },
+                { label: "Anggaran Desa", routeName: "admin.budgets.index", active: "admin.budgets.*", icon: Receipt },
+            ]
+        },
+        {
+            label: "Statistik",
+            items: [
+                { label: "Statistik Desa", routeName: "admin.statistics.index", active: "admin.statistics.*", icon: BarChart3 },
+                { label: "Statistik Beranda", routeName: "admin.home-statistics.index", active: "admin.home-statistics.*", icon: BarChart3 },
+            ]
+        }
     ];
 
     return (
@@ -91,37 +110,47 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
                     </SidebarHeader>
 
                     <SidebarContent className="bg-white px-3 py-4">
-                        <SidebarGroup>
-                            <SidebarGroupLabel className="text-gray-400 font-semibold px-2 py-3 text-[10px] uppercase tracking-widest">Menu Utama</SidebarGroupLabel>
-                            <SidebarGroupContent>
-                                <SidebarMenu className="gap-1">
-                                    {navItems.map((item) => {
-                                        const isActive = route().current(item.active || item.routeName);
-                                        return (
-                                            <SidebarMenuItem key={item.routeName}>
-                                                <SidebarMenuButton
-                                                    asChild
-                                                    isActive={isActive}
-                                                    tooltip={item.label}
-                                                    className={`h-11 rounded-xl transition-all duration-200 font-medium px-3.5 group relative ${isActive
-                                                        ? '!bg-orange-50 !text-orange-600'
-                                                        : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
-                                                        }`}
-                                                >
-                                                    <Link href={route(item.routeName)} className="flex items-center gap-3">
-                                                        <item.icon className={`h-5 w-5 ${isActive ? "text-orange-600" : "text-gray-400 group-hover:text-gray-600 transition-colors"}`} />
-                                                        <span className="text-sm">{item.label}</span>
-                                                        {isActive && (
-                                                            <div className="absolute right-2 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-orange-600"></div>
-                                                        )}
-                                                    </Link>
-                                                </SidebarMenuButton>
-                                            </SidebarMenuItem>
-                                        );
-                                    })}
-                                </SidebarMenu>
-                            </SidebarGroupContent>
-                        </SidebarGroup>
+                        {navGroups.map((group, index) => (
+                            <SidebarGroup key={index} className="mb-2">
+                                <SidebarGroupLabel className="text-gray-400 font-semibold px-2 py-2 text-[10px] uppercase tracking-widest">
+                                    {group.label}
+                                </SidebarGroupLabel>
+                                <SidebarGroupContent>
+                                    <SidebarMenu className="gap-1">
+                                        {group.items.map((item) => {
+                                            const isActive = route().current(item.active || item.routeName);
+                                            return (
+                                                <SidebarMenuItem key={item.routeName}>
+                                                    <SidebarMenuButton
+                                                        asChild
+                                                        isActive={isActive}
+                                                        tooltip={item.label}
+                                                        className={`h-10 rounded-lg transition-all duration-200 font-medium px-3 group relative ${isActive
+                                                            ? '!bg-orange-50 !text-orange-600'
+                                                            : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
+                                                            }`}
+                                                    >
+                                                        <Link href={route(item.routeName)} className="flex items-center gap-3">
+                                                            <item.icon className={`h-4.5 w-4.5 ${isActive ? "text-orange-600" : "text-gray-400 group-hover:text-gray-600 transition-colors"}`} />
+                                                            <span className="text-sm">{item.label}</span>
+                                                            {isActive && (
+                                                                <div className="absolute right-2 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-orange-600"></div>
+                                                            )}
+                                                            {/* Render badge if available */}
+                                                            {item.badge !== undefined && item.badge > 0 && (
+                                                                <span className="ml-auto bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">
+                                                                    {item.badge}
+                                                                </span>
+                                                            )}
+                                                        </Link>
+                                                    </SidebarMenuButton>
+                                                </SidebarMenuItem>
+                                            );
+                                        })}
+                                    </SidebarMenu>
+                                </SidebarGroupContent>
+                            </SidebarGroup>
+                        ))}
                     </SidebarContent>
 
                     <SidebarFooter className="border-t border-gray-50 bg-white p-4">
