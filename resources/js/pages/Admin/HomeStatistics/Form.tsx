@@ -41,7 +41,7 @@ interface DataItem {
 export default function Form({ statistic }: Props) {
     const isEditing = !!statistic;
 
-    const { data, setData, post, put, processing, errors } = useForm({
+    const { data, setData, post, put, processing, errors, transform } = useForm({
         title: statistic?.title || '',
         subtitle: statistic?.subtitle || '',
         type: statistic?.type || 'budget',
@@ -54,25 +54,22 @@ export default function Form({ statistic }: Props) {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Clean up data for submission
-        const submitData: any = { ...data };
-        if (data.type === 'count') {
-            // Logic specific to count if needed, but keeping data array is harmless
-        }
-
         if (isEditing) {
-            router.post(route('admin.home-statistics.update', statistic.id), {
+            // Transform data to add _method before submission
+            transform((data) => ({
+                ...data,
                 _method: 'put',
-                ...submitData,
+            }));
+            
+            post(route('admin.home-statistics.update', statistic.id), {
+                forceFormData: true,
             });
         } else {
-            post(route('admin.home-statistics.store'));
+            post(route('admin.home-statistics.store'), {
+                forceFormData: true,
+            });
         }
     };
-
-    // Since Inertia useForm put doesn't support FormData (needed for file upload) directly with method spoofing in the same way as post with forceFormData,
-    // we need to use post with _method='PUT' for file uploads on update.
-    const router = { post: (url: string, data: any) => post(url, data) };
 
     const addDataItem = () => {
         setData('data', [...data.data, { label: '', value: '', color: 'bg-[#71d338]', textColor: 'text-slate-800' }]);

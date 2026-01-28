@@ -79,7 +79,7 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
     // Normalize dynamic stats
     const processedHomeStatistics = homeStatistics.map((stat: any) => ({
         ...stat,
-        rawValue: stat.data?.[0]?.value || 0,
+        rawValue: stat.type === 'count' ? (stat.subtitle || 0) : (stat.data?.[0]?.value || 0),
     }));
 
     // Use ONLY homeStatistics for displayStats as requested
@@ -122,17 +122,12 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                         {/* Avatar Side */}
                         <div className="flex-shrink-0 relative">
                             <div className="w-72 h-72 md:w-96 md:h-96 relative">
-                                {villageInfo?.head_of_village_photo ? (
-                                    <img
-                                        src={villageInfo.head_of_village_photo}
-                                        alt={villageInfo.head_of_village_name}
-                                        className="w-full h-full object-cover rounded-3xl md:rounded-[2.5rem] shadow-2xl transition-transform duration-500 hover:scale-[1.02]"
-                                    />
-                                ) : (
-                                    <div className="w-full h-full bg-slate-100 flex items-center justify-center rounded-3xl md:rounded-[2.5rem] shadow-xl">
-                                        <Users className="w-24 h-24 text-slate-300" />
-                                    </div>
-                                )}
+                                <img
+                                    src={villageInfo?.head_of_village_photo || '/images/kepala-desa.png'}
+                                    alt={villageInfo?.head_of_village_name || 'Kepala Desa'}
+                                    className="w-full h-full object-contain transition-transform duration-500 hover:scale-[1.02]"
+                                    style={{ filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15))' }}
+                                />
                             </div>
                             {/* Subtle decorative element */}
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-amber-50 rounded-full blur-3xl -z-10 opacity-60"></div>
@@ -149,7 +144,7 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
 
                             <div className="border-t-2 md:border-t-0 md:border-l-2 border-slate-900 pt-6 md:pt-0 md:pl-6 inline-block md:block">
                                 <h3 className="text-base font-semibold text-slate-900 tracking-wide uppercase">{villageInfo?.head_of_village_name || 'Kepala Desa'}</h3>
-                                <p className="text-slate-500 text-sm mt-1.5">Kepala Desa Sodong Basari</p>
+                                <p className="text-slate-500 text-sm mt-1.5">PJ Kepala Desa Sodong Basari</p>
                             </div>
                         </div>
                     </div>
@@ -235,11 +230,11 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                                         <div className="mb-4">
                                             <h3 className="text-5xl md:text-6xl font-bold text-slate-900 tracking-tighter">
                                                 {displayStats[currentStat].type === 'count' ? (
-                                                    <AnimatedCounter value={displayStats[currentStat].rawValue} />
-                                                ) : displayStats[currentStat].type === 'static' ? (
-                                                    displayStats[currentStat].value
-                                                ) : (
+                                                    <AnimatedCounter value={parseFloat(displayStats[currentStat].subtitle) || 0} />
+                                                ) : displayStats[currentStat].type === 'budget' ? (
                                                     <AnimatedCounter value={displayStats[currentStat].data?.[0]?.value || 0} />
+                                                ) : (
+                                                    displayStats[currentStat].subtitle || displayStats[currentStat].data?.[0]?.value || 0
                                                 )}
                                             </h3>
                                         </div>

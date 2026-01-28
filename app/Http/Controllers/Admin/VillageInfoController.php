@@ -32,6 +32,9 @@ class VillageInfoController extends Controller
         $validated = $request->validate([
             'vision' => 'nullable|string',
             'mission' => 'nullable|string',
+            'head_of_village_name' => 'nullable|string|max:255',
+            'welcome_message' => 'nullable|string',
+            'head_of_village_photo' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
         ]);
 
         $villageInfo = VillageInfo::first();
@@ -42,10 +45,21 @@ class VillageInfoController extends Controller
                 'description' => '',
             ]);
         }
+
+        // Handle photo upload
+        if ($request->hasFile('head_of_village_photo')) {
+            // Delete old photo if exists
+            if ($villageInfo->head_of_village_photo) {
+                \Storage::disk('public')->delete($villageInfo->head_of_village_photo);
+            }
+            
+            $path = $request->file('head_of_village_photo')->store('village-head', 'public');
+            $validated['head_of_village_photo'] = '/storage/' . $path;
+        }
         
         $villageInfo->update($validated);
 
         return redirect()->route('admin.village-info.edit')
-            ->with('success', 'Visi & Misi berhasil diperbarui');
+            ->with('success', 'Informasi desa berhasil diperbarui');
     }
 }
