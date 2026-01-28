@@ -65,7 +65,7 @@ export default function HeroEdit({ images }: { images: any[] }) {
                 <Card>
                     <CardHeader>
                         <CardTitle>Upload Gambar Baru</CardTitle>
-                        <CardDescription>Format: JPG, PNG. Max 15MB. Rasio Landscape disarankan.</CardDescription>
+                        <CardDescription>Format: JPG, PNG. Max 15MB. Rasio Landscape Disarankan.</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSubmit} className="space-y-4">
