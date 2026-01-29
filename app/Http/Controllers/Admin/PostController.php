@@ -43,8 +43,17 @@ class PostController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('posts', 'public');
-            $imagePath = "/storage/$path";
+            try {
+                $path = $request->file('image')->store('posts', 'public');
+                $imagePath = "/storage/$path";
+                Log::info('Post Image Uploaded', ['path' => $path]);
+            } catch (\Exception $e) {
+                Log::error('Post Image Upload Failed', [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString()
+                ]);
+                return back()->withErrors(['image' => 'Gagal mengupload gambar: ' . $e->getMessage()]);
+            }
         }
 
         $post = Post::create([
@@ -123,14 +132,23 @@ class PostController extends Controller
         ];
 
         if ($request->hasFile('image')) {
-            // Delete old image
-            if ($post->image_path) {
-                $oldPath = str_replace('/storage/', '', $post->image_path);
-                Storage::disk('public')->delete($oldPath);
+            try {
+                // Delete old image
+                if ($post->image_path) {
+                    $oldPath = str_replace('/storage/', '', $post->image_path);
+                    Storage::disk('public')->delete($oldPath);
+                }
+
+                $path = $request->file('image')->store('posts', 'public');
+                $updateData['image_path'] = "/storage/$path";
+                Log::info('Post Image Updated', ['path' => $path]);
+            } catch (\Exception $e) {
+                Log::error('Post Image Update Failed', [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString()
+                ]);
+                return back()->withErrors(['image' => 'Gagal mengupload gambar update: ' . $e->getMessage()]);
             }
-            
-            $path = $request->file('image')->store('posts', 'public');
-            $updateData['image_path'] = "/storage/$path";
         }
 
         $post->update($updateData);
@@ -144,7 +162,7 @@ class PostController extends Controller
             $oldPath = str_replace('/storage/', '', $post->image_path);
             Storage::disk('public')->delete($oldPath);
         }
-        
+
         $post->delete();
 
         return to_route('admin.posts.index')->with('success', 'Berita berhasil dihapus.');

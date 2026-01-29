@@ -16,10 +16,10 @@ export default function Show({ villageInfo, post, related }: { villageInfo: any;
 
             <div className="py-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
-                <AccentImage3 className="left-[-10%] top-[15%] w-[500px] opacity-10 rotate-12" />
-                <CloudAccent className="top-[25%] right-[8%] w-[175px] h-[175px] opacity-19 -rotate-15" />
+                {/* <AccentImage3 className="left-[-10%] top-[15%] w-[500px] opacity-10 rotate-12" /> */}
+                {/* <CloudAccent className="top-[25%] right-[8%] w-[175px] h-[175px] opacity-19 -rotate-15" />
                 <CloudAccent className="bottom-[30%] left-[15%] w-[160px] h-[160px] opacity-18 rotate-28" />
-                <CloudAccent className="top-[65%] right-[20%] w-[150px] h-[150px] opacity-17 -rotate-22" />
+                <CloudAccent className="top-[65%] right-[20%] w-[150px] h-[150px] opacity-17 -rotate-22" /> */}
                 <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
                     {/* Back Button */}
                     <Link

@@ -267,9 +267,9 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
             <section className="py-24 bg-white relative overflow-hidden">
                 <OrangeAccentBottom className="left-0 top-0 w-[600px] -translate-x-1/3 -translate-y-1/4 opacity-100" />
                 <AccentImage3 className="right-[-5%] bottom-[-10%] w-[500px] opacity-10 rotate-[-15deg]" />
-                <CloudAccent className="top-[40%] right-[15%] w-[190px] h-[190px] opacity-20 -rotate-18" />
+                {/* <CloudAccent className="top-[40%] right-[15%] w-[190px] h-[190px] opacity-20 -rotate-18" /> */}
                 <CloudAccent className="bottom-[25%] left-[40%] w-[155px] h-[155px] opacity-18 rotate-28" />
-                <CloudAccent className="top-[65%] right-[35%] w-[140px] h-[140px] opacity-17 -rotate-22" />
+                {/* <CloudAccent className="top-[65%] right-[35%] w-[140px] h-[140px] opacity-17 -rotate-22" /> */}
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-3 tracking-tight">Struktur Organisasi</h2>

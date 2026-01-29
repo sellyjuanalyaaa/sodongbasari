@@ -52,13 +52,13 @@ export default function Edit({ villageInfo }: Props) {
 
     return (
         <AdminLayout>
-            <Head title="Edit Visi & Misi Desa" />
+            <Head title="Edit Informasi Desa" />
 
             <div className="bg-white rounded-lg border border-slate-200 shadow-sm">
                 <div className="p-6 border-b border-slate-200">
                     <div>
                         <h2 className="text-xl font-semibold text-slate-900">Informasi Desa</h2>
-                        <p className="text-sm text-slate-500 mt-1">Kelola informasi desa, kepala desa, visi dan misi</p>
+                        <p className="text-sm text-slate-500 mt-1">Kelola sambutan kepala desa, visi, misi, dan identitas desa</p>
                     </div>
                 </div>
 

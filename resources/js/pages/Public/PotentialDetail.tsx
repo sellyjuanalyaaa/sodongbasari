@@ -46,9 +46,9 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
 
             <div className="py-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
-                <CloudAccent className="top-[20%] right-[10%] w-[170px] h-[170px] opacity-18 rotate-15" />
-                <CloudAccent className="bottom-[25%] left-[8%] w-[155px] h-[155px] opacity-17 -rotate-20" />
-                <CloudAccent className="top-[60%] right-[22%] w-[140px] h-[140px] opacity-16 rotate-28" />
+                {/* <CloudAccent className="top-[20%] right-[10%] w-[170px] h-[170px] opacity-18 rotate-15" /> */}
+                {/* <CloudAccent className="bottom-[25%] left-[8%] w-[155px] h-[155px] opacity-17 -rotate-20" /> */}
+                {/* <CloudAccent className="top-[60%] right-[22%] w-[140px] h-[140px] opacity-16 rotate-28" /> */}
                 <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                     {/* Back Button */}
                     <Link
@@ -184,7 +184,7 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
                 </div>
                 <OrangeAccentBottom className="left-0 bottom-0 opacity-100" />
                 <DotsPattern className="right-0 bottom-1/3 opacity-20" />
-                <AccentImage3 className="right-[-10%] top-[15%] w-[450px] opacity-10 -rotate-12" />
+                {/* <AccentImage3 className="right-[-10%] top-[15%] w-[450px] opacity-10 -rotate-12" /> */}
             </div>
         </PublicLayout>
     );

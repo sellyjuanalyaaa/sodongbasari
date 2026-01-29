@@ -12,7 +12,7 @@ class VillageInfoController extends Controller
     public function edit()
     {
         $villageInfo = VillageInfo::first();
-        
+
         if (!$villageInfo) {
             $villageInfo = VillageInfo::create([
                 'name' => 'Desa Sodong Basari',
@@ -21,7 +21,7 @@ class VillageInfoController extends Controller
                 'mission' => '',
             ]);
         }
-        
+
         return Inertia::render('Admin/VillageInfo/Edit', [
             'villageInfo' => $villageInfo,
         ]);
@@ -38,7 +38,7 @@ class VillageInfoController extends Controller
         ]);
 
         $villageInfo = VillageInfo::first();
-        
+
         if (!$villageInfo) {
             $villageInfo = VillageInfo::create([
                 'name' => 'Desa Sodong Basari',
@@ -46,17 +46,32 @@ class VillageInfoController extends Controller
             ]);
         }
 
+        \Illuminate\Support\Facades\Log::info('VillageInfo Update Attempt', [
+            'user' => auth()->id(),
+            'has_file' => $request->hasFile('head_of_village_photo')
+        ]);
+
         // Handle photo upload
         if ($request->hasFile('head_of_village_photo')) {
-            // Delete old photo if exists
-            if ($villageInfo->head_of_village_photo) {
-                \Storage::disk('public')->delete($villageInfo->head_of_village_photo);
+            try {
+                // Delete old photo if exists
+                if ($villageInfo->head_of_village_photo) {
+                    \Storage::disk('public')->delete($villageInfo->head_of_village_photo);
+                }
+
+                $path = $request->file('head_of_village_photo')->store('village-head', 'public');
+                $validated['head_of_village_photo'] = '/storage/' . $path;
+
+                \Illuminate\Support\Facades\Log::info('VillageInfo Photo Uploaded', ['path' => $path]);
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('VillageInfo Photo Upload Failed', [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString()
+                ]);
+                return back()->withErrors(['head_of_village_photo' => 'Gagal mengupload foto. Cek log server.']);
             }
-            
-            $path = $request->file('head_of_village_photo')->store('village-head', 'public');
-            $validated['head_of_village_photo'] = '/storage/' . $path;
         }
-        
+
         $villageInfo->update($validated);
 
         return redirect()->route('admin.village-info.edit')
