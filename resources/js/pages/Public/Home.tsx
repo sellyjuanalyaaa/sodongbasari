@@ -221,19 +221,35 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                                     <div className="absolute inset-0 flex flex-col items-center justify-center p-8 md:p-12 text-center h-full">
                                         {/* Icon Container */}
                                         <div className="w-24 h-24 rounded-3xl bg-orange-100 flex items-center justify-center mb-8 shadow-inner shadow-orange-200/50 overflow-hidden">
-                                            {displayStats[currentStat].image ? (
-                                                <img
-                                                    src={displayStats[currentStat].image}
-                                                    alt={displayStats[currentStat].title}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            ) : displayStats[currentStat].type === 'static' ? (
-                                                displayStats[currentStat].icon
-                                            ) : displayStats[currentStat].type === 'count' ? (
-                                                <Users className="w-10 h-10 text-orange-600" />
-                                            ) : (
-                                                <span className="text-4xl">📊</span>
-                                            )}
+                                            {(() => {
+                                                const currentStatData = displayStats[currentStat];
+                                                console.log('Current Stat Rendering:', {
+                                                    title: currentStatData.title,
+                                                    type: currentStatData.type,
+                                                    image: currentStatData.image,
+                                                    hasImage: !!currentStatData.image
+                                                });
+
+                                                if (currentStatData.image) {
+                                                    return (
+                                                        <img
+                                                            src={currentStatData.image}
+                                                            alt={currentStatData.title}
+                                                            className="w-full h-full object-cover"
+                                                            onError={(e) => {
+                                                                console.error('Image failed to load:', currentStatData.image);
+                                                                e.currentTarget.style.display = 'none';
+                                                            }}
+                                                        />
+                                                    );
+                                                } else if (currentStatData.type === 'static') {
+                                                    return currentStatData.icon;
+                                                } else if (currentStatData.type === 'count') {
+                                                    return <Users className="w-10 h-10 text-orange-600" />;
+                                                } else {
+                                                    return <span className="text-4xl">📊</span>;
+                                                }
+                                            })()}
                                         </div>
 
                                         {/* Value */}
