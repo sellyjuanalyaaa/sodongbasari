@@ -21,7 +21,7 @@ interface HomeStatistic {
     title: string;
     subtitle: string | null;
     type: string;
-    image_path: string | null;
+    image: string | null;
     data: any[] | null;
     order: number;
     is_active: boolean;
@@ -60,7 +60,7 @@ export default function Form({ statistic }: Props) {
                 ...data,
                 _method: 'put',
             }));
-            
+
             post(route('admin.home-statistics.update', statistic.id), {
                 forceFormData: true,
             });
@@ -175,9 +175,9 @@ export default function Form({ statistic }: Props) {
                                 <div className="space-y-2">
                                     <Label htmlFor="image">Gambar (Opsional / Untuk Landmark)</Label>
                                     <div className="flex items-center gap-4">
-                                        {statistic?.image_path && (
+                                        {statistic?.image && (
                                             <div className="w-20 h-20 rounded-lg overflow-hidden border border-gray-200">
-                                                <img src={statistic.image_path} alt="Preview" className="w-full h-full object-cover" />
+                                                <img src={statistic.image} alt="Preview" className="w-full h-full object-cover" />
                                             </div>
                                         )}
                                         <Input
