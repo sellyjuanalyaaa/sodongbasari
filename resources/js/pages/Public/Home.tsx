@@ -79,8 +79,12 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
     // Normalize dynamic stats
     const processedHomeStatistics = homeStatistics.map((stat: any) => ({
         ...stat,
+        image: stat.image, // Ensure image is included
         rawValue: stat.type === 'count' ? (stat.subtitle || 0) : (stat.data?.[0]?.value || 0),
     }));
+
+    // Debug: Log to see if images are present
+    console.log('Home Statistics Data:', processedHomeStatistics);
 
     // Use ONLY homeStatistics for displayStats as requested
     const displayStats = processedHomeStatistics.length > 0 ? processedHomeStatistics : [];
