@@ -97,8 +97,8 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
                 <Sidebar collapsible="icon" className="border-r border-gray-100 bg-white text-gray-700 shadow-[2px_0_20px_-10px_rgba(0,0,0,0.05)]">
                     <SidebarHeader className="border-b border-transparent bg-white p-5">
                         <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-600 text-white font-bold shadow-lg shadow-orange-600/20">
-                                SB
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-600 text-white font-bold shadow-lg shadow-orange-600/20 overflow-hidden">
+                                <img src="/images/logo-kabupaten-pemalang.png" alt="Logo Kabupaten Pemalang" className="w-full h-full object-contain p-1" />
                             </div>
                             <div className="flex flex-col overflow-hidden group-data-[collapsible=icon]:hidden h-10 justify-center">
                                 <span className="font-bold text-lg text-gray-900 leading-tight">

@@ -72,14 +72,19 @@ class NotificationObserver
 
         // Only try to link to edit/view if not deleted
         if ($action !== 'deleted') {
-            if (\Illuminate\Support\Facades\Route::has("admin.{$resourceName}.edit")) {
+            // Special handling for nested resources
+            if ($modelName === 'InstitutionMember' && $model->institution_id) {
+                $url = route('admin.institutions.members.index', $model->institution_id);
+            } elseif (\Illuminate\Support\Facades\Route::has("admin.{$resourceName}.edit")) {
                 $url = route("admin.{$resourceName}.edit", $model->id);
             } elseif (\Illuminate\Support\Facades\Route::has("admin.{$resourceName}.index")) {
                 $url = route("admin.{$resourceName}.index");
             }
         } else {
             // If deleted, try to link to index
-            if (\Illuminate\Support\Facades\Route::has("admin.{$resourceName}.index")) {
+            if ($modelName === 'InstitutionMember' && $model->institution_id) {
+                $url = route('admin.institutions.members.index', $model->institution_id);
+            } elseif (\Illuminate\Support\Facades\Route::has("admin.{$resourceName}.index")) {
                 $url = route("admin.{$resourceName}.index");
             }
         }

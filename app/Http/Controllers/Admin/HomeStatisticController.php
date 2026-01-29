@@ -43,7 +43,7 @@ class HomeStatisticController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
-            $validated['image_path'] = "/storage/$path";
+            $validated['image'] = "/storage/$path";
         }
 
         \App\Models\HomeStatistic::create($validated);
@@ -81,8 +81,13 @@ class HomeStatisticController extends Controller
 
         if ($request->hasFile('image')) {
             // Optional: Delete old image
+            if ($statistic->image) {
+                $oldPath = str_replace('/storage/', '', $statistic->image);
+                \Storage::disk('public')->delete($oldPath);
+            }
+
             $path = $request->file('image')->store('images', 'public');
-            $validated['image_path'] = "/storage/$path";
+            $validated['image'] = "/storage/$path";
         }
 
         $statistic->update($validated);

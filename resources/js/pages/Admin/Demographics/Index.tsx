@@ -54,7 +54,7 @@ export default function Index({ demographics }: { demographics: any[] }) {
                             <TableRow key={item.id} className="hover:bg-gray-50 border-b border-gray-100">
                                 <TableCell className="font-bold text-gray-700">{item.year}</TableCell>
                                 <TableCell className="text-center font-semibold text-gray-900">
-                                    {(item.total_male + item.total_female).toLocaleString()}
+                                    {item.total_population.toLocaleString()}
                                 </TableCell>
                                 <TableCell className="text-center text-gray-600">{item.total_male.toLocaleString()}</TableCell>
                                 <TableCell className="text-center text-gray-600">{item.total_female.toLocaleString()}</TableCell>

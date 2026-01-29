@@ -33,7 +33,7 @@ export default function AuthSplitLayout({
                 <div className="relative z-20 flex items-center text-lg font-medium">
                     <Link href={route('home')} className="flex items-center gap-3 group">
                         <div className="p-2 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20 group-hover:bg-white/20 transition-all duration-300">
-                            <AppLogoIcon className="size-8 text-white fill-current" />
+                            <img src="/images/logo-kabupaten-pemalang.png" alt="Logo Kabupaten Pemalang" className="size-8 object-contain" />
                         </div>
                         <span className="font-bold tracking-tight text-xl drop-shadow-md">Sodong Basari</span>
                     </Link>
@@ -67,7 +67,7 @@ export default function AuthSplitLayout({
                             className="relative z-20 flex flex-col items-center justify-center lg:hidden mb-8"
                         >
                             <div className="p-3 bg-orange-50 rounded-2xl mb-3">
-                                <AppLogoIcon className="size-10 text-orange-600 fill-current" />
+                                <img src="/images/logo-kabupaten-pemalang.png" alt="Logo Kabupaten Pemalang" className="size-10 object-contain" />
                             </div>
                             <span className="font-bold text-lg text-slate-900">Sodong Basari</span>
                         </Link>
