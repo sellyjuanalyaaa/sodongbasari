@@ -54,7 +54,7 @@ class PublicController extends Controller
         return Inertia::render('Public/SodongBasari', array_merge($this->getCommonProps(), [
             'officials' => VillageOfficial::where('is_active', true)->orderBy('order')->get(),
             'institutions' => Institution::all(),
-            'formerHeads' => \App\Models\FormerVillageHead::orderBy('start_year', 'desc')->get(),
+            'formerHeads' => \App\Models\FormerVillageHead::orderBy('order', 'asc')->get(),
         ]));
     }
 

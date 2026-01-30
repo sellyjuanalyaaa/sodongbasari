@@ -12,7 +12,7 @@ class FormerVillageHeadController extends Controller
 {
     public function index()
     {
-        $formerHeads = FormerVillageHead::orderBy('start_year', 'desc')->get();
+        $formerHeads = FormerVillageHead::orderBy('order', 'asc')->get();
         
         return Inertia::render('Admin/FormerVillageHeads/Index', [
             'formerHeads' => $formerHeads,
