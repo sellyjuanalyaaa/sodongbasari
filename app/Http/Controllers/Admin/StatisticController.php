@@ -162,6 +162,8 @@ class StatisticController extends Controller
             // Migrasi Penduduk
             'penduduk_datang' => 'nullable|integer|min:0',
             'penduduk_keluar' => 'nullable|integer|min:0',
+            'kelahiran' => 'nullable|integer|min:0',
+            'kematian' => 'nullable|integer|min:0',
         ]);
 
         // Default null values to 0
