@@ -41,6 +41,8 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     Route::resource('demographics', \App\Http\Controllers\Admin\DemographicController::class);
     Route::resource('budgets', \App\Http\Controllers\Admin\BudgetController::class);
     Route::resource('statistics', \App\Http\Controllers\Admin\StatisticController::class);
+    Route::resource('electoral-rolls', \App\Http\Controllers\ElectoralRollController::class);
+    Route::resource('election-types', \App\Http\Controllers\ElectionTypeController::class);
     Route::resource('officials', \App\Http\Controllers\Admin\VillageOfficialController::class);
     Route::resource('former-village-heads', \App\Http\Controllers\Admin\FormerVillageHeadController::class);
     Route::resource('home-statistics', \App\Http\Controllers\Admin\HomeStatisticController::class);

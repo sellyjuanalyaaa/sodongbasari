@@ -98,6 +98,15 @@ interface BudgetData {
     amount: number;
 }
 
+interface ElectoralRollData {
+    id: number;
+    year: number;
+    male_voters: number;
+    female_voters: number;
+    total_voters: number;
+    election_type: string;
+}
+
 interface Props {
     villageInfo: any;
     statistics: StatisticData | null;
@@ -106,9 +115,10 @@ interface Props {
     selectedYear?: number;
     demographics?: DemographicData[];
     budgets?: BudgetData[];
+    electoralRolls?: ElectoralRollData[];
 }
 
-export default function Statistics({ villageInfo, statistics, historicalStatistics = [], availableYears = [], selectedYear, demographics = [], budgets = [] }: Props) {
+export default function Statistics({ villageInfo, statistics, historicalStatistics = [], availableYears = [], selectedYear, demographics = [], budgets = [], electoralRolls = [] }: Props) {
     if (!statistics) {
         return (
             <PublicLayout villageInfo={villageInfo}>
@@ -197,104 +207,104 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                     <div className="flex overflow-x-auto pb-6 -mx-6 px-6 sm:mx-0 sm:px-0 sm:pb-0 gap-4 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible">
                         {/* Total Penduduk */}
                         <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-5 border border-orange-200 shadow-sm hover:shadow-md transition-all">
-                            <div className="flex items-center justify-between">
-                                <div>
+                            <div className="flex items-center justify-between gap-3">
+                                <div className="flex-1 min-w-0">
                                     <p className="text-xs text-orange-700 font-medium uppercase tracking-wide mb-1">Total Penduduk</p>
-                                    <h4 className="text-3xl font-bold text-orange-900">{statistics.male_population + statistics.female_population}</h4>
+                                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-orange-900 break-all">{(statistics.male_population + statistics.female_population).toLocaleString('id-ID')}</h4>
                                 </div>
-                                <div className="bg-orange-200 rounded-full p-3">
-                                    <Users className="h-6 w-6 text-orange-700" />
+                                <div className="bg-orange-200 rounded-full p-2.5 sm:p-3 flex-shrink-0">
+                                    <Users className="h-5 w-5 sm:h-6 sm:w-6 text-orange-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Laki-laki */}
                         <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                            <div className="flex items-center justify-between">
-                                <div>
+                            <div className="flex items-center justify-between gap-3">
+                                <div className="flex-1 min-w-0">
                                     <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-1">Laki-Laki</p>
-                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.male_population}</h4>
+                                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 break-all">{statistics.male_population.toLocaleString('id-ID')}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-3">
-                                    <Users className="h-6 w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-2.5 sm:p-3 flex-shrink-0">
+                                    <Users className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Perempuan */}
                         <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                            <div className="flex items-center justify-between">
-                                <div>
+                            <div className="flex items-center justify-between gap-3">
+                                <div className="flex-1 min-w-0">
                                     <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-1">Perempuan</p>
-                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.female_population}</h4>
+                                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 break-all">{statistics.female_population.toLocaleString('id-ID')}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-3">
-                                    <Users className="h-6 w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-2.5 sm:p-3 flex-shrink-0">
+                                    <Users className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Kepala Keluarga */}
                         <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                            <div className="flex items-center justify-between">
-                                <div>
+                            <div className="flex items-center justify-between gap-3">
+                                <div className="flex-1 min-w-0">
                                     <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-1">Kepala Keluarga</p>
-                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.total_families}</h4>
+                                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 break-all">{statistics.total_families.toLocaleString('id-ID')}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-3">
-                                    <Users className="h-6 w-6 text-orange-600" />
+                                <div className="bg-white rounded-full p-2.5 sm:p-3 flex-shrink-0">
+                                    <Users className="h-5 w-5 sm:h-6 sm:w-6 text-orange-600" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Penduduk Datang */}
                         <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-5 border border-green-200 shadow-sm hover:shadow-md transition-all">
-                            <div className="flex items-center justify-between">
-                                <div>
+                            <div className="flex items-center justify-between gap-3">
+                                <div className="flex-1 min-w-0">
                                     <p className="text-xs text-green-700 font-medium uppercase tracking-wide mb-1">Penduduk Datang</p>
-                                    <h4 className="text-3xl font-bold text-green-900">{statistics.penduduk_datang || 0}</h4>
+                                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-900 break-all">{(statistics.penduduk_datang || 0).toLocaleString('id-ID')}</h4>
                                 </div>
-                                <div className="bg-green-200 rounded-full p-3">
-                                    <ArrowUpRight className="h-6 w-6 text-green-700" />
+                                <div className="bg-green-200 rounded-full p-2.5 sm:p-3 flex-shrink-0">
+                                    <ArrowUpRight className="h-5 w-5 sm:h-6 sm:w-6 text-green-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Penduduk Keluar */}
                         <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-5 border border-red-200 shadow-sm hover:shadow-md transition-all">
-                            <div className="flex items-center justify-between">
-                                <div>
+                            <div className="flex items-center justify-between gap-3">
+                                <div className="flex-1 min-w-0">
                                     <p className="text-xs text-red-700 font-medium uppercase tracking-wide mb-1">Penduduk Keluar</p>
-                                    <h4 className="text-3xl font-bold text-red-900">{statistics.penduduk_keluar || 0}</h4>
+                                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-900 break-all">{(statistics.penduduk_keluar || 0).toLocaleString('id-ID')}</h4>
                                 </div>
-                                <div className="bg-red-200 rounded-full p-3">
-                                    <ArrowDownRight className="h-6 w-6 text-red-700" />
+                                <div className="bg-red-200 rounded-full p-2.5 sm:p-3 flex-shrink-0">
+                                    <ArrowDownRight className="h-5 w-5 sm:h-6 sm:w-6 text-red-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Penduduk Usia Kerja */}
                         <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                            <div className="flex items-center justify-between">
-                                <div>
+                            <div className="flex items-center justify-between gap-3">
+                                <div className="flex-1 min-w-0">
                                     <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-1">Usia Kerja (15-64)</p>
-                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.petani + statistics.pedagang + statistics.pns + statistics.wiraswasta}</h4>
+                                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 break-all">{(statistics.petani + statistics.pedagang + statistics.pns + statistics.wiraswasta).toLocaleString('id-ID')}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-3">
-                                    <Briefcase className="h-6 w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-2.5 sm:p-3 flex-shrink-0">
+                                    <Briefcase className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Perguruan Tinggi */}
                         <div className="flex-shrink-0 w-[85vw] sm:w-auto snap-center bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                            <div className="flex items-center justify-between">
-                                <div>
+                            <div className="flex items-center justify-between gap-3">
+                                <div className="flex-1 min-w-0">
                                     <p className="text-xs text-slate-600 font-medium uppercase tracking-wide mb-1">Perguruan Tinggi</p>
-                                    <h4 className="text-3xl font-bold text-slate-900">{statistics.sarjana + statistics.diploma}</h4>
+                                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 break-all">{(statistics.sarjana + statistics.diploma).toLocaleString('id-ID')}</h4>
                                 </div>
-                                <div className="bg-white rounded-full p-3">
-                                    <GraduationCap className="h-6 w-6 text-slate-700" />
+                                <div className="bg-white rounded-full p-2.5 sm:p-3 flex-shrink-0">
+                                    <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
@@ -315,11 +325,11 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                             />
                             <div className="mt-5 grid grid-cols-2 gap-4">
                                 <div className="bg-white rounded-lg p-4 text-center border border-slate-200">
-                                    <h4 className="text-2xl font-semibold text-slate-900">{statistics.total_rt}</h4>
+                                    <h4 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-900 break-all">{statistics.total_rt.toLocaleString('id-ID')}</h4>
                                     <p className="text-xs text-slate-600 font-medium mt-1 tracking-wide">RT</p>
                                 </div>
                                 <div className="bg-white rounded-lg p-4 text-center border border-slate-200">
-                                    <h4 className="text-2xl font-semibold text-slate-900">{statistics.total_rw}</h4>
+                                    <h4 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-900 break-all">{statistics.total_rw.toLocaleString('id-ID')}</h4>
                                     <p className="text-xs text-slate-600 font-medium mt-1 tracking-wide">RW</p>
                                 </div>
                             </div>
@@ -330,25 +340,25 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                             <h3 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Agama</h3>
                             <div className="bg-white rounded-lg p-4">
                                 <div className="space-y-2">
-                                    <div className="flex justify-between text-slate-700 text-sm">
-                                        <span className="font-normal">Islam</span>
-                                        <span className="font-semibold">{statistics.islam}</span>
+                                    <div className="flex justify-between items-center gap-2 text-slate-700 text-sm">
+                                        <span className="font-normal flex-shrink-0">Islam</span>
+                                        <span className="font-semibold text-right break-all">{statistics.islam.toLocaleString('id-ID')}</span>
                                     </div>
-                                    <div className="flex justify-between text-slate-700 text-sm">
-                                        <span className="font-normal">Kristen</span>
-                                        <span className="font-semibold">{statistics.kristen}</span>
+                                    <div className="flex justify-between items-center gap-2 text-slate-700 text-sm">
+                                        <span className="font-normal flex-shrink-0">Kristen</span>
+                                        <span className="font-semibold text-right break-all">{statistics.kristen.toLocaleString('id-ID')}</span>
                                     </div>
-                                    <div className="flex justify-between text-slate-700 text-sm">
-                                        <span className="font-normal">Katolik</span>
-                                        <span className="font-semibold">{statistics.katolik}</span>
+                                    <div className="flex justify-between items-center gap-2 text-slate-700 text-sm">
+                                        <span className="font-normal flex-shrink-0">Katolik</span>
+                                        <span className="font-semibold text-right break-all">{statistics.katolik.toLocaleString('id-ID')}</span>
                                     </div>
-                                    <div className="flex justify-between text-slate-700 text-sm">
-                                        <span className="font-normal">Hindu</span>
-                                        <span className="font-semibold">{statistics.hindu}</span>
+                                    <div className="flex justify-between items-center gap-2 text-slate-700 text-sm">
+                                        <span className="font-normal flex-shrink-0">Hindu</span>
+                                        <span className="font-semibold text-right break-all">{statistics.hindu.toLocaleString('id-ID')}</span>
                                     </div>
-                                    <div className="flex justify-between text-slate-700 text-sm">
-                                        <span className="font-normal">Buddha</span>
-                                        <span className="font-semibold">{statistics.budha}</span>
+                                    <div className="flex justify-between items-center gap-2 text-slate-700 text-sm">
+                                        <span className="font-normal flex-shrink-0">Buddha</span>
+                                        <span className="font-semibold text-right break-all">{statistics.budha.toLocaleString('id-ID')}</span>
                                     </div>
                                 </div>
                             </div>
@@ -359,21 +369,21 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                             <h3 className="text-center text-slate-900 font-medium mb-4 text-sm uppercase tracking-wide">Pekerjaan</h3>
                             <div className="bg-white rounded-lg p-4">
                                 <div className="space-y-2">
-                                    <div className="flex justify-between text-slate-700 text-sm">
-                                        <span className="font-normal">Petani</span>
-                                        <span className="font-semibold">{statistics.petani}</span>
+                                    <div className="flex justify-between items-center gap-2 text-slate-700 text-sm">
+                                        <span className="font-normal flex-shrink-0">Petani</span>
+                                        <span className="font-semibold text-right break-all">{statistics.petani.toLocaleString('id-ID')}</span>
                                     </div>
-                                    <div className="flex justify-between text-slate-700 text-sm">
-                                        <span className="font-normal">Pedagang</span>
-                                        <span className="font-semibold">{statistics.pedagang}</span>
+                                    <div className="flex justify-between items-center gap-2 text-slate-700 text-sm">
+                                        <span className="font-normal flex-shrink-0">Pedagang</span>
+                                        <span className="font-semibold text-right break-all">{statistics.pedagang.toLocaleString('id-ID')}</span>
                                     </div>
-                                    <div className="flex justify-between text-slate-700 text-sm">
-                                        <span className="font-normal">PNS</span>
-                                        <span className="font-semibold">{statistics.pns}</span>
+                                    <div className="flex justify-between items-center gap-2 text-slate-700 text-sm">
+                                        <span className="font-normal flex-shrink-0">PNS</span>
+                                        <span className="font-semibold text-right break-all">{statistics.pns.toLocaleString('id-ID')}</span>
                                     </div>
-                                    <div className="flex justify-between text-slate-700 text-sm">
-                                        <span className="font-normal">Wiraswasta</span>
-                                        <span className="font-semibold">{statistics.wiraswasta}</span>
+                                    <div className="flex justify-between items-center gap-2 text-slate-700 text-sm">
+                                        <span className="font-normal flex-shrink-0">Wiraswasta</span>
+                                        <span className="font-semibold text-right break-all">{statistics.wiraswasta.toLocaleString('id-ID')}</span>
                                     </div>
                                 </div>
                             </div>
@@ -710,6 +720,45 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                                                     <td className="px-6 py-4 text-center text-red-600 font-medium">
                                                         {item.mutation_out ? `-${item.mutation_out}` : '-'}
                                                     </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Daftar Pemilih Tetap Section */}
+                    {electoralRolls.length > 0 && (
+                        <div className="mt-16 sm:mt-24">
+                            <h3 className="text-2xl md:text-3xl font-light text-slate-900 mb-8 text-center tracking-tight">
+                                Arsip Daftar Pemilih Tetap (DPT)
+                            </h3>
+                            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-sm text-left">
+                                        <thead className="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                                            <tr>
+                                                <th scope="col" className="px-6 py-4 font-medium">Tahun</th>
+                                                <th scope="col" className="px-6 py-4 font-medium">Jenis Pemilu</th>
+                                                <th scope="col" className="px-6 py-4 font-medium text-center">Laki-laki</th>
+                                                <th scope="col" className="px-6 py-4 font-medium text-center">Perempuan</th>
+                                                <th scope="col" className="px-6 py-4 font-medium text-center">Total Pemilih</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-100">
+                                            {electoralRolls.map((item) => (
+                                                <tr key={item.id} className="hover:bg-slate-50 transition-colors">
+                                                    <td className="px-6 py-4 font-medium text-slate-900">{item.year}</td>
+                                                    <td className="px-6 py-4">
+                                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                                            {item.election_type}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-6 py-4 text-center text-slate-600">{item.male_voters.toLocaleString('id-ID')}</td>
+                                                    <td className="px-6 py-4 text-center text-slate-600">{item.female_voters.toLocaleString('id-ID')}</td>
+                                                    <td className="px-6 py-4 text-center font-semibold text-slate-900">{item.total_voters.toLocaleString('id-ID')}</td>
                                                 </tr>
                                             ))}
                                         </tbody>

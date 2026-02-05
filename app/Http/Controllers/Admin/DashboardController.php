@@ -14,11 +14,18 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        // Get latest budget year
+        $latestBudgetYear = Budget::max('year');
+        $totalBudget = $latestBudgetYear 
+            ? Budget::where('year', $latestBudgetYear)->sum('amount')
+            : 0;
+
         return Inertia::render('Admin/Dashboard', [
             'stats' => [
                 'total_posts' => Post::count(),
                 'total_potentials' => Potential::count(),
-                'total_budget' => Budget::sum('amount'),
+                'total_budget' => $totalBudget,
+                'budget_year' => $latestBudgetYear,
                 'total_population' => Demographic::orderBy('year', 'desc')->get()->first()?->total_male + Demographic::orderBy('year', 'desc')->get()->first()?->total_female ?? 0,
                 'total_visitors' => Visitor::getTotalUniqueVisitors(),
                 'today_visitors' => Visitor::getTodayVisitors(),

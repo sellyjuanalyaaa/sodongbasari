@@ -5,10 +5,10 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Save, Loader2, Image as ImageIcon } from "lucide-react";
+import RichTextEditor from "@/components/RichTextEditor";
 
 export default function PostForm({ post, categories }: { post?: any; categories?: any[] }) {
     const isEdit = !!post;
@@ -105,14 +105,10 @@ export default function PostForm({ post, categories }: { post?: any; categories?
                         {/* Content */}
                         <div className="space-y-2">
                             <Label htmlFor="content" className="text-gray-900 font-semibold">Isi Berita</Label>
-                            <Textarea
-                                id="content"
-                                rows={10}
-                                value={data.content}
-                                onChange={e => setData('content', e.target.value)}
+                            <RichTextEditor
+                                content={data.content}
+                                onChange={(content) => setData('content', content)}
                                 placeholder="Tulis isi berita di sini..."
-                                className="resize-y border-gray-200 focus:border-orange-500 focus:ring-orange-200"
-                                required
                             />
                             {errors.content && <p className="text-sm text-red-500">{errors.content}</p>}
                         </div>

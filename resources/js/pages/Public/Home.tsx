@@ -163,8 +163,6 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                         <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
                     </svg>
                 </div>
-                <CloudAccent className="top-[10%] right-[5%] w-[300px] h-[300px] opacity-20 rotate-12 mix-blend-overlay text-white" />
-                <CloudAccent className="bottom-[10%] left-[5%] w-[250px] h-[250px] opacity-20 -rotate-12 mix-blend-overlay text-white" />
 
                 <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 py-24 md:py-32">
                     <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-24">
@@ -220,8 +218,8 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
 
                                     <div className="absolute inset-0 flex flex-col items-center justify-center p-8 md:p-12 text-center h-full">
                                         {/* Value */}
-                                        <div className="mb-4">
-                                            <h3 className="text-5xl md:text-6xl font-bold text-slate-900 tracking-tighter">
+                                        <div className="mb-4 w-full px-4">
+                                            <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 tracking-tighter break-all">
                                                 {displayStats[currentStat].type === 'count' ? (
                                                     <AnimatedCounter value={parseFloat(displayStats[currentStat].subtitle) || 0} />
                                                 ) : displayStats[currentStat].type === 'budget' ? (
@@ -233,7 +231,7 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                                         </div>
 
                                         {/* Label */}
-                                        <p className="text-lg text-slate-500 font-medium uppercase tracking-widest mb-8">
+                                        <p className="text-base sm:text-lg md:text-xl text-slate-500 font-medium uppercase tracking-widest mb-8 px-4">
                                             {displayStats[currentStat].title}
                                         </p>
 

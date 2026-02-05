@@ -128,6 +128,8 @@ class PublicController extends Controller
 
         $demographics = Demographic::orderBy('year', 'desc')->get(); // Archive data for "Data Kependudukan"
 
+        $electoralRolls = \App\Models\ElectoralRoll::orderBy('year', 'desc')->get(); // Data Pemilih Tetap
+
         return Inertia::render('Public/Statistics', array_merge($this->getCommonProps(), [
             'statistics' => $statistic,
             'historicalStatistics' => $historicalStatistics,
@@ -135,6 +137,7 @@ class PublicController extends Controller
             'selectedYear' => $statistic ? $statistic->year : null,
             'demographics' => $demographics,
             'budgets' => Budget::orderBy('year', 'desc')->get(),
+            'electoralRolls' => $electoralRolls,
         ]));
     }
 

@@ -10,6 +10,7 @@ interface DashboardProps {
         total_posts: number;
         total_potentials: number;
         total_budget: number;
+        budget_year: number | null;
         total_population: number;
         total_visitors: number;
         today_visitors: number;
@@ -20,10 +21,10 @@ interface DashboardProps {
 
 export default function Dashboard({ stats }: DashboardProps) {
     const items = [
-        { title: "Total Berita", value: stats.total_posts, icon: FileText, color: "text-blue-600", bg: "bg-blue-50" },
-        { title: "Potensi Desa", value: stats.total_potentials, icon: Mountain, color: "text-emerald-600", bg: "bg-emerald-50" },
-        { title: "Anggaran Desa", value: `Rp ${stats.total_budget.toLocaleString('id-ID')}`, icon: Receipt, color: "text-orange-600", bg: "bg-orange-50" },
-        { title: "Total Penduduk", value: stats.total_population, icon: Users, color: "text-purple-600", bg: "bg-purple-50" },
+        { title: "Total Berita", value: stats.total_posts, icon: FileText, color: "text-blue-600", bg: "bg-blue-50", year: null },
+        { title: "Potensi Desa", value: stats.total_potentials, icon: Mountain, color: "text-emerald-600", bg: "bg-emerald-50", year: null },
+        { title: "Anggaran Desa", value: `Rp ${stats.total_budget.toLocaleString('id-ID')}`, icon: Receipt, color: "text-orange-600", bg: "bg-orange-50", year: stats.budget_year },
+        { title: "Total Penduduk", value: stats.total_population, icon: Users, color: "text-purple-600", bg: "bg-purple-50", year: null },
     ];
 
     const visitorStats = [
@@ -54,8 +55,10 @@ export default function Dashboard({ stats }: DashboardProps) {
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-3xl font-bold text-gray-900">{item.value}</div>
-                            <p className="text-xs text-gray-400 mt-1">Data terbaru</p>
+                            <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 break-all leading-tight">{item.value}</div>
+                            <p className="text-xs text-gray-400 mt-1">
+                                {item.year ? `Tahun ${item.year}` : 'Data terbaru'}
+                            </p>
                         </CardContent>
                     </Card>
                 ))}
@@ -76,7 +79,7 @@ export default function Dashboard({ stats }: DashboardProps) {
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <div className="text-3xl font-bold text-gray-900">{item.value}</div>
+                                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 break-all leading-tight">{item.value}</div>
                                 <p className="text-xs text-gray-400 mt-1">{item.desc}</p>
                             </CardContent>
                         </Card>

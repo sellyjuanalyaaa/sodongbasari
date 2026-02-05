@@ -7,6 +7,19 @@ export default function NewsCard({ post }: { post: any }) {
     // SVG placeholder untuk gambar yang tidak tersedia
     const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect fill='%23f1f5f9' width='600' height='400'/%3E%3Cg fill='%2394a3b8'%3E%3Cpath d='M240 180h120v40H240zm-60 60h240v16H180z'/%3E%3Ccircle cx='280' cy='140' r='20'/%3E%3C/g%3E%3Ctext x='300' y='210' font-family='system-ui' font-size='16' fill='%23475569' text-anchor='middle'%3EBerita%3C/text%3E%3C/svg%3E";
     
+    // Function to strip HTML tags and get plain text excerpt
+    const getPlainTextExcerpt = (html: string, maxLength: number = 150): string => {
+        // Remove HTML tags
+        const text = html.replace(/<[^>]*>/g, '');
+        // Remove extra whitespaces and newlines
+        const cleanText = text.replace(/\s+/g, ' ').trim();
+        // Truncate to maxLength
+        if (cleanText.length > maxLength) {
+            return cleanText.substring(0, maxLength) + '...';
+        }
+        return cleanText;
+    };
+
     return (
         <Link 
             href={route('news.show', post.slug)}
@@ -36,9 +49,8 @@ export default function NewsCard({ post }: { post: any }) {
                 <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-[#EFA00B] transition-colors line-clamp-2">
                     {post.title}
                 </h3>
-                <p className="text-[13px] leading-relaxed line-clamp-3 mb-4 flex-1">
-                    <span className="font-semibold text-slate-900">{post.category?.name || 'Berita'}</span>
-                    <span className="text-slate-600"> {post.content}</span>
+                <p className="text-sm text-slate-600 leading-relaxed line-clamp-3 mb-4 flex-1">
+                    {getPlainTextExcerpt(post.content, 120)}
                 </p>
                 <div className="flex items-center justify-between">
                     <div className="space-y-1">

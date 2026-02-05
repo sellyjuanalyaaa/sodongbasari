@@ -79,6 +79,7 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
                 { label: "Perangkat Desa", routeName: "admin.officials.index", active: "admin.officials.*", icon: Users },
                 { label: "Riwayat Kepala Desa", routeName: "admin.former-village-heads.index", active: "admin.former-village-heads.*", icon: History },
                 { label: "Data Penduduk", routeName: "admin.demographics.index", active: "admin.demographics.*", icon: Users },
+                { label: "Daftar Pemilih Tetap", routeName: "admin.electoral-rolls.index", active: "admin.electoral-rolls.*", icon: Users },
                 { label: "Anggaran Desa", routeName: "admin.budgets.index", active: "admin.budgets.*", icon: Receipt },
             ]
         },
