@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
 import { route } from 'ziggy-js';
 import NewsCard from '@/components/NewsCard';
-import { Calendar, User, ArrowLeft, ArrowRight, Share2 } from 'lucide-react';
+import { Calendar, User, ArrowLeft, ArrowRight, Share2, Heart } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
 import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
+import axios from 'axios';
 
-export default function Show({ villageInfo, post, related }: { villageInfo: any; post: any; related: any[] }) {
+export default function Show({ villageInfo, post, related, likedPosts = [] }: { villageInfo: any; post: any; related: any[]; likedPosts?: number[] }) {
     const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'%3E%3Crect fill='%23f1f5f9' width='1200' height='400'/%3E%3Cg fill='%2394a3b8'%3E%3Cpath d='M480 160h240v80H480zm-120 120h480v32H360z'/%3E%3Ccircle cx='560' cy='120' r='40'/%3E%3C/g%3E%3Ctext x='600' y='250' font-family='system-ui' font-size='32' fill='%23475569' text-anchor='middle'%3EBerita%3C/text%3E%3C/svg%3E";
+
+    const [likesCount, setLikesCount] = useState(post.likes_count || 0);
+    const [isLiked, setIsLiked] = useState(likedPosts.includes(post.id));
+    const [isLiking, setIsLiking] = useState(false);
+
+    const handleLike = async () => {
+        if (isLiking) return;
+        
+        setIsLiking(true);
+        
+        try {
+            const response = await axios.post(route('news.like', post.id));
+            setLikesCount(response.data.likes_count);
+            setIsLiked(response.data.is_liked);
+        } catch (error) {
+            console.error('Error toggling like:', error);
+        } finally {
+            setIsLiking(false);
+        }
+    };
 
     // Simple share handler - langsung buka window
     const handleShare = (platform: string) => {
@@ -149,12 +170,37 @@ export default function Show({ villageInfo, post, related }: { villageInfo: any;
                         </article>
                     </div>
 
-                    {/* Share Section */}
+                    {/* Share & Like Section */}
                     <div className="bg-white rounded-xl p-6 border border-slate-200 relative z-10">
                         <div className="flex items-center justify-between flex-wrap gap-4">
-                            <div className="flex items-center gap-3">
-                                <Share2 className="h-5 w-5 text-[#EFA00B]" />
-                                <h3 className="text-base font-medium text-slate-900">Bagikan Artikel</h3>
+                            <div className="flex items-center gap-6">
+                                {/* Like Button */}
+                                <button
+                                    onClick={handleLike}
+                                    disabled={isLiking}
+                                    className="flex items-center gap-3 px-5 py-2.5 rounded-lg border-2 transition-all disabled:opacity-50 hover:scale-105 active:scale-95"
+                                    style={{
+                                        borderColor: isLiked ? '#ef4444' : '#e2e8f0',
+                                        backgroundColor: isLiked ? '#fef2f2' : 'white'
+                                    }}
+                                >
+                                    <Heart 
+                                        className={`h-5 w-5 transition-all ${isLiked ? 'fill-red-500 text-red-500' : 'text-slate-400'}`}
+                                    />
+                                    <div className="flex flex-col items-start">
+                                        <span className={`text-xs font-medium ${isLiked ? 'text-red-500' : 'text-slate-500'}`}>
+                                            {isLiked ? 'Disukai' : 'Suka'}
+                                        </span>
+                                        <span className={`text-sm font-semibold ${isLiked ? 'text-red-600' : 'text-slate-700'}`}>
+                                            {likesCount}
+                                        </span>
+                                    </div>
+                                </button>
+
+                                <div className="flex items-center gap-3">
+                                    <Share2 className="h-5 w-5 text-[#EFA00B]" />
+                                    <h3 className="text-base font-medium text-slate-900">Bagikan</h3>
+                                </div>
                             </div>
                             <div className="flex gap-3">
                                 {/* Facebook Button */}
@@ -227,7 +273,7 @@ export default function Show({ villageInfo, post, related }: { villageInfo: any;
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {related.map((relatedPost) => (
-                                    <NewsCard key={relatedPost.id} post={relatedPost} />
+                                    <NewsCard key={relatedPost.id} post={relatedPost} likedPosts={likedPosts} />
                                 ))}
                             </div>
                         </div>

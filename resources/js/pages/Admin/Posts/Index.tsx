@@ -3,7 +3,7 @@ import React from 'react';
 import AdminLayout from '@/layouts/AdminLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { Button } from "@/components/ui/button";
-import { Plus, Pencil, Trash2, Eye, Folder } from "lucide-react";
+import { Plus, Pencil, Trash2, Eye, Folder, Heart } from "lucide-react";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -55,6 +55,7 @@ export default function PostIndex({ posts }: { posts: any }) {
                                 <th className="h-12 px-4 text-left align-middle font-medium text-gray-500">Kategori</th>
                                 <th className="h-12 px-4 text-left align-middle font-medium text-gray-500">Dibuat Oleh</th>
                                 <th className="h-12 px-4 text-center align-middle font-medium text-gray-500">View</th>
+                                <th className="h-12 px-4 text-center align-middle font-medium text-gray-500">Like</th>
                                 <th className="h-12 px-4 text-left align-middle font-medium text-gray-500">Tanggal</th>
                                 <th className="h-12 px-4 text-right align-middle font-medium text-gray-500">Aksi</th>
                             </tr>
@@ -93,6 +94,12 @@ export default function PostIndex({ posts }: { posts: any }) {
                                         <div className="flex items-center justify-center gap-1 text-gray-600">
                                             <Eye className="h-3.5 w-3.5" />
                                             <span className="text-sm">{post.view_count || 0}</span>
+                                        </div>
+                                    </td>
+                                    <td className="p-4 align-middle text-center">
+                                        <div className="flex items-center justify-center gap-1 text-red-500">
+                                            <Heart className="h-3.5 w-3.5 fill-current" />
+                                            <span className="text-sm font-medium">{post.likes_count || 0}</span>
                                         </div>
                                     </td>
                                     <td className="p-4 align-middle text-gray-700">
@@ -139,7 +146,7 @@ export default function PostIndex({ posts }: { posts: any }) {
                             ))}
                             {posts.data.length === 0 && (
                                 <tr>
-                                    <td colSpan={7} className="p-4 text-center text-muted-foreground">Belum ada data berita.</td>
+                                    <td colSpan={8} className="p-4 text-center text-muted-foreground">Belum ada data berita.</td>
                                 </tr>
                             )}
                         </tbody>

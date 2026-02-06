@@ -30,6 +30,8 @@ class PublicController extends Controller
 
         $latestStat = \App\Models\Statistic::orderBy('year', 'desc')->first();
 
+        $likedPosts = session()->get('liked_posts', []);
+
         return Inertia::render('Public/Home', array_merge($this->getCommonProps(), [
             'latestNews' => Post::with(['category', 'creator'])
                 ->latest('published_at')
@@ -46,6 +48,7 @@ class PublicController extends Controller
             'categoryColors' => $categories->mapWithKeys(function ($cat) {
                 return [$cat->name => $cat->color];
             }),
+            'likedPosts' => $likedPosts,
         ]));
     }
 
@@ -155,9 +158,12 @@ class PublicController extends Controller
             ->take(5)
             ->get();
 
+        $likedPosts = session()->get('liked_posts', []);
+
         return Inertia::render('Public/News/Index', array_merge($this->getCommonProps(), [
             'posts' => Post::with('category')->latest()->paginate(9),
             'mostTrending' => $mostTrending,
+            'likedPosts' => $likedPosts,
         ]));
     }
 
@@ -168,9 +174,12 @@ class PublicController extends Controller
         // Increment view count
         $post->incrementViewCount();
 
+        $likedPosts = session()->get('liked_posts', []);
+
         return Inertia::render('Public/News/Show', array_merge($this->getCommonProps(), [
             'post' => $post,
             'related' => Post::where('id', '!=', $post->id)->latest()->take(3)->get(),
+            'likedPosts' => $likedPosts,
         ]));
     }
 
@@ -181,5 +190,38 @@ class PublicController extends Controller
         return Inertia::render('Public/InstitutionDetail', array_merge($this->getCommonProps(), [
             'institution' => $institution,
         ]));
+    }
+
+    public function toggleLike($id)
+    {
+        $post = Post::findOrFail($id);
+        
+        // Get liked posts from session
+        $likedPosts = session()->get('liked_posts', []);
+        
+        // Check if already liked
+        if (in_array($id, $likedPosts)) {
+            // Unlike: remove from session and decrement
+            $likedPosts = array_diff($likedPosts, [$id]);
+            $post->decrementLikesCount();
+            $isLiked = false;
+        } else {
+            // Like: add to session and increment
+            $likedPosts[] = $id;
+            $post->incrementLikesCount();
+            $isLiked = true;
+        }
+        
+        // Update session
+        session()->put('liked_posts', $likedPosts);
+        
+        // Refresh post to get updated likes_count
+        $post->refresh();
+        
+        return response()->json([
+            'success' => true,
+            'likes_count' => $post->likes_count,
+            'is_liked' => $isLiked,
+        ]);
     }
 }

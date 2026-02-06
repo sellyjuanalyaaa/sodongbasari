@@ -10,9 +10,12 @@ import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import AuthSplitLayout from '@/layouts/auth/auth-split-layout';
 
-import { User, Mail, Lock } from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Register() {
+    const [showPassword, setShowPassword] = useState(false);
+    const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
     return (
         <AuthSplitLayout
             title="Buat Akun"
@@ -74,14 +77,26 @@ export default function Register() {
                                     <Lock className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
                                     <Input
                                         id="password"
-                                        type="password"
+                                        type={showPassword ? "text" : "password"}
                                         required
                                         tabIndex={3}
                                         autoComplete="new-password"
                                         name="password"
                                         placeholder="Kata sandi"
-                                        className="pl-10"
+                                        className="pl-10 pr-10"
                                     />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 transition-colors"
+                                        tabIndex={-1}
+                                    >
+                                        {showPassword ? (
+                                            <EyeOff className="h-4 w-4" />
+                                        ) : (
+                                            <Eye className="h-4 w-4" />
+                                        )}
+                                    </button>
                                 </div>
                                 <InputError message={errors.password} />
                             </div>
@@ -94,14 +109,26 @@ export default function Register() {
                                     <Lock className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
                                     <Input
                                         id="password_confirmation"
-                                        type="password"
+                                        type={showPasswordConfirmation ? "text" : "password"}
                                         required
                                         tabIndex={4}
                                         autoComplete="new-password"
                                         name="password_confirmation"
                                         placeholder="Konfirmasi kata sandi"
-                                        className="pl-10"
+                                        className="pl-10 pr-10"
                                     />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPasswordConfirmation(!showPasswordConfirmation)}
+                                        className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 transition-colors"
+                                        tabIndex={-1}
+                                    >
+                                        {showPasswordConfirmation ? (
+                                            <EyeOff className="h-4 w-4" />
+                                        ) : (
+                                            <Eye className="h-4 w-4" />
+                                        )}
+                                    </button>
                                 </div>
                                 <InputError
                                     message={errors.password_confirmation}

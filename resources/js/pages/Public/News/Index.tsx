@@ -8,7 +8,7 @@ import { TrendingUp, Eye } from 'lucide-react';
 import { OrangeAccentTop, DotsPattern } from '@/components/SvgDecorations';
 import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 
-export default function Index({ villageInfo, posts, mostTrending }) {
+export default function Index({ villageInfo, posts, mostTrending, likedPosts = [] }) {
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Berita Desa" />
@@ -34,7 +34,7 @@ export default function Index({ villageInfo, posts, mostTrending }) {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                                 {posts?.data?.length > 0 ? (
                                     posts.data.map((post) => (
-                                        <NewsCard key={post.id} post={post} />
+                                        <NewsCard key={post.id} post={post} likedPosts={likedPosts} />
                                     ))
                                 ) : (
                                     <div className="col-span-3 text-center py-20">

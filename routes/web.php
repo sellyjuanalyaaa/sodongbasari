@@ -14,6 +14,7 @@ Route::controller(PublicController::class)->group(function () {
     // Route::get('/layanan', 'services')->name('services'); // Layanan Desa - Ditiadakan
     Route::get('/news', 'news')->name('news.index');
     Route::get('/news/{slug}', 'newsShow')->name('news.show');
+    Route::post('/news/{id}/like', 'toggleLike')->name('news.like');
     Route::get('/lembaga/{id}', 'institutionShow')->name('institution.show');
 });
 

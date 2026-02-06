@@ -73,7 +73,7 @@ const AnimatedCounter = ({ value, duration = 2000 }: { value: any; duration?: nu
     return <span>{count.toLocaleString('id-ID')}</span>;
 };
 
-export default function Home({ villageInfo, heroImages = [], stats = {}, officials = [], latestNews = [], homeStatistics = [] }: { villageInfo: any, heroImages?: any[], stats?: any, officials?: any[], latestNews?: any[], homeStatistics?: any[] }) {
+export default function Home({ villageInfo, heroImages = [], stats = {}, officials = [], latestNews = [], homeStatistics = [], likedPosts = [] }: { villageInfo: any, heroImages?: any[], stats?: any, officials?: any[], latestNews?: any[], homeStatistics?: any[], likedPosts?: number[] }) {
     const [currentStat, setCurrentStat] = useState(0);
 
     // Normalize dynamic stats
@@ -325,7 +325,7 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {latestNews.map((post) => (
-                                    <NewsCard key={post.id} post={post} />
+                                    <NewsCard key={post.id} post={post} likedPosts={likedPosts} />
                                 ))}
                             </div>
 

@@ -8,8 +8,8 @@ import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import AuthSplitLayout from '@/layouts/auth/auth-split-layout';
 import { Head, useForm } from '@inertiajs/react';
-import { Mail, Lock } from 'lucide-react';
-import React from 'react';
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import React, { useState } from 'react';
 
 interface LoginProps {
     status?: string;
@@ -22,6 +22,7 @@ export default function Login({
     canResetPassword,
     canRegister,
 }: LoginProps) {
+    const [showPassword, setShowPassword] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -88,16 +89,28 @@ export default function Login({
                             <Lock className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
                             <Input
                                 id="password"
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 value={data.password}
                                 onChange={(e) => setData('password', e.target.value)}
-                                className="pl-10"
+                                className="pl-10 pr-10"
                                 required
                                 tabIndex={2}
                                 autoComplete="current-password"
                                 placeholder="Masukkan kata sandi"
                             />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 transition-colors"
+                                tabIndex={-1}
+                            >
+                                {showPassword ? (
+                                    <EyeOff className="h-4 w-4" />
+                                ) : (
+                                    <Eye className="h-4 w-4" />
+                                )}
+                            </button>
                         </div>
                         <InputError message={errors.password} />
                     </div>

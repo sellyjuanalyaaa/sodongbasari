@@ -29,4 +29,14 @@ class Post extends Model
     {
         $this->increment('view_count');
     }
+
+    public function incrementLikesCount()
+    {
+        $this->increment('likes_count');
+    }
+
+    public function decrementLikesCount()
+    {
+        $this->decrement('likes_count');
+    }
 }
