@@ -33,7 +33,7 @@ export default function InstitutionDetail({ villageInfo, institution }: Props) {
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title={institution.name} />
-            <div className="py-20 bg-slate-50 relative overflow-hidden">
+            <div className="pt-32 pb-20 bg-slate-50 relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
                 <CloudAccent className="top-[30%] left-[12%] w-[160px] h-[160px] opacity-18 rotate-20" />
                 <CloudAccent className="bottom-[20%] right-[15%] w-[150px] h-[150px] opacity-17 -rotate-25" />

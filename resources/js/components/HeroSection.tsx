@@ -51,14 +51,14 @@ export default function HeroSection({ villageInfo, heroImages = [] }: { villageI
             </div>
 
             {/* Content */}
-            <div className="relative h-full flex flex-col justify-center items-center text-center px-6 sm:px-8 lg:px-12 z-10 pt-20">
+            <div className="relative h-full flex flex-col justify-start items-center text-center px-6 sm:px-8 lg:px-12 z-10 pt-12 md:pt-20 lg:pt-32">
                 <div className="relative inline-block mb-10">
                     <span className="relative z-10 inline-block py-2.5 px-6 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white text-xs font-medium tracking-[0.15em] uppercase shadow-sm transition-all duration-300 hover:bg-white/15 hover:scale-[1.02] cursor-default select-none">
                         Website Resmi Desa Sodong Basari
                     </span>
                 </div>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight mb-6 drop-shadow-lg text-white max-w-5xl leading-[1.1]">
-                    Selamat Datang di <span className="font-medium">Sodong Basari</span>
+                    Selamat Datang<br /> <span className="font-medium">di Sodong Basari</span>
                 </h1>
                 <p className="max-w-2xl text-base md:text-lg lg:text-xl text-white/90 mb-14 drop-shadow-md font-light leading-relaxed tracking-wide">
                     Harmoni Alam, Budaya, dan Kehidupan Masyarakat

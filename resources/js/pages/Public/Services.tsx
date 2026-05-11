@@ -177,7 +177,7 @@ export default function Services({ villageInfo }: { villageInfo: any }) {
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Layanan Desa" />
 
-            <div className="bg-slate-50 min-h-screen py-16 lg:py-24 relative overflow-hidden">
+            <div className="bg-slate-50 min-h-screen pt-32 pb-16 lg:pb-24 relative overflow-hidden">
                 <OrangeAccentBottom className="right-0 top-0 opacity-100 rotate-180" />
                 <OrangeAccentTop className="left-0 bottom-0 opacity-50" />
                 <DotsPattern className="left-10 top-20 opacity-20" />

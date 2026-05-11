@@ -115,7 +115,7 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
             <HeroSection villageInfo={villageInfo} heroImages={heroImages} />
 
             {/* Welcome Section (Head of Village) */}
-            <section className="py-24 bg-white relative overflow-hidden">
+            <section className="pt-32 pb-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
                 <AccentImage3 className="left-[-5%] bottom-[-10%] w-[400px] opacity-15 -rotate-12" />
                 <CloudAccent className="top-[20%] right-[12%] w-[145px] h-[145px] opacity-17 -rotate-25" />

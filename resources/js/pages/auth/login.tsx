@@ -49,8 +49,8 @@ export default function Login({
                 </div>
             )}
 
-            <form onSubmit={submit} className="flex flex-col gap-6">
-                <div className="grid gap-6">
+            <form onSubmit={submit} className="flex flex-col gap-4">
+                <div className="grid gap-4">
                     <div className="grid gap-2">
                         <Label htmlFor="email" className="text-slate-900 font-medium">Alamat Email</Label>
                         <div className="relative">
@@ -128,7 +128,7 @@ export default function Login({
 
                     <Button
                         type="submit"
-                        className="mt-4 w-full bg-[#EFA00B] hover:bg-orange-600 text-white"
+                        className="mt-3 w-full bg-[#EFA00B] hover:bg-orange-600 text-white"
                         tabIndex={4}
                         disabled={processing}
                         data-test="login-button"

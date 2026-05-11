@@ -13,7 +13,7 @@ export default function Potentials({ villageInfo, potentials, categoryColors }: 
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Potensi Desa" />
-            <div className="py-24 bg-white relative overflow-hidden">
+            <div className="pt-32 pb-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
                 <DotsPattern className="left-0 bottom-0 opacity-20" />
                 <AccentImage3 className="left-[-5%] bottom-[20%] w-[400px] opacity-10 rotate-45" />
@@ -72,7 +72,7 @@ export default function Potentials({ villageInfo, potentials, categoryColors }: 
                                                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                                     </svg>
-                                                    <span className="font-medium">Administrator</span>
+                                                    <span className="font-medium">{item.creator?.name || 'Administrator'}</span>
                                                 </div>
                                                 <div className="flex items-center gap-1.5 text-slate-400 text-[11px]">
                                                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">

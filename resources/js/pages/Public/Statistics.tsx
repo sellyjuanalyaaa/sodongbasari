@@ -123,7 +123,7 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
         return (
             <PublicLayout villageInfo={villageInfo}>
                 <Head title="Statistik Desa" />
-                <div className="py-24 bg-white relative overflow-hidden">
+                <div className="pt-32 pb-24 bg-white relative overflow-hidden">
                     <OrangeAccentTop className="right-0 top-0 opacity-100" />
                     <DotsPattern className="left-0 bottom-0 opacity-20" />
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">

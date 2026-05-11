@@ -69,7 +69,7 @@ export default function Show({ villageInfo, post, related, likedPosts = [] }: { 
         <PublicLayout villageInfo={villageInfo}>
             <Head title={post.title} />
 
-            <div className="py-24 bg-white relative overflow-hidden">
+            <div className="pt-32 pb-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
                 {/* <AccentImage3 className="left-[-10%] top-[15%] w-[500px] opacity-10 rotate-12" /> */}
                 {/* <CloudAccent className="top-[25%] right-[8%] w-[175px] h-[175px] opacity-19 -rotate-15" />

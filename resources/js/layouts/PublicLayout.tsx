@@ -19,127 +19,132 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
 
     return (
         <div className="min-h-screen bg-white font-sans text-slate-800">
-            {/* Navbar - Minimalist Modern with Orange Accent */}
-            <nav className="bg-white/95 backdrop-blur-md border-b border-slate-200 fixed w-full z-50 shadow-sm">
-                <div className="max-w-7xl mx-auto px-6 lg:px-12">
-                    <div className="flex justify-between h-16 items-center">
-                        {/* Logo Area */}
-                        <Link href={route('home')} className="flex items-center gap-3 group">
-                            <div className="relative">
-                                <div className="absolute inset-0 bg-[#EFA00B] rounded-lg blur-sm opacity-0 group-hover:opacity-20 transition-opacity" />
-                                <img
-                                    src="/images/logo-kabupaten-pemalang.png"
-                                    alt="Logo Kabupaten Pemalang"
-                                    className="w-9 h-9 object-contain relative z-10"
-                                />
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-base font-medium text-slate-900 leading-tight">
-                                    {villageInfo?.name || 'Desa Sodong Basari'}
-                                </span>
-                                <span className="text-xs text-slate-500 font-light">Belik, Pemalang</span>
-                            </div>
-                        </Link>
+            {/* Floating Navbar - Modern */}
+            <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
+                <div className="bg-white/80 backdrop-blur-md border border-slate-200/50 rounded-2xl shadow-lg">
+                    <div className="px-8 lg:px-12">
+                        <div className="flex justify-between items-center h-16">
+                            {/* Logo Section */}
+                            <Link href={route('home')} className="flex items-center gap-2 flex-shrink-0 group">
+                                <div className="relative">
+                                    <div className="absolute inset-0 bg-[#EFA00B] rounded-lg blur-sm opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+                                    <img
+                                        src="/images/logo-kabupaten-pemalang.png"
+                                        alt="Logo Kabupaten Pemalang"
+                                        className="w-8 h-8 object-contain relative z-10 rounded"
+                                    />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-sm font-semibold text-slate-900 leading-tight">
+                                        {villageInfo?.name || 'Desa Sodong Basari'}
+                                    </span>
+                                    <span className="text-xs text-slate-500 font-light">Belik, Pemalang</span>
+                                </div>
+                            </Link>
 
-                        {/* Desktop Navigation */}
-                        <div className="hidden md:flex items-center gap-1">
-                            {links.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    href={route(link.route)}
-                                    className={`relative px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap ${
-                                        route().current(link.route)
-                                            ? 'text-[#EFA00B]'
-                                            : 'text-slate-700 hover:text-[#EFA00B]'
-                                    }`}
-                                >
-                                    {link.name}
-                                    {route().current(link.route) && (
-                                        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#EFA00B]" />
-                                    )}
-                                </Link>
-                            ))}
+                            {/* Desktop Navigation - Center */}
+                            <div className="hidden md:flex items-center gap-8">
+                                {links.map((link) => (
+                                    <Link
+                                        key={link.name}
+                                        href={route(link.route)}
+                                        className={`text-sm font-medium transition-colors duration-200 relative ${
+                                            route().current(link.route)
+                                                ? 'text-[#EFA00B]'
+                                                : 'text-slate-700 hover:text-[#EFA00B]'
+                                        }`}
+                                    >
+                                        {link.name}
+                                        {route().current(link.route) && (
+                                            <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#EFA00B] rounded-full" />
+                                        )}
+                                    </Link>
+                                ))}
+                            </div>
 
-                            {/* Search Bar */}
-                            <div className="ml-4 pl-4 border-l border-slate-200">
-                                <form action="#" method="GET">
-                                    <div className="flex items-center bg-slate-50 rounded-lg px-3 py-1.5 w-48 border border-slate-200 focus-within:border-[#EFA00B] focus-within:bg-white transition-all">
+                            {/* Right Section - Search & Mobile Menu */}
+                            <div className="flex items-center gap-4">
+                                {/* Search Bar (Desktop) */}
+                                <div className="hidden lg:flex items-center">
+                                    <form action="#" method="GET" className="relative">
                                         <input
                                             type="text"
                                             placeholder="Cari..."
-                                            className="bg-transparent border-none outline-none text-slate-900 placeholder-slate-400 text-sm w-full font-light"
+                                            className="px-4 py-2 text-sm rounded-lg border border-slate-200 bg-slate-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#EFA00B] focus:bg-white w-48"
                                         />
-                                        <button type="submit" className="text-slate-400 hover:text-[#EFA00B] transition-colors">
+                                        <button
+                                            type="submit"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors duration-200 text-slate-400 hover:text-[#EFA00B]"
+                                        >
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                             </svg>
                                         </button>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
+
+                                {/* Mobile Menu Button */}
+                                <button
+                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                    className="md:hidden p-2 rounded-lg transition-colors duration-200 hover:bg-slate-100"
+                                    aria-label="Toggle menu"
+                                >
+                                    <svg className="h-6 w-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        {isMenuOpen ? (
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                        ) : (
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+                                        )}
+                                    </svg>
+                                </button>
                             </div>
                         </div>
 
-                        {/* Mobile Menu Button */}
-                        <div className="md:hidden flex items-center">
-                            <button 
-                                onClick={() => setIsMenuOpen(!isMenuOpen)} 
-                                className="p-2 text-slate-700 hover:text-[#EFA00B] focus:outline-none transition-colors"
-                            >
-                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                    {isMenuOpen ? (
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    ) : (
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
-                                    )}
-                                </svg>
-                            </button>
-                        </div>
+                        {/* Mobile Menu */}
+                        {isMenuOpen && (
+                            <div className="md:hidden border-t border-slate-200/50 py-4 animate-in slide-in-from-top duration-200">
+                                <div className="space-y-2">
+                                    {links.map((link) => (
+                                        <Link
+                                            key={link.name}
+                                            href={route(link.route)}
+                                            className={`block px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+                                                route().current(link.route)
+                                                    ? 'text-[#EFA00B] bg-orange-50'
+                                                    : 'text-slate-700 hover:text-[#EFA00B] hover:bg-slate-50'
+                                            }`}
+                                            onClick={() => setIsMenuOpen(false)}
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    ))}
+                                    
+                                    {/* Mobile Search */}
+                                    <div className="pt-3">
+                                        <form action="#" method="GET">
+                                            <div className="flex items-center bg-slate-50 rounded-lg px-3 py-2 border border-slate-200">
+                                                <input
+                                                    type="text"
+                                                    placeholder="Cari..."
+                                                    className="bg-transparent border-none outline-none text-slate-900 placeholder-slate-400 text-sm w-full font-light"
+                                                />
+                                                <button type="submit" className="text-slate-400 hover:text-[#EFA00B]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
-
-                {/* Mobile Menu */}
-                {isMenuOpen && (
-                    <div className="md:hidden bg-white border-t border-slate-200 animate-in slide-in-from-top duration-200 shadow-lg">
-                        <div className="px-6 py-4 space-y-1">
-                            {links.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    href={route(link.route)}
-                                    className={`block px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-                                        route().current(link.route)
-                                            ? 'text-[#EFA00B] bg-orange-50'
-                                            : 'text-slate-700 hover:text-[#EFA00B] hover:bg-slate-50'
-                                    }`}
-                                    onClick={() => setIsMenuOpen(false)}
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
-                            
-                            {/* Mobile Search */}
-                            <div className="pt-3">
-                                <form action="#" method="GET">
-                                    <div className="flex items-center bg-slate-50 rounded-lg px-3 py-2 border border-slate-200">
-                                        <input
-                                            type="text"
-                                            placeholder="Cari..."
-                                            className="bg-transparent border-none outline-none text-slate-900 placeholder-slate-400 text-sm w-full font-light"
-                                        />
-                                        <button type="submit" className="text-slate-400">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                )}
             </nav>
 
             {/* Main Content */}
-            <main className="pt-16 min-h-[calc(100vh-200px)]">
+            <main className="min-h-[calc(100vh-200px)]">
                 {children}
             </main>
 

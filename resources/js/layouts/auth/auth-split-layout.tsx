@@ -16,76 +16,79 @@ export default function AuthSplitLayout({
     const { name } = usePage<SharedData>().props;
 
     return (
-        <div className="relative grid min-h-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 bg-slate-50">
-            {/* Left Column - Hero Image */}
-            <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r overflow-hidden">
-                <div className="absolute inset-0 bg-slate-900" />
-                <div
-                    className="absolute inset-0 bg-cover bg-center opacity-50 mix-blend-overlay transition-all duration-1000 hover:scale-105"
-                    style={{ backgroundImage: "url('/images/hero/hero-1.jpg')" }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-600/90 via-orange-700/80 to-amber-900/90" />
+        <div className="grid relative h-screen overflow-hidden flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 bg-gradient-to-br from-slate-50 to-white">
+            {/* Left Column - Hero Section */}
+            <div className="relative hidden h-screen flex-col bg-gradient-to-br from-blue-400 via-blue-500 to-orange-500 p-10 text-white lg:flex dark:border-r overflow-hidden lg:justify-between">
+                {/* Decorative Blobs */}
+                <div className="absolute top-0 right-0 w-80 h-80 bg-blue-300 rounded-full blur-3xl opacity-20 -mr-40 -mt-40 pointer-events-none"></div>
+                <div className="absolute bottom-10 left-0 w-96 h-96 bg-orange-400 rounded-full blur-3xl opacity-20 -ml-48 -mb-40 pointer-events-none"></div>
+                <div className="absolute top-1/2 left-1/4 w-72 h-72 bg-purple-400 rounded-full blur-3xl opacity-15 pointer-events-none"></div>
 
-                {/* Decorative Elements */}
-                <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/20 to-transparent pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
-
+                {/* Content */}
                 <div className="relative z-20 flex items-center text-lg font-medium">
                     <Link href={route('home')} className="flex items-center gap-3 group">
-                        <div className="p-2 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20 group-hover:bg-white/20 transition-all duration-300">
+                        <div className="p-2 bg-white/20 rounded-2xl backdrop-blur-sm border border-white/30 group-hover:bg-white/30 transition-all duration-300 shadow-lg">
                             <img src="/images/logo-kabupaten-pemalang.png" alt="Logo Kabupaten Pemalang" className="size-8 object-contain" />
                         </div>
-                        <span className="font-bold tracking-tight text-xl drop-shadow-md">Sodong Basari</span>
+                        <div>
+                            <span className="font-bold tracking-tight text-xl drop-shadow-lg block">Sodong Basari</span>
+                            <span className="text-xs text-white/70 drop-shadow font-normal">Sistem Informasi Desa</span>
+                        </div>
                     </Link>
                 </div>
 
-                <div className="relative z-20 mt-auto">
-                    <div className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-3xl shadow-2xl max-w-lg">
-                        <svg className="w-8 h-8 text-orange-200 mb-4 opacity-80" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9.01703V15C9.01703 14.3333 9.35036 14 10.017 14H13.017C14.9088 14 16.4912 12.6717 16.9065 10.8647C16.9723 10.5786 17.017 10.292 17.017 10C17.017 10 17.017 10 17.017 10C17.017 6.13401 13.883 3 10.017 3C6.15104 3 3.01703 6.13401 3.01703 10C3.01703 13.866 6.15104 17 10.017 17H12.017C12.5693 17 13.017 17.4477 13.017 18V21H14.017ZM19.017 21V18C19.017 16.8954 18.1216 16 17.017 16H15.017V15C15.017 14.3333 15.3504 14 16.017 14H19.017C20.9088 14 22.4912 12.6717 22.9065 10.8647C22.9723 10.5786 23.017 10.292 23.017 10C23.017 10 23.017 10 23.017 10C23.017 6.13401 19.883 3 16.017 3C12.151 3 9.01703 6.13401 9.01703 10C9.01703 13.866 12.151 17 16.017 17H18.017C18.5693 17 19.017 17.4477 19.017 18V21H19.017Z" /></svg>
-                        <blockquote className="space-y-4">
-                            <p className="text-xl font-medium italic text-white leading-relaxed">
-                                "Membangun desa dengan semangat gotong royong, mewujudkan masyarakat yang sejahtera, mandiri, dan berbudaya."
-                            </p>
-                            <footer className="flex items-center gap-2 text-sm font-semibold text-orange-200 tracking-wide uppercase pt-2 border-t border-white/20">
-                                <span className="w-8 h-0.5 bg-orange-200 rounded-full"></span>
-                                Pemerintah Desa Sodong Basari
-                            </footer>
-                        </blockquote>
+                <div className="relative z-20 mt-auto mb-0">
+                    <div className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-3xl shadow-2xl max-w-lg hover:bg-white/15 transition-all duration-300">
+                        <div className="flex items-start gap-4">
+                            <div className="flex-shrink-0">
+                                <svg className="w-8 h-8 text-orange-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <blockquote className="space-y-3">
+                                <p className="text-lg font-medium text-white leading-relaxed">
+                                    "Membangun desa dengan semangat gotong royong, mewujudkan masyarakat yang sejahtera, mandiri, dan berbudaya."
+                                </p>
+                                <div className="text-xs font-semibold text-orange-100 tracking-wide uppercase">
+                                    - Pemerintahan Desa Sodong Basari
+                                </div>
+                            </blockquote>
+                        </div>
                     </div>
                 </div>
             </div>
 
             {/* Right Column - Form */}
-            <div className="w-full h-full flex flex-col items-center justify-center lg:p-8 relative">
-                {/* Background Pattern */}
-                <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(#475569 1px, transparent 1px)", backgroundSize: "20px 20px" }}></div>
+            <div className="w-full h-screen flex flex-col items-center justify-start pt-4 lg:px-8 lg:pt-6 relative">
+                {/* Background Elements */}
+                <div className="absolute top-0 right-0 w-96 h-96 bg-orange-100 rounded-full blur-3xl opacity-10 -mr-48 -mt-48 pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-100 rounded-full blur-3xl opacity-10 -ml-36 -mb-36 pointer-events-none"></div>
 
-                <div className="relative z-10 w-full max-w-[420px] mx-auto">
-                    <div className="bg-white p-8 sm:p-10 rounded-3xl shadow-xl border border-slate-100">
+                <div className="relative z-10 w-full max-w-sm mx-auto px-4">
+                    <div className="bg-white p-5 sm:p-6 rounded-2xl shadow-2xl border border-slate-100 backdrop-blur-sm max-h-[calc(100vh-48px)] overflow-hidden">
                         <Link
                             href={route('home')}
                             className="relative z-20 flex flex-col items-center justify-center lg:hidden mb-8"
                         >
-                            <div className="p-3 bg-orange-50 rounded-2xl mb-3">
+                            <div className="p-3 bg-gradient-to-br from-orange-100 to-orange-50 rounded-2xl mb-3 border border-orange-200">
                                 <img src="/images/logo-kabupaten-pemalang.png" alt="Logo Kabupaten Pemalang" className="size-10 object-contain" />
                             </div>
                             <span className="font-bold text-lg text-slate-900">Sodong Basari</span>
                         </Link>
 
-                        <div className="flex flex-col items-start gap-1 text-left sm:items-center sm:text-center mb-8">
+                        <div className="flex flex-col items-center text-center gap-2 mb-6">
                             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">{title}</h1>
-                            <p className="text-sm text-slate-500 font-normal">
+                            <p className="text-sm text-slate-500 font-normal leading-relaxed max-w-sm">
                                 {description}
                             </p>
                         </div>
-                        {children}
+
+                        <div className="mb-6">
+                            {children}
+                        </div>
+
                     </div>
 
-                    <div className="mt-8 text-center">
-                        <p className="text-xs text-slate-400 font-medium">
-                            &copy; {new Date().getFullYear()} Desa Sodong Basari. All rights reserved.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>

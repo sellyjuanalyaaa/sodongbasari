@@ -12,7 +12,7 @@ export default function Index({ villageInfo, posts, mostTrending, likedPosts = [
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Berita Desa" />
-            <div className="py-24 bg-white relative overflow-hidden">
+            <div className="pt-32 pb-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
                 <DotsPattern className="left-0 bottom-0 opacity-20" />
                 <AccentImage3 className="right-[-5%] top-[10%] w-[500px] opacity-10 -rotate-12" />

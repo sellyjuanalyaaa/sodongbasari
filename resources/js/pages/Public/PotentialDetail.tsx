@@ -1,7 +1,7 @@
 import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
-import { MapPin, Phone, Tag, ArrowLeft, ArrowRight, Calendar, User } from 'lucide-react';
+import { MapPin, Tag, ArrowLeft, ArrowRight, Calendar, User } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
 import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 import { route } from 'ziggy-js';
@@ -44,7 +44,7 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
         <PublicLayout villageInfo={villageInfo}>
             <Head title={potential.name} />
 
-            <div className="py-24 bg-white relative overflow-hidden">
+            <div className="pt-32 pb-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
                 {/* <CloudAccent className="top-[20%] right-[10%] w-[170px] h-[170px] opacity-18 rotate-15" /> */}
                 {/* <CloudAccent className="bottom-[25%] left-[8%] w-[155px] h-[155px] opacity-17 -rotate-20" /> */}
@@ -73,20 +73,14 @@ export default function PotentialDetail({ villageInfo, potential, relatedPotenti
                         </h1>
 
                         {/* Info Meta */}
-                        <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-slate-600">
-                            {potential.location && (
+                        {potential.creator && (
+                            <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-slate-600">
                                 <div className="flex items-center gap-2">
-                                    <MapPin className="h-4 w-4 text-[#EFA00B]" />
-                                    <span className="font-light">{potential.location}</span>
+                                    <User className="h-4 w-4 text-[#EFA00B]" />
+                                    <span className="font-light">{potential.creator.name}</span>
                                 </div>
-                            )}
-                            {potential.contact_info && (
-                                <div className="flex items-center gap-2">
-                                    <Phone className="h-4 w-4 text-[#EFA00B]" />
-                                    <span className="font-light">{potential.contact_info}</span>
-                                </div>
-                            )}
-                        </div>
+                            </div>
+                        )}
 
                         {/* Created Info */}
                         <div className="mt-4 pt-4 border-t border-slate-200">

@@ -74,7 +74,7 @@ class PublicController extends Controller
             'from-red-500 to-rose-500' => '#ef4444', // Red-500
         ];
 
-        $potentials = Potential::all()->map(function ($potential) use ($categories, $colorMap) {
+        $potentials = Potential::with('creator')->get()->map(function ($potential) use ($categories, $colorMap) {
             $category = $categories->get($potential->category);
             $hexColor = '#EFA00B'; // Default orange
 
@@ -153,7 +153,7 @@ class PublicController extends Controller
 
     public function news()
     {
-        $mostTrending = Post::with('category')
+        $mostTrending = Post::with(['category', 'creator'])
             ->orderBy('view_count', 'desc')
             ->take(5)
             ->get();
@@ -161,7 +161,7 @@ class PublicController extends Controller
         $likedPosts = session()->get('liked_posts', []);
 
         return Inertia::render('Public/News/Index', array_merge($this->getCommonProps(), [
-            'posts' => Post::with('category')->latest()->paginate(9),
+            'posts' => Post::with(['category', 'creator'])->latest()->paginate(9),
             'mostTrending' => $mostTrending,
             'likedPosts' => $likedPosts,
         ]));

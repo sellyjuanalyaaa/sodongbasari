@@ -42,7 +42,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
     return (
         <PublicLayout villageInfo={villageInfo}>
             <Head title="Sodong Basari" />
-            <div className="py-24 bg-white relative overflow-hidden">
+            <div className="pt-32 pb-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
                 <AccentImage3 className="left-[-10%] bottom-[10%] w-[500px] opacity-10 rotate-[15deg]" />
                 <AccentImage3 className="right-[-5%] top-[20%] w-[400px] opacity-5 -rotate-45" />
@@ -77,11 +77,10 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                     </div>
 
                                     <div className="relative z-10">
-                                        <div className="flex items-center gap-3 mb-6">
-                                            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30 shadow-inner">
-                                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        <div className="flex items-center gap-4 mb-6">
+                                            <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-white border border-white/30 shadow-lg flex-shrink-0">
+                                                <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
                                                 </svg>
                                             </div>
                                             <h3 className="text-2xl font-bold tracking-tight text-white">Visi Desa</h3>
@@ -102,10 +101,10 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                             {villageInfo?.mission && (
                                 <div className="w-full md:w-7/12 p-8 md:p-12 bg-white relative">
                                     <div className="relative z-10">
-                                        <div className="flex items-center gap-3 mb-8">
-                                            <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center border border-orange-200">
-                                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
+                                        <div className="flex items-center gap-4 mb-8">
+                                            <div className="w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center border-2 border-orange-200 shadow-md flex-shrink-0">
+                                                <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                                                 </svg>
                                             </div>
                                             <h3 className="text-2xl font-bold tracking-tight text-slate-900 leading-none">Misi Desa</h3>
