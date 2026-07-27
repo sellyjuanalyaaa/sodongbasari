@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import {
@@ -10,12 +9,11 @@ import {
     Receipt,
     Image as ImageIcon,
     LogOut,
-    Menu,
     BarChart3,
-    Tag,
     History,
     Target,
-    Bell
+    Bell,
+    Scroll
 } from "lucide-react";
 import {
     Sidebar,
@@ -74,13 +72,14 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
         {
             label: "Data Desa",
             items: [
-                { label: "Potensi Desa", routeName: "admin.potentials.index", active: "admin.potentials.*", icon: Mountain },
+                { label: "Potensi Desa", routeName: "admin.potentials.index", active: "admin.potential*", icon: Mountain },
                 { label: "Lembaga Desa", routeName: "admin.institutions.index", active: "admin.institutions.*", icon: Building2 },
                 { label: "Perangkat Desa", routeName: "admin.officials.index", active: "admin.officials.*", icon: Users },
                 { label: "Riwayat Kepala Desa", routeName: "admin.former-village-heads.index", active: "admin.former-village-heads.*", icon: History },
                 { label: "Data Penduduk", routeName: "admin.demographics.index", active: "admin.demographics.*", icon: Users },
                 { label: "Daftar Pemilih Tetap", routeName: "admin.electoral-rolls.index", active: "admin.electoral-rolls.*", icon: Users },
                 { label: "Anggaran Desa", routeName: "admin.budgets.index", active: "admin.budgets.*", icon: Receipt },
+                { label: "Produk Hukum", routeName: "admin.law-products.index", active: "admin.law-product*", icon: Scroll },
             ]
         },
         {
@@ -127,7 +126,7 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
                                                         isActive={isActive}
                                                         tooltip={item.label}
                                                         className={`h-10 rounded-lg transition-all duration-200 font-medium px-3 group relative ${isActive
-                                                            ? '!bg-orange-50 !text-orange-600'
+                                                            ? 'bg-orange-50! text-orange-600!'
                                                             : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
                                                             }`}
                                                     >
@@ -155,7 +154,7 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
                     </SidebarContent>
 
                     <SidebarFooter className="border-t border-gray-50 bg-white p-4">
-                        <div className="rounded-2xl bg-gradient-to-br from-orange-50 to-white border border-orange-100 p-4 mb-4 group-data-[collapsible=icon]:hidden">
+                        <div className="rounded-2xl bg-linear-to-br from-orange-50 to-white border border-orange-100 p-4 mb-4 group-data-[collapsible=icon]:hidden">
                             <div className="flex items-center gap-2.5 mb-2">
                                 <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse ring-2 ring-emerald-100"></div>
                                 <span className="text-xs font-semibold text-orange-800">System Online</span>
@@ -224,7 +223,7 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
                             <Link href={route('admin.notifications.index')}>
                                 <div className="h-9 w-9 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-orange-600 hover:border-orange-100 cursor-pointer transition shadow-sm relative">
                                     <span className="sr-only">Notifications</span>
-                                    <Bell className="h-[18px] w-[18px]" />
+                                    <Bell className="h-4.5 w-4.5" />
                                     {(usePage().props as any).unreadNotificationsCount > 0 && (
                                         <div className="absolute top-0 right-0 h-2.5 w-2.5 rounded-full bg-red-500 border border-white"></div>
                                     )}

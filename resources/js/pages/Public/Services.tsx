@@ -183,12 +183,12 @@ export default function Services({ villageInfo }: { villageInfo: any }) {
                 <DotsPattern className="left-10 top-20 opacity-20" />
                 <Blob2 className="right-0 bottom-1/4 opacity-30 w-96 h-96" />
                 <Blob2 className="right-0 bottom-1/4 opacity-30 w-96 h-96" />
-                <AccentImage3 className="left-[-5%] bottom-[-5%] w-[600px] opacity-10 -rotate-12" />
-                <AccentImage3 className="right-[-10%] top-[40%] w-[500px] opacity-5 rotate-12" />
-                <CloudAccent className="top-[20%] left-[40%] w-[155px] h-[155px] opacity-17 rotate-30" />
-                <CloudAccent className="bottom-[50%] left-[25%] w-[145px] h-[145px] opacity-18 -rotate-20" />
-                <CloudAccent className="top-[55%] right-[28%] w-[160px] h-[160px] opacity-16 rotate-25" />
-                <CloudAccent className="bottom-[70%] left-[50%] w-[140px] h-[140px] opacity-19 -rotate-35" />
+                <AccentImage3 className="left-[-5%] bottom-[-5%] w-150 opacity-10 -rotate-12" />
+                <AccentImage3 className="right-[-10%] top-[40%] w-125 opacity-5 rotate-12" />
+                <CloudAccent className="top-[20%] left-[40%] w-38.75 h-38.75 opacity-17 rotate-30" />
+                <CloudAccent className="bottom-[50%] left-[25%] w-36.25 h-36.25 opacity-18 -rotate-20" />
+                <CloudAccent className="top-[55%] right-[28%] w-40 h-40 opacity-16 rotate-25" />
+                <CloudAccent className="bottom-[70%] left-[50%] w-35 h-35 opacity-19 -rotate-35" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <SectionTitle
                         title="Layanan Mandiri"

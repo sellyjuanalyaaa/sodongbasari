@@ -89,7 +89,7 @@ export default function Index({ categories }: Props) {
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex items-center gap-3">
                                             <div 
-                                                className="w-4 h-4 rounded-full flex-shrink-0" 
+                                                className="w-4 h-4 rounded-full shrink-0" 
                                                 style={{ backgroundColor: category.color }}
                                             />
                                             <span className="font-medium text-gray-900">{category.name}</span>

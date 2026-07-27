@@ -78,7 +78,7 @@ export default function Show({ villageInfo, post, related, likedPosts = [] }: { 
                 <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
                     {/* Back Button */}
                     <Link
-                        href={route('news.index')}
+                        href={route('news')}
                         className="inline-flex items-center gap-2 text-slate-600 hover:text-[#EFA00B] transition-colors mb-8 group"
                     >
                         <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
@@ -263,7 +263,7 @@ export default function Show({ villageInfo, post, related, likedPosts = [] }: { 
                                     Berita Terkait
                                 </h2>
                                 <Link
-                                    href={route('news.index')}
+                                    href={route('news')}
                                     className="text-sm text-[#EFA00B] hover:text-orange-600 font-medium inline-flex items-center gap-1 group"
                                 >
                                     Lihat Semua

@@ -68,7 +68,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
 
                             {/* Visi Section - Left/Top Side */}
                             {villageInfo?.vision && (
-                                <div className="w-full md:w-5/12 p-8 md:p-12 bg-gradient-to-br from-orange-500 to-amber-600 text-white relative overflow-hidden flex flex-col justify-center">
+                                <div className="w-full md:w-5/12 p-8 md:p-12 bg-linear-to-br from-orange-500 to-amber-600 text-white relative overflow-hidden flex flex-col justify-center">
                                     {/* Background Pattern */}
                                     <div className="absolute inset-0 opacity-10">
                                         <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -113,7 +113,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                         <div className="space-y-4">
                                             {villageInfo.mission.split('\n').filter((item: string) => item.trim()).map((item: string, index: number) => (
                                                 <div key={index} className="flex gap-4 p-3 rounded-lg hover:bg-orange-50 transition-colors duration-300">
-                                                    <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-sm mt-0.5">
+                                                    <div className="flex-shrink-0 w-8 h-8 bg-linear-to-br from-orange-500 to-amber-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-sm mt-0.5">
                                                         {index + 1}
                                                     </div>
                                                     <p className="text-slate-600 text-[15px] leading-relaxed font-light flex-1">
@@ -149,31 +149,31 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="bg-white border border-slate-200 rounded-lg p-5 hover:border-orange-200 hover:shadow-sm transition-all group">
                                 <div className="flex items-center gap-3 mb-2">
-                                    <div className="w-9 h-9 bg-gradient-to-br from-slate-900 to-slate-700 rounded-full flex items-center justify-center text-white text-sm font-medium group-hover:from-orange-500 group-hover:to-[#EFA00B] transition-all">U</div>
+                                    <div className="w-9 h-9 bg-linear-to-br from-slate-900 to-slate-700 rounded-full flex items-center justify-center text-white text-sm font-medium group-hover:from-orange-500 group-hover:to-[#EFA00B] transition-all">U</div>
                                     <h4 className="font-medium text-slate-900">Sebelah Utara</h4>
                                 </div>
                                 <p className="text-slate-600 text-sm ml-12 font-light">Desa Kalisaeh & Desa Sikasur, Kecamatan Belik</p>
                             </div>
                             <div className="bg-white border border-slate-200 rounded-lg p-5 hover:border-orange-200 hover:shadow-sm transition-all group">
                                 <div className="flex items-center gap-3 mb-2">
-                                    <div className="w-9 h-9 bg-gradient-to-br from-slate-900 to-slate-700 rounded-full flex items-center justify-center text-white text-sm font-medium group-hover:from-orange-500 group-hover:to-[#EFA00B] transition-all">S</div>
+                                    <div className="w-9 h-9 bg-linear-to-br from-slate-900 to-slate-700 rounded-full flex items-center justify-center text-white text-sm font-medium group-hover:from-orange-500 group-hover:to-[#EFA00B] transition-all">S</div>
                                     <h4 className="font-medium text-slate-900">Sebelah Selatan</h4>
                                 </div>
                                 <p className="text-slate-600 text-sm ml-12 font-light">Desa Bulakan, Kecamatan Belik</p>
                             </div>
                             <div className="bg-white border border-slate-200 rounded-lg p-5 hover:border-orange-200 hover:shadow-sm transition-all group">
                                 <div className="flex items-center gap-3 mb-2">
-                                    <div className="w-9 h-9 bg-gradient-to-br from-slate-900 to-slate-700 rounded-full flex items-center justify-center text-white text-sm font-medium group-hover:from-orange-500 group-hover:to-[#EFA00B] transition-all">B</div>
+                                    <div className="w-9 h-9 bg-linear-to-br from-slate-900 to-slate-700 rounded-full flex items-center justify-center text-white text-sm font-medium group-hover:from-orange-500 group-hover:to-[#EFA00B] transition-all">B</div>
                                     <h4 className="font-medium text-slate-900">Sebelah Barat</h4>
                                 </div>
                                 <p className="text-slate-600 text-sm ml-12 font-light">Desa Moga, Kecamatan Moga</p>
                             </div>
                             <div className="bg-white border border-slate-200 rounded-lg p-5 hover:border-orange-200 hover:shadow-sm transition-all group">
                                 <div className="flex items-center gap-3 mb-2">
-                                    <div className="w-9 h-9 bg-gradient-to-br from-slate-900 to-slate-700 rounded-full flex items-center justify-center text-white text-sm font-medium group-hover:from-orange-500 group-hover:to-[#EFA00B] transition-all">T</div>
+                                    <div className="w-9 h-9 bg-linear-to-br from-slate-900 to-slate-700 rounded-full flex items-center justify-center text-white text-sm font-medium group-hover:from-orange-500 group-hover:to-[#EFA00B] transition-all">T</div>
                                     <h4 className="font-medium text-slate-900">Sebelah Timur</h4>
                                 </div>
-                                <p className="text-slate-600 text-sm ml-12 font-light">Desa Mendelem, Kecamatan Belik</p>
+                                <p className="text-slate-600 text-sm ml-12 font-light">Desa Mendelem & Desa Sikasur, Kecamatan Belik</p>
                             </div>
                         </div>
                         <p className="text-slate-500 text-xs mt-6 font-light italic">
@@ -185,7 +185,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                     <div className="bg-slate-50 p-8 md:p-10 rounded-xl border border-slate-200 mb-8">
                         <h3 className="text-xl md:text-2xl font-medium text-slate-900 mb-8 tracking-tight">Luas Wilayah dan Pembagian Dusun</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-                            <div className="bg-gradient-to-br from-orange-500 to-[#EFA00B] rounded-lg p-6 text-white text-center shadow-lg shadow-orange-200">
+                            <div className="bg-linear-to-br from-orange-500 to-[#EFA00B] rounded-lg p-6 text-white text-center shadow-lg shadow-orange-200">
                                 <div className="text-3xl font-semibold mb-2">441,48</div>
                                 <div className="text-sm text-white/90 font-light">Hektare (±)</div>
                                 <div className="text-xs text-white/70 mt-2 font-light tracking-wide">Luas Wilayah Desa</div>
@@ -340,7 +340,7 @@ export default function SodongBasari({ villageInfo, officials, institutions, for
                                     ))}
                                 </div>
                                 {/* Hint overlay for horizontal scroll on desktop if needed, usually scrollbar is enough or trackpad */}
-                                <div className="absolute right-0 top-0 bottom-8 w-12 bg-gradient-to-l from-white to-transparent pointer-events-none md:hidden"></div>
+                                <div className="absolute right-0 top-0 bottom-8 w-12 bg-linear-to-l from-white to-transparent pointer-events-none md:hidden"></div>
                             </div>
                         </div>
                     )}

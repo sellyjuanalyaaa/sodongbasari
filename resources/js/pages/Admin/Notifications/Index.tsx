@@ -114,7 +114,7 @@ export default function Index({ notifications, unreadCount }: Props) {
                                 }`}
                             >
                                 <div className="flex items-start gap-4">
-                                    <div className="flex-shrink-0">
+                                    <div className="shrink-0">
                                         <div
                                             className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${getTypeColor(
                                                 notification.type
