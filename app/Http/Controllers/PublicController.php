@@ -16,7 +16,6 @@ use App\Models\VillageOfficial;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class PublicController extends Controller
@@ -146,6 +145,8 @@ class PublicController extends Controller
             'demographics' => $demographics,
             'budgets' => Budget::orderBy('year', 'desc')->get(),
             'electoralRolls' => $electoralRolls,
+            // 'boundary' => json_decode(Storage::disk('public')->get('geojson/batas_desa.json')),
+            // 'boundary' => json_decode(file_get_contents(public_path('geojson/batas_desa.json'))),
         ]));
     }
 
