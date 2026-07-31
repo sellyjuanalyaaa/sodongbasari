@@ -1,4 +1,3 @@
-
 import { Link, usePage } from '@inertiajs/react';
 import React, { useState } from 'react';
 import { route } from 'ziggy-js';
@@ -13,19 +12,22 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
         { name: 'Home', route: 'home' },
         { name: 'Sodong Basari', route: 'sodong-basari' },
         { name: 'Statistik Desa', route: 'statistics' },
+        { name: 'Produk Hukum', route: 'laws' },
         { name: 'Potensi Desa', route: 'potentials' },
-        { name: 'Info & Berita', route: 'news.index' },
+        { name: 'Info & Berita', route: 'news' },
     ];
 
     return (
         <div className="min-h-screen bg-white font-sans text-slate-800">
-            {/* Floating Navbar - Modern */}
-            <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
+
+            {/* Navbar */}
+            <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
                 <div className="bg-white/80 backdrop-blur-md border border-slate-200/50 rounded-2xl shadow-lg">
                     <div className="px-8 lg:px-12">
                         <div className="flex justify-between items-center h-16">
+
                             {/* Logo Section */}
-                            <Link href={route('home')} className="flex items-center gap-2 flex-shrink-0 group">
+                            <Link href={route('home')} className="flex items-center gap-2 shrink-0 group">
                                 <div className="relative">
                                     <div className="absolute inset-0 bg-[#EFA00B] rounded-lg blur-sm opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
                                     <img
@@ -149,7 +151,6 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
             </main>
 
             {/* Footer */}
-            {/* Minimalist Modern Footer */}
             <footer className="bg-slate-900/95 backdrop-blur-sm text-slate-300 py-16 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
@@ -163,7 +164,7 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
                                 Melalui platform ini, kami berharap informasi dan layanan desa dapat diakses dengan lebih mudah, cepat, dan transparan oleh seluruh masyarakat.
                             </p>
                             <a 
-                                href="https://www.instagram.com/kkn13_sodongbasari?igsh=YXQ3dm1kczMwa2Rv" 
+                                href="https://www.instagram.com/kkn13_sodongbasari?igsh=YXQ3dm1kczMwa2Rv"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group inline-flex items-center gap-2 bg-[#EFA00B] text-white text-sm font-bold py-3 px-6 rounded-lg transition-all hover:bg-[#D48C00] hover:pl-8"
@@ -187,14 +188,14 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
                                         rel="noopener noreferrer"
                                         className="flex gap-3 hover:text-[#EFA00B] transition-colors group"
                                     >
-                                        <svg className="w-5 h-5 text-[#EFA00B] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                        <svg className="w-5 h-5 text-[#EFA00B] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                                         <span>Desa Sodong Basari,<br />Kec. Belik, Kab. Pemalang<br />Jawa Tengah 52356</span>
                                     </a>
                                     <a 
                                         href="mailto:sodongbasari@desakupemalang.id"
                                         className="flex gap-3 hover:text-[#EFA00B] transition-colors group"
                                     >
-                                        <svg className="w-5 h-5 text-[#EFA00B] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                        <svg className="w-5 h-5 text-[#EFA00B] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                                         <span>sodongbasari@desakupemalang.id</span>
                                     </a>
                                 </div>
@@ -229,7 +230,7 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
                                             className="flex items-center gap-2 hover:text-[#EFA00B] transition-colors cursor-pointer"
                                         >
                                             <span className="w-1.5 h-1.5 bg-[#EFA00B] rounded-full"></span>
-                                            Layanan Administrasi
+                                            Pengaduan Masyarakat
                                         </a>
                                     </li>
                                     <li>
@@ -239,7 +240,7 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
                                             className="flex items-center gap-2 hover:text-[#EFA00B] transition-colors cursor-pointer"
                                         >
                                             <span className="w-1.5 h-1.5 bg-[#EFA00B] rounded-full"></span>
-                                            Pengaduan Masyarakat
+                                            Layanan Administrasi
                                         </a>
                                     </li>
                                 </ul>
@@ -255,7 +256,7 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
                                 href="https://www.instagram.com/sodongbasari?igsh=MnkwcGZiMTQwYjl0" 
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 hover:text-white transition-all duration-300 group"
+                                className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 hover:bg-linear-to-br hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 hover:text-white transition-all duration-300 group"
                                 aria-label="Instagram Desa Sodong Basari"
                             >
                                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

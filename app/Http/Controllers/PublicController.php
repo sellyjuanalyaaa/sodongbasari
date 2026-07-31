@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Budget;
 use App\Models\Demographic;
 use App\Models\Institution;
+use App\Models\LawProduct;
+use App\Models\LawProductCategory;
 use App\Models\Post;
 use App\Models\Potential;
 use App\Models\PotentialCategory;
@@ -12,6 +14,8 @@ use App\Models\Statistic;
 use App\Models\VillageInfo;
 use App\Models\VillageOfficial;
 use App\Models\Visitor;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class PublicController extends Controller
@@ -141,7 +145,122 @@ class PublicController extends Controller
             'demographics' => $demographics,
             'budgets' => Budget::orderBy('year', 'desc')->get(),
             'electoralRolls' => $electoralRolls,
+            // 'boundary' => json_decode(Storage::disk('public')->get('geojson/batas_desa.json')),
+            // 'boundary' => json_decode(file_get_contents(public_path('geojson/batas_desa.json'))),
         ]));
+    }
+
+    public function laws(Request $request)
+    {
+        $lawProduct = LawProduct::query()
+            ->with('category')
+            ->when($request->search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%");
+                });
+            })
+            ->when($request->category, function ($query, $category) {
+                $query->where('category_id', $category);
+            })
+            ->when($request->years, function ($query, $years) {
+                $query->whereYear('establish', $years);
+            })
+            ->when($request->status, function ($query, $status) {
+                $query->where('status', $status);
+            })
+            ->when($request->sort, function ($query, $sort) {
+                match ($sort) {
+                    'popular' => $query->orderByDesc('downloads'),
+                    'oldest' => $query->orderBy('establish'),
+                    'a-z' => $query->orderBy('title'),
+                    'z-a' => $query->orderByDesc('title'),
+                    default => $query->latest('establish'),
+                };
+            }, function ($query) {
+                $query->latest('establish');
+            })
+            ->paginate(6)
+            ->withQueryString();
+
+        $years = LawProduct::selectRaw('YEAR(establish) as year')
+            ->distinct()
+            ->orderByDesc('year')
+            ->pluck('year');
+
+        return Inertia::render('Public/LawProducts/Index', array_merge(
+            $this->getCommonProps(),
+            [
+                'lawProducts' => $lawProduct,
+                'stats' => [
+                    'totalCat' => LawProductCategory::count(),
+                    'docThisYear' => LawProduct::whereYear('establish', now()->year)->count(),
+                    'lastUpdate' => LawProduct::max('updated_at') ?? LawProduct::max('created_at'),
+                ],
+                'category' => LawProductCategory::select('id', 'name', 'icon', 'color')
+                    ->orderBy('name')
+                    ->get(),
+                'years' => $years,
+                'filters' => $request->only([
+                    'search',
+                    'category',
+                    'years',
+                    'status',
+                    'sort',
+                ]),
+            ]
+        ));
+    }
+
+    public function lawShow(String $slug)
+    {
+        $lawProduct = LawProduct::where('slug', $slug)->with('category')->firstOrFail();
+        $related = LawProduct::query()
+            ->where('id', '!=', $lawProduct->id)
+            ->orderByDesc('establish')
+            ->take(4)
+            ->get()
+            ->values();
+
+        return Inertia::render('Public/LawProducts/Show', array_merge($this->getCommonProps(), [
+            'lawProduct' => [
+                ...$lawProduct->toArray(),
+                'fileUrl' => route('laws.open', $lawProduct->slug)
+            ],
+            'related' => $related,
+        ]));
+    }
+
+    /**
+     * Open pdf file for preview.
+     */
+    public function openPDF(String $slug)
+    {
+        $lawProduct = LawProduct::where('slug', $slug)->firstOrFail();
+        $path = Storage::disk('public')->path($lawProduct->path);
+
+        if (!$lawProduct->path || !Storage::disk('public')->exists($lawProduct->path)) {
+            abort(404, 'Dokumen tidak ditemukan.');
+        }
+
+        return response()->file($path);
+    }
+
+    /**
+     * Download pdf file.
+     */
+    public function downloadPDF(String $slug)
+    {
+        $lawProduct = LawProduct::where('slug', $slug)->firstOrFail();
+        $path = Storage::disk('public')->path($lawProduct->path);
+
+        if (!$lawProduct->path || !Storage::disk('public')->exists($lawProduct->path)) {
+            abort(404, 'Dokumen tidak ditemukan.');
+        }
+
+        $lawProduct->increment('downloads');
+
+        return response()->download($path);
     }
 
     public function services()
@@ -195,10 +314,10 @@ class PublicController extends Controller
     public function toggleLike($id)
     {
         $post = Post::findOrFail($id);
-        
+
         // Get liked posts from session
         $likedPosts = session()->get('liked_posts', []);
-        
+
         // Check if already liked
         if (in_array($id, $likedPosts)) {
             // Unlike: remove from session and decrement
@@ -211,13 +330,13 @@ class PublicController extends Controller
             $post->incrementLikesCount();
             $isLiked = true;
         }
-        
+
         // Update session
         session()->put('liked_posts', $likedPosts);
-        
+
         // Refresh post to get updated likes_count
         $post->refresh();
-        
+
         return response()->json([
             'success' => true,
             'likes_count' => $post->likes_count,

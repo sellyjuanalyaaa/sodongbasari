@@ -1,8 +1,8 @@
-
 import { Link, router } from '@inertiajs/react';
 import React, { useState } from 'react';
 import { route } from 'ziggy-js';
 import axios from 'axios';
+import { Eye, Heart, User } from 'lucide-react';
 
 export default function NewsCard({ post, likedPosts = [] }: { post: any, likedPosts?: number[] }) {
     // SVG placeholder untuk gambar yang tidak tersedia
@@ -49,6 +49,7 @@ export default function NewsCard({ post, likedPosts = [] }: { post: any, likedPo
             href={route('news.show', post.slug)}
             className="group bg-white rounded-lg overflow-hidden flex flex-col h-full hover:shadow-lg transition-all duration-300"
         >
+            {/* News Image */}
             <div className="h-56 overflow-hidden relative bg-slate-100">
                 <img
                     src={post.image_path || placeholderImage}
@@ -69,6 +70,8 @@ export default function NewsCard({ post, likedPosts = [] }: { post: any, likedPo
                     )}
                 </div>
             </div>
+
+            {/* Descirption */}
             <div className="p-5 flex-1 flex flex-col">
                 <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-[#EFA00B] transition-colors line-clamp-2">
                     {post.title}
@@ -79,17 +82,12 @@ export default function NewsCard({ post, likedPosts = [] }: { post: any, likedPo
                 <div className="flex items-center justify-between">
                     <div className="space-y-1">
                         <div className="flex items-center gap-1.5 text-slate-500 text-xs">
-                            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
+                            <User className="w-3.5 h-3.5"/>
                             <span className="font-medium">{post.creator?.name || 'Administrator'}</span>
                         </div>
                         <div className="flex items-center gap-3">
                             <div className="flex items-center gap-1.5 text-slate-400 text-[11px]">
-                                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                </svg>
+                                <Eye className="w-3 h-3"/>
                                 <span>{post.view_count || Math.floor(Math.random() * 50) + 10} views</span>
                             </div>
                             <button 
@@ -97,14 +95,7 @@ export default function NewsCard({ post, likedPosts = [] }: { post: any, likedPo
                                 disabled={isLiking}
                                 className="flex items-center gap-1 text-[11px] hover:scale-110 transition-transform disabled:opacity-50"
                             >
-                                <svg 
-                                    className={`w-3.5 h-3.5 transition-colors ${isLiked ? 'fill-red-500 text-red-500' : 'fill-none text-slate-400'}`}
-                                    viewBox="0 0 24 24" 
-                                    stroke="currentColor"
-                                    strokeWidth={2}
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
+                                <Heart className={`w-3 h-3 transition-colors ${isLiked ? 'fill-red-500 text-red-500' : 'fill-none text-slate-400'}`}/>
                                 <span className={isLiked ? 'text-red-500 font-medium' : 'text-slate-400'}>{likesCount}</span>
                             </button>
                         </div>

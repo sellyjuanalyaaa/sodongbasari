@@ -72,7 +72,7 @@ export default function HeroSection({ villageInfo, heroImages = [] }: { villageI
                         Profil Desa
                     </Link>
                     <Link
-                        href={route('news.index')}
+                        href={route('news')}
                         className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white hover:bg-white/20 hover:border-white/40 font-medium text-sm transition-all duration-300 hover:-translate-y-0.5"
                     >
                         Berita Terkini

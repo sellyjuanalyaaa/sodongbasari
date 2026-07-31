@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
@@ -14,7 +13,7 @@ export default function Index({ villageInfo, posts, mostTrending, likedPosts = [
             <Head title="Berita Desa" />
             <div className="pt-32 pb-24 bg-white relative overflow-hidden">
                 <OrangeAccentTop className="right-0 top-0 opacity-100" />
-                <DotsPattern className="left-0 bottom-0 opacity-20" />
+                {/* <DotsPattern className="left-0 bottom-0 opacity-20" /> */}
                 <AccentImage3 className="right-[-5%] top-[10%] w-[500px] opacity-10 -rotate-12" />
                 <CloudAccent className="top-[35%] left-[10%] w-[195px] h-[195px] opacity-21 rotate-22 z-0" />
                 <CloudAccent className="bottom-[30%] right-[12%] w-[185px] h-[185px] opacity-20 -rotate-18 z-0" />
