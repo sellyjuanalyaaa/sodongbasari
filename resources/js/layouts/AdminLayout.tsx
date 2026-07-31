@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import {
     LayoutDashboard,
@@ -31,7 +31,6 @@ import {
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-
 import { BreadcrumbItem } from '@/types';
 
 interface AdminLayoutProps {
@@ -43,6 +42,8 @@ interface AdminLayoutProps {
 export default function AdminLayout({ children, title, breadcrumbs }: AdminLayoutProps) {
     const { auth } = usePage().props as any;
     const user = auth.user;
+    const activeMenuRef = useRef<HTMLAnchorElement | null>(null); // get ref for save sidebar menu state
+    const pathname = window.location.pathname; // get url path
 
     const navGroups = [
         {
@@ -119,6 +120,15 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
                                     <SidebarMenu className="gap-1">
                                         {group.items.map((item) => {
                                             const isActive = route().current(item.active || item.routeName);
+
+                                            // change scroll state to active menu
+                                            useEffect(() => {
+                                                activeMenuRef.current?.scrollIntoView({
+                                                    block: "center",
+                                                    behavior: "smooth",
+                                                });
+                                            }, [pathname]);
+
                                             return (
                                                 <SidebarMenuItem key={item.routeName}>
                                                     <SidebarMenuButton
@@ -130,13 +140,17 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
                                                             : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
                                                             }`}
                                                     >
-                                                        <Link href={route(item.routeName)} className="flex items-center gap-3">
+                                                        <Link 
+                                                            href={route(item.routeName)}
+                                                            ref={isActive ? activeMenuRef : null} 
+                                                            className="flex items-center gap-3"
+                                                        >
                                                             <item.icon className={`h-4.5 w-4.5 ${isActive ? "text-orange-600" : "text-gray-400 group-hover:text-gray-600 transition-colors"}`} />
                                                             <span className="text-sm">{item.label}</span>
                                                             {isActive && (
                                                                 <div className="absolute right-2 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-orange-600"></div>
                                                             )}
-                                                            {/* Render badge if available */}
+                                                            {/* Render badge for notification */}
                                                             {item.badge !== undefined && item.badge > 0 && (
                                                                 <span className="ml-auto bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">
                                                                     {item.badge}

@@ -320,12 +320,7 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                                 <MapPin className="h-5 w-5 text-[#EFA00B]" />
                                 <h3 className="text-base font-medium text-slate-900">Wilayah Desa</h3>
                             </div>
-                            <VillageMap
-                                villageName="Desa Sodong Basari"
-                                totalRt={statistics.total_rt}
-                                totalRw={statistics.total_rw}
-                                // boundary={boundary}
-                            />
+                            <VillageMap />
                             <div className="mt-5 grid grid-cols-2 gap-4">
                                 <div className="bg-white rounded-lg p-4 text-center border border-slate-200">
                                     <h4 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-900 break-all">{statistics.total_rt.toLocaleString('id-ID')}</h4>

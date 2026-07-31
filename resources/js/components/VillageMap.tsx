@@ -3,6 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, LayersControl, GeoJSON 
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { FeatureCollection } from "geojson";
+import { Link } from '@inertiajs/react';
+import { ExternalLink } from 'lucide-react';
 
 // Fix default marker icon issue in react-leaflet
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -38,8 +40,12 @@ interface VillageMapProps {
 }
 
 export default function VillageMap({
-    latitude = -7.1163628,
-    longitude = 109.3063082,
+    latitude = 
+    // -7.1163628,
+    -7.11632744773697, 
+    longitude = 
+    // 109.3063082,
+    109.3088472502586,
 }: VillageMapProps) {
     const position: [number, number] = [latitude, longitude];
     const [boundary, setBoundary] = useState<FeatureCollection | null>(null);
@@ -91,6 +97,21 @@ export default function VillageMap({
                         />
                     </LayersControl.BaseLayer>
                 </LayersControl>
+
+                <Marker position={position}>
+                    <Popup>
+                        <div className="text-center gap-0">
+                            <div className="font-semibold text-md">Balai Desa Sodong Basari</div>
+                            <div className="text-sm">
+                                <Link href="https://maps.app.goo.gl/exRWRDGizawmETX67" target="_blank" 
+                                    className="flex justify-center items-center gap-1">
+                                    lihat di google map
+                                    <ExternalLink className="h-3 w-3"/>
+                                </Link>
+                            </div>
+                        </div>
+                    </Popup>
+                </Marker>
 
                 {boundary && 
                     <GeoJSON 

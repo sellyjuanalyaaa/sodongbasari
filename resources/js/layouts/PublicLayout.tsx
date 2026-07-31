@@ -165,7 +165,6 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
                             </p>
                             <a 
                                 href="https://www.instagram.com/kkn13_sodongbasari?igsh=YXQ3dm1kczMwa2Rv"
-                                // href="http://www.youtube.com" 
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group inline-flex items-center gap-2 bg-[#EFA00B] text-white text-sm font-bold py-3 px-6 rounded-lg transition-all hover:bg-[#D48C00] hover:pl-8"
