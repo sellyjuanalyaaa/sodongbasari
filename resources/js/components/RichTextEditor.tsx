@@ -35,7 +35,7 @@ interface RichTextEditorProps {
     placeholder?: string;
 }
 
-const RichTextEditor: React.FC<RichTextEditorProps> = ({ content, onChange, placeholder = 'Tulis isi berita di sini...' }) => {
+const RichTextEditor: React.FC<RichTextEditorProps> = ({ content, onChange }) => {
     const editor = useEditor({
         extensions: [
             StarterKit.configure({

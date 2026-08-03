@@ -40,7 +40,7 @@ export default function Index({ institutions }: { institutions: any }) {
                 <Table>
                     <TableHeader>
                         <TableRow className="hover:bg-gray-50 border-b border-gray-100">
-                            <TableHead className="w-[80px] text-gray-500">Logo</TableHead>
+                            <TableHead className="w-20 text-gray-500">Logo</TableHead>
                             <TableHead className="text-gray-500">Nama Lembaga</TableHead>
                             <TableHead className="text-gray-500">Deskripsi Singkat</TableHead>
                             <TableHead className="text-center text-gray-500">Anggota</TableHead>
@@ -61,7 +61,7 @@ export default function Index({ institutions }: { institutions: any }) {
                                 <TableCell className="max-w-md truncate text-gray-500">{item.description}</TableCell>
                                 <TableCell className="text-center">
                                     <Link href={route('admin.institutions.members.index', item.id)}>
-                                        <Button variant="outline" size="sm">
+                                        <Button variant="outline" size="sm"> 
                                             <Users className="h-4 w-4 mr-2" />
                                             {item.members_count || 0} orang
                                         </Button>

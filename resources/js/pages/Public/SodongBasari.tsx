@@ -1,7 +1,7 @@
 import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
-import { Users, Building2, ArrowRight, TentTree, Camera, MapPinned, MoveHorizontal, HandCoins, MountainSnow, Baby } from 'lucide-react';
+import { Users, Building2, ArrowRight, TentTree, MoveHorizontal, HandCoins, MountainSnow, Baby } from 'lucide-react';
 import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern, Blob1 } from '@/components/SvgDecorations';
 import PanoramaViewer from '@/components/PanoramaViewer';

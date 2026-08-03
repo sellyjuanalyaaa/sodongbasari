@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { route } from 'ziggy-js';
 
-export default function HeroSection({ villageInfo, heroImages = [] }: { villageInfo: any, heroImages?: any[] }) {
+export default function HeroSection({ heroImages = [] }: { heroImages?: any[] }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     // Use dynamic images if available, otherwise fallback
@@ -26,11 +26,6 @@ export default function HeroSection({ villageInfo, heroImages = [] }: { villageI
 
         return () => clearInterval(interval);
     }, [images.length]);
-
-    // Function to manually set the slide
-    const setSlide = (index: number) => {
-        setCurrentImageIndex(index);
-    };
 
     return (
         <div className="relative bg-slate-900 text-white overflow-hidden h-[600px] md:h-[700px] lg:h-[800px]">

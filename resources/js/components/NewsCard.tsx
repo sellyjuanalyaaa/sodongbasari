@@ -1,4 +1,4 @@
-import { Link, router } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import React, { useState } from 'react';
 import { route } from 'ziggy-js';
 import axios from 'axios';

@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Head, useForm, Link } from '@inertiajs/react';
 import AdminLayout from '@/layouts/AdminLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import {
     Select,
@@ -13,7 +12,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { ArrowLeft, Save, Plus, Trash2, GripVertical } from 'lucide-react';
+import { ArrowLeft, Save, Plus, Trash2 } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 
 interface HomeStatistic {
@@ -41,7 +40,7 @@ interface DataItem {
 export default function Form({ statistic }: Props) {
     const isEditing = !!statistic;
 
-    const { data, setData, post, put, processing, errors, transform } = useForm({
+    const { data, setData, post, processing, errors, transform } = useForm({
         title: statistic?.title || '',
         subtitle: statistic?.subtitle || '',
         type: statistic?.type || 'budget',

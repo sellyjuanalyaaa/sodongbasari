@@ -1,9 +1,8 @@
 import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
-import { MapPin, Tag, ArrowLeft, ArrowRight, Calendar, User } from 'lucide-react';
+import { Tag, ArrowLeft, ArrowRight, Calendar, User } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
-import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 import { route } from 'ziggy-js';
 
 interface Potential {

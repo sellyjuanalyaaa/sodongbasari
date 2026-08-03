@@ -1,10 +1,9 @@
 import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
-import SectionTitle from '@/components/SectionTitle';
 import NewsCard from '@/components/NewsCard';
 import { TrendingUp, Eye } from 'lucide-react';
-import { OrangeAccentTop, DotsPattern } from '@/components/SvgDecorations';
+import { OrangeAccentTop } from '@/components/SvgDecorations';
 import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 
 export default function Index({ villageInfo, posts, mostTrending, likedPosts = [] }) {

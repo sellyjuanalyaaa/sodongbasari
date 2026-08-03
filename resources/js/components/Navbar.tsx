@@ -1,5 +1,5 @@
-import { Link, usePage } from '@inertiajs/react';
-import React, { useState } from 'react';
+import { Link } from '@inertiajs/react';
+import { useState } from 'react';
 import { route } from 'ziggy-js';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
@@ -23,7 +23,6 @@ interface NavbarProps {
 export default function Navbar({
     logo = '/images/logo-kabupaten-pemalang.png',
     logoText = 'Logo',
-    logoSubtext = '',
     links = [
         { name: 'Home', route: 'home' },
         { name: 'Sodong Basari', route: 'sodong-basari' },

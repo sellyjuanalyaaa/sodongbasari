@@ -8,6 +8,9 @@ import {
   Image,
   MapPinned,
   FileSignature,
+  Archive,
+  TriangleAlert,
+  Handshake,
   type LucideIcon,
 } from "lucide-react";
 
@@ -21,6 +24,9 @@ export const icons = {
   Image,
   MapPinned,
   FileSignature,
+  TriangleAlert,
+  Archive,
+  Handshake
 } satisfies Record<string, LucideIcon>;
 
 export type IconName = keyof typeof icons;

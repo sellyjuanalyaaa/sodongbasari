@@ -4,7 +4,7 @@ import AdminLayout from '@/layouts/AdminLayout';
 import { Head, Link } from '@inertiajs/react';
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Plus, Pencil, Trash2, MapPin, Tag } from "lucide-react";
+import { Plus, Pencil, Trash2, Tag } from "lucide-react";
 import { router } from '@inertiajs/react';
 import {
     AlertDialog,

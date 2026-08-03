@@ -169,8 +169,8 @@ class PublicController extends Controller
             ->when($request->status, function ($query, $status) {
                 $query->where('status', $status);
             })
-            ->when($request->sort, function ($query, $sort) {
-                match ($sort) {
+            ->when($request->sorting, function ($query, $sorting) {
+                match ($sorting) {
                     'popular' => $query->orderByDesc('downloads'),
                     'oldest' => $query->orderBy('establish'),
                     'a-z' => $query->orderBy('title'),
@@ -206,7 +206,7 @@ class PublicController extends Controller
                     'category',
                     'years',
                     'status',
-                    'sort',
+                    'sorting',
                 ]),
             ]
         ));

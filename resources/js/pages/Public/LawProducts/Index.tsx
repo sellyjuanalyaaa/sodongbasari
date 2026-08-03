@@ -13,7 +13,6 @@ import { id } from 'date-fns/locale';
 import { getIcon } from "@/lib/icons";
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Label } from "@radix-ui/react-dropdown-menu";
 
 export default function LawProducts({ villageInfo, lawProducts, category, stats, filters, years }: { villageInfo: any; lawProducts: any; category: any; stats: any, filters: any, years: [] }) {
     const [values, setValues] = useState(filters);
@@ -305,16 +304,16 @@ export default function LawProducts({ villageInfo, lawProducts, category, stats,
                                     </SelectContent>
                                 </Select>
 
-                                {/* Sort */}
+                                {/* Sorting */}
                                 <Select
-                                    value={values.sort ?? ""}
-                                    onValueChange={(sort) => {
+                                    value={values.sorting ?? ""}
+                                    onValueChange={(sorting) => {
                                         setValues({
                                             ...values,
-                                            sort,
+                                            sorting,
                                         })
                                         applyFilter({
-                                            sort,
+                                            sorting,
                                         });
                                     }}
                                 >
@@ -322,7 +321,6 @@ export default function LawProducts({ villageInfo, lawProducts, category, stats,
                                         <SelectValue placeholder="Urutkan Dokumen"></SelectValue>
                                     </SelectTrigger>
                                     <SelectContent>
-                                        {/* <SelectItem value="" className="cursor-pointer">Semua</SelectItem> */}
                                         <SelectItem key="popular" value="popular" className="cursor-pointer">Terpopuler</SelectItem>
                                         <SelectItem key="oldest" value="oldest" className="cursor-pointer">Terlama</SelectItem>
                                         <SelectItem key="a-z" value="a-z" className="cursor-pointer">A-Z</SelectItem>
@@ -335,7 +333,7 @@ export default function LawProducts({ villageInfo, lawProducts, category, stats,
                                     type="button"
                                     variant="outline"
                                     onClick={resetFilter}
-                                    className="h-11 w-full rounded-xl border-slate-200 text-slate-700 hover:border-orange-200 hover:bg-orange-50 hover:text-[#EFA00B] cursor-pointer"
+                                    className="h-11 w-full rounded-xl border-slate-200 text-slate-700 hover:border-orange-200 hover:bg-orange-50 hover:text-[#EFA00B]"
                                 >
                                     <RefreshCw className="size-4" />
                                     Reset Filter
@@ -406,7 +404,7 @@ export default function LawProducts({ villageInfo, lawProducts, category, stats,
                                                             <Button
                                                                 variant="outline"
                                                                 size="sm"
-                                                                className="h-8 border-slate-200 px-2.5 text-xs text-slate-700 hover:border-orange-200 hover:bg-orange-50 hover:text-[#EFA00B] cursor-pointer"
+                                                                className="h-8 border-slate-200 px-2.5 text-xs text-slate-700 hover:border-orange-200 hover:bg-orange-50 hover:text-[#EFA00B]"
                                                             >
                                                                 Lihat Detail
                                                             </Button>
@@ -415,7 +413,7 @@ export default function LawProducts({ villageInfo, lawProducts, category, stats,
                                                             <Button
                                                                 variant="outline"
                                                                 size="sm"
-                                                                className="h-8 bg-[#EFA00B] px-2.5 text-xs text-white hover:bg-[#D48C00] hover:text-white cursor-pointer"
+                                                                className="h-8 bg-[#EFA00B] px-2.5 text-xs text-white hover:bg-[#D48C00] hover:text-white"
                                                             >
                                                                 Unduh
                                                                 <Download className="size-3.5" />
@@ -434,7 +432,7 @@ export default function LawProducts({ villageInfo, lawProducts, category, stats,
                                     <div className="mx-auto flex size-20 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-300"><FileText className="size-9" /></div>
                                     <h3 className="mt-6 text-xl font-semibold text-slate-900">Dokumen tidak ditemukan.</h3>
                                     <p className="mx-auto mt-3 max-w-md text-sm leading-7 text-slate-600">Coba ubah kata kunci atau filter pencarian.</p>
-                                    <Button type="button" variant="outline" className="mt-6 h-11 rounded-xl border-slate-200 text-slate-700 hover:border-orange-200 hover:bg-orange-50 hover:text-[#EFA00B] cursor-pointer">
+                                    <Button type="button" variant="outline" className="mt-6 h-11 rounded-xl border-slate-200 text-slate-700 hover:border-orange-200 hover:bg-orange-50 hover:text-[#EFA00B]">
                                         Reset Filter
                                     </Button>
                                 </CardContent>

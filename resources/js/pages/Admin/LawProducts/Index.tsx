@@ -3,7 +3,7 @@ import AdminLayout from '@/layouts/AdminLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Plus, Pencil, Trash2, Users, Tag } from "lucide-react";
+import { Plus, Pencil, Trash2, Tag } from "lucide-react";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -34,12 +34,12 @@ export default function Index({ lawProduct }: { lawProduct: any }) {
                 </div>
                 <div className="flex gap-2">
                     <Link href={route('admin.law-product-categories.index')}>
-                        <Button variant="outline" className="bg-white border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:text-green-800 cursor-pointer">
+                        <Button variant="outline" className="bg-white border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:text-green-800">
                             <Tag className="mr-2 h-4 w-4" /> Kelola Kategori
                         </Button>
                     </Link>
                     <Link href={route('admin.law-products.create')}>
-                        <Button className="bg-orange-600 hover:bg-orange-700 text-white shadow-sm cursor-pointer">
+                        <Button className="bg-orange-600 hover:bg-orange-700 text-white shadow-sm">
                             <Plus className="mr-2 h-4 w-4" /> Tambah Dokumen
                         </Button>
                     </Link>
@@ -87,13 +87,13 @@ export default function Index({ lawProduct }: { lawProduct: any }) {
                                         <TableCell className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div className="flex gap-2">
                                                 <Link href={route('admin.law-products.edit', item.id)}>
-                                                    <Button variant="outline" size="sm" className="border-gray-200 cursor-pointer">
+                                                    <Button variant="outline" size="sm" className="border-gray-200">
                                                         <Pencil className="h-4 w-4" />
                                                     </Button>
                                                 </Link>
                                                 <AlertDialog>
                                                     <AlertDialogTrigger asChild>
-                                                        <Button variant="outline" size="sm" className="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-600 cursor-pointer">
+                                                        <Button variant="outline" size="sm" className="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-600">
                                                             <Trash2 className="h-4 w-4" />
                                                         </Button>
                                                     </AlertDialogTrigger>

@@ -5,7 +5,6 @@ import { route } from 'ziggy-js';
 import NewsCard from '@/components/NewsCard';
 import { Calendar, User, ArrowLeft, ArrowRight, Share2, Heart } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
-import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 import axios from 'axios';
 
 export default function Show({ villageInfo, post, related, likedPosts = [] }: { villageInfo: any; post: any; related: any[]; likedPosts?: number[] }) {

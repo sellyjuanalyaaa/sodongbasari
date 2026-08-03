@@ -8,7 +8,7 @@ import { getIcon } from "@/lib/icons";
 import { Head, Link } from "@inertiajs/react";
 import { formatDate } from "date-fns";
 import { id } from 'date-fns/locale';
-import { ArrowLeft, ArrowRight, Download, FileText, FileWarning, TypeIcon } from "lucide-react";
+import { ArrowLeft, ArrowRight, Download, FileText, FileWarning} from "lucide-react";
 
 export default function LawShow({ villageInfo, lawProduct, related }: { villageInfo: any; lawProduct: any; related: any }) {
 	const Icon = getIcon(lawProduct.category.icon)
@@ -106,7 +106,7 @@ export default function LawShow({ villageInfo, lawProduct, related }: { villageI
 						<div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
 							{lawProduct.fileUrl ? (
 								<a href={route('laws.download', lawProduct.slug)} rel="noreferrer" className="inline-flex">
-									<Button className="h-11 rounded-xl bg-[#EFA00B] text-white hover:bg-[#D48C00] cursor-pointer">
+									<Button className="h-11 rounded-xl bg-[#EFA00B] text-white hover:bg-[#D48C00]">
 										<Download className="size-4" />
 										Unduh Dokumen
 									</Button>

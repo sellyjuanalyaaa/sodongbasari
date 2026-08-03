@@ -9,12 +9,12 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
     const { visitorStats } = usePage().props as any;
 
     const links = [
-        { name: 'Home', route: 'home' },
-        { name: 'Sodong Basari', route: 'sodong-basari' },
-        { name: 'Statistik Desa', route: 'statistics' },
-        { name: 'Produk Hukum', route: 'laws' },
-        { name: 'Potensi Desa', route: 'potentials' },
-        { name: 'Info & Berita', route: 'news' },
+        { name: 'Home', route: 'home', active: 'home' },
+        { name: 'Sodong Basari', route: 'sodong-basari', active: 'sodong-basari' },
+        { name: 'Statistik Desa', route: 'statistics', active: 'statistics' },
+        { name: 'Produk Hukum', route: 'laws', active: 'laws*' },
+        { name: 'Potensi Desa', route: 'potentials', active: 'potentials*' },
+        { name: 'Info & Berita', route: 'news', active: 'news*' },
     ];
 
     return (
@@ -51,13 +51,13 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
                                         key={link.name}
                                         href={route(link.route)}
                                         className={`text-sm font-medium transition-colors duration-200 relative ${
-                                            route().current(link.route)
+                                            route().current(link.active || link.route)
                                                 ? 'text-[#EFA00B]'
                                                 : 'text-slate-700 hover:text-[#EFA00B]'
                                         }`}
                                     >
                                         {link.name}
-                                        {route().current(link.route) && (
+                                        {route().current(link.active || link.route) && (
                                             <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#EFA00B] rounded-full" />
                                         )}
                                     </Link>
@@ -111,7 +111,7 @@ export default function PublicLayout({ children, villageInfo }: { children: Reac
                                             key={link.name}
                                             href={route(link.route)}
                                             className={`block px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-                                                route().current(link.route)
+                                                route().current(link.active || link.route)
                                                     ? 'text-[#EFA00B] bg-orange-50'
                                                     : 'text-slate-700 hover:text-[#EFA00B] hover:bg-slate-50'
                                             }`}
