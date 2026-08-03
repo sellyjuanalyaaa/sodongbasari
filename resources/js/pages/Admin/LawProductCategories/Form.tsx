@@ -9,7 +9,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { icons } from '@/lib/icons';
-import { cn } from '@/lib/utils';
 import InputError from '@/components/input-error';
 
 interface Category {
@@ -160,14 +159,14 @@ export default function Form({ category }: Props) {
 
                             <div className="flex flex-col-reverse gap-3 border-t border-gray-100 pt-5 sm:flex-row sm:items-center sm:justify-end">
                                 <Link href={route('admin.law-product-categories.index')}>
-                                    <Button type="button" variant="outline" className="h-11 border-gray-200 px-5 text-gray-700 hover:bg-gray-50 cursor-pointer">
+                                    <Button type="button" variant="outline" className="h-11 border-gray-200 px-5 text-gray-700 hover:bg-gray-50">
                                         Batal
                                     </Button>
                                 </Link>
                                 <Button
                                     type="submit"
                                     disabled={processing}
-                                    className="h-11 bg-orange-600 px-5 text-white shadow-sm hover:bg-orange-700 cursor-pointer"
+                                    className="h-11 bg-orange-600 px-5 text-white shadow-sm hover:bg-orange-700"
                                 >
                                     {processing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                                     {isEdit ? 'Simpan Perubahan' : 'Simpan Kategori'}

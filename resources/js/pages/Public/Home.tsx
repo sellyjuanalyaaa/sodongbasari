@@ -112,7 +112,7 @@ export default function Home({ villageInfo, heroImages = [], stats = {}, officia
             <Head title="Beranda" />
 
             {/* Hero Section */}
-            <HeroSection villageInfo={villageInfo} heroImages={heroImages} />
+            <HeroSection heroImages={heroImages} />
 
             {/* Welcome Section (Head of Village) */}
             <section className="pt-32 pb-24 bg-white relative overflow-hidden">

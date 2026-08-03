@@ -2,7 +2,6 @@
 import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, Link } from '@inertiajs/react';
-import SectionTitle from '@/components/SectionTitle';
 import { Users, ArrowLeft, Building2 } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
 import { AccentImage3, CloudAccent } from '@/components/ImageAccents';

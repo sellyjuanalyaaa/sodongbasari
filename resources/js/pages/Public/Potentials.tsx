@@ -5,7 +5,7 @@ import { route } from 'ziggy-js';
 import { OrangeAccentTop, DotsPattern } from '@/components/SvgDecorations';
 import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 
-export default function Potentials({ villageInfo, potentials, categoryColors }: { villageInfo: any, potentials: any[], categoryColors: Record<string, string> }) {
+export default function Potentials({ villageInfo, potentials }: { villageInfo: any, potentials: any[] }) {
     // SVG placeholder untuk potensi yang tidak memiliki gambar
     const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect fill='%23f8fafc' width='400' height='300'/%3E%3Cg fill='%2394a3b8'%3E%3Cpath d='M160 120h80v26H160zm-40 40h160v12H120z'/%3E%3Ccircle cx='186' cy='93' r='13'/%3E%3C/g%3E%3Ctext x='200' y='170' font-family='system-ui' font-size='14' fill='%23475569' text-anchor='middle'%3EPotensi Desa%3C/text%3E%3C/svg%3E";
 

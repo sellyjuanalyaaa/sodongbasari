@@ -40,12 +40,8 @@ interface VillageMapProps {
 }
 
 export default function VillageMap({
-    latitude = 
-    // -7.1163628,
-    -7.11632744773697, 
-    longitude = 
-    // 109.3063082,
-    109.3088472502586,
+    latitude = -7.11632744773697, 
+    longitude = 109.3088472502586,
 }: VillageMapProps) {
     const position: [number, number] = [latitude, longitude];
     const [boundary, setBoundary] = useState<FeatureCollection | null>(null);

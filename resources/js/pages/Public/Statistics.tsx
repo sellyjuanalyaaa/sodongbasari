@@ -2,10 +2,9 @@ import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, router } from '@inertiajs/react';
 import VillageMap from '@/components/VillageMap';
-import { Users, Home, MapPin, GraduationCap, Briefcase, Church, Building2, Heart, DollarSign, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { Users, MapPin, GraduationCap, Briefcase, Church, Building2, Heart, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
 import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
-import type { FeatureCollection } from "geojson";
 import {
     Chart as ChartJS,
     CategoryScale,

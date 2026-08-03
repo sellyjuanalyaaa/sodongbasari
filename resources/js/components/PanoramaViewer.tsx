@@ -11,11 +11,14 @@ export default function PanoramaViewer({
     const container = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (!container.current || !src) return;
+        console.log("src =", src);
+        if (!container.current) return;
+
+        console.log("create viewer");
 
         const viewer = new Viewer({
             container: container.current,
-            panorama: src,
+            panorama: `${src}?v=${Date.now()}`,
 
             defaultYaw: "0deg",
             defaultPitch: "0deg",
@@ -31,6 +34,7 @@ export default function PanoramaViewer({
         });
 
         return () => {
+            console.log("destroy viewer");
             viewer.destroy();
         };
     }, [src]);

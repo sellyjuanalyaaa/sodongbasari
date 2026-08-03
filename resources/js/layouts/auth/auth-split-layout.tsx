@@ -1,4 +1,3 @@
-import AppLogoIcon from '@/components/app-logo-icon';
 import { type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { type PropsWithChildren } from 'react';
@@ -13,8 +12,6 @@ export default function AuthSplitLayout({
     title,
     description,
 }: PropsWithChildren<AuthLayoutProps>) {
-    const { name } = usePage<SharedData>().props;
-
     return (
         <div className="grid relative h-screen overflow-hidden flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 bg-gradient-to-br from-slate-50 to-white">
             {/* Left Column - Hero Section */}

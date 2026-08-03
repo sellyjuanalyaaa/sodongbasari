@@ -6,11 +6,6 @@ import {
     Pencil,
     Trash2,
     ArrowLeft,
-    BadgeCheck,
-    FileClock,
-    FileSignature,
-    Loader2,
-    ScrollText
 } from "lucide-react";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -37,16 +32,24 @@ export default function Index({ categories }: Props) {
         <AdminLayout title="Kategori Produk Hukum">
             <Head title="Kategori Produk Hukum" />
 
-            <div className="flex justify-between items-center mb-8">
-                <div>
-                    <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Kategori Produk Hukum</h1>
-                    <p className="text-gray-500 mt-1">Kelola kategori untuk produk hukum desa</p>
-                </div>
-                <Link href={route('admin.law-product-categories.create')}>
-                    <Button className="bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-md cursor-pointer">
-                        <Plus className="mr-2 h-4 w-4" /> Tambah Kategori
+            <div className='mb-6'>
+                <Link href={route('admin.law-products.index')}>
+                    <Button variant="ghost" className="mb-4">
+                        <ArrowLeft className="mr-2 h-4 w-4" />
+                        Kembali
                     </Button>
                 </Link>
+                <div className="flex justify-between items-center mb-8">
+                    <div>
+                        <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Kategori Produk Hukum</h1>
+                        <p className="text-gray-500 mt-1">Kelola kategori untuk produk hukum desa</p>
+                    </div>
+                    <Link href={route('admin.law-product-categories.create')}>
+                        <Button className="bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-md">
+                            <Plus className="mr-2 h-4 w-4" /> Tambah Kategori
+                        </Button>
+                    </Link>
+                </div>
             </div>
 
             <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
@@ -77,20 +80,20 @@ export default function Index({ categories }: Props) {
                                                     color: `${category.color}`,
                                                 }}
                                             >
-                                                { Icon && <Icon className="size-3" /> }
+                                                {Icon && <Icon className="size-3" />}
                                                 <h4 className="text-[10px] font-semibold uppercase tracking-[0.14em]">{category.name || 'Nama Kategori'}</h4>
                                             </div>
                                         </TableCell>
                                         <TableCell className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div className="flex gap-2 justify-end">
                                                 <Link href={route('admin.law-product-categories.edit', category.id)}>
-                                                    <Button variant="outline" size="sm" className="border-gray-200 cursor-pointer">
+                                                    <Button variant="outline" size="sm" className="border-gray-200">
                                                         <Pencil className="h-4 w-4" />
                                                     </Button>
                                                 </Link>
                                                 <AlertDialog>
                                                     <AlertDialogTrigger asChild>
-                                                        <Button variant="outline" size="sm" className="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-600 cursor-pointer">
+                                                        <Button variant="outline" size="sm" className="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-600">
                                                             <Trash2 className="h-4 w-4" />
                                                         </Button>
                                                     </AlertDialogTrigger>
