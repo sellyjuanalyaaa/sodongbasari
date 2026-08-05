@@ -32,9 +32,9 @@ export default function Form({ category }: Props) {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (isEdit) {
-            put(route('admin.categories.update', category.id));
+            put(route('admin.posts-categories.update', category.id));
         } else {
-            post(route('admin.categories.store'));
+            post(route('admin.posts-categories.store'));
         }
     };
 
@@ -45,7 +45,7 @@ export default function Form({ category }: Props) {
             <div className="p-6">
                 <div className="max-w-3xl mx-auto">
                     <div className="mb-8">
-                        <Link href={route('admin.categories.index')}>
+                        <Link href={route('admin.posts-categories.index')}>
                             <Button variant="ghost" className="mb-4">
                                 <ArrowLeft className="h-4 w-4 mr-2" />
                                 Kembali
@@ -134,7 +134,7 @@ export default function Form({ category }: Props) {
                         </div>
 
                         <div className="flex items-center justify-between pt-4 border-t">
-                            <Link href={route('admin.categories.index')}>
+                            <Link href={route('admin.posts-categories.index')}>
                                 <Button type="button" variant="outline">
                                     Batal
                                 </Button>

@@ -193,6 +193,7 @@ class PublicController extends Controller
             [
                 'lawProducts' => $lawProduct,
                 'stats' => [
+                    'totalDoc' => LawProduct::count(),
                     'totalCat' => LawProductCategory::count(),
                     'docThisYear' => LawProduct::whereYear('establish', now()->year)->count(),
                     'lastUpdate' => LawProduct::max('updated_at') ?? LawProduct::max('created_at'),

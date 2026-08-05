@@ -34,5 +34,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\InstitutionMember::observe(\App\Observers\NotificationObserver::class);
         \App\Models\PotentialCategory::observe(\App\Observers\NotificationObserver::class);
         \App\Models\Statistic::observe(\App\Observers\NotificationObserver::class);
+        \App\Models\LawProduct::observe(\App\Observers\NotificationObserver::class);
+        \App\Models\LawProductCategory::observe(\App\Observers\NotificationObserver::class);
     }
 }

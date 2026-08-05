@@ -29,7 +29,7 @@ export default function Form({ category }: Props) {
     const { data, setData, post, put, processing, errors } = useForm({
         name: category?.name || '',
         description: category?.description || '',
-        icon: category?.icon || 'ScrollText',
+        icon: category?.icon || 'Home',
         color: category?.color || 'from-amber-500 to-orange-500',
     });
 

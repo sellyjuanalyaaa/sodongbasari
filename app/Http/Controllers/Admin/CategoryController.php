@@ -36,7 +36,7 @@ class CategoryController extends Controller
 
         Category::create($validated);
 
-        return redirect()->route('admin.categories.index')
+        return redirect()->route('admin.posts-categories.index')
             ->with('success', 'Kategori berhasil ditambahkan.');
     }
 
@@ -58,7 +58,7 @@ class CategoryController extends Controller
 
         $category->update($validated);
 
-        return redirect()->route('admin.categories.index')
+        return redirect()->route('admin.posts-categories.index')
             ->with('success', 'Kategori berhasil diperbarui.');
     }
 

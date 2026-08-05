@@ -2,7 +2,7 @@ import React from 'react';
 import PublicLayout from '@/layouts/PublicLayout';
 import { Head, router } from '@inertiajs/react';
 import VillageMap from '@/components/VillageMap';
-import { Users, MapPin, GraduationCap, Briefcase, Church, Building2, Heart, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { Users, MapPin, GraduationCap, Briefcase, Church, Building2, Heart, ArrowUpRight, ArrowDownRight, Mars, Venus, UsersRound } from 'lucide-react';
 import { OrangeAccentTop, OrangeAccentBottom, DotsPattern } from '@/components/SvgDecorations';
 import { AccentImage3, CloudAccent } from '@/components/ImageAccents';
 import {
@@ -214,7 +214,7 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                                     <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-orange-900 break-all">{(statistics.male_population + statistics.female_population).toLocaleString('id-ID')}</h4>
                                 </div>
                                 <div className="bg-orange-200 rounded-full p-2.5 sm:p-3 shrink-0">
-                                    <Users className="h-5 w-5 sm:h-6 sm:w-6 text-orange-700" />
+                                    <UsersRound className="h-5 w-5 sm:h-6 sm:w-6 text-orange-700" />
                                 </div>
                             </div>
                         </div>
@@ -227,7 +227,7 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                                     <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 break-all">{statistics.male_population.toLocaleString('id-ID')}</h4>
                                 </div>
                                 <div className="bg-white rounded-full p-2.5 sm:p-3 shrink-0">
-                                    <Users className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
+                                    <Mars className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>
@@ -240,7 +240,7 @@ export default function Statistics({ villageInfo, statistics, historicalStatisti
                                     <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 break-all">{statistics.female_population.toLocaleString('id-ID')}</h4>
                                 </div>
                                 <div className="bg-white rounded-full p-2.5 sm:p-3 shrink-0">
-                                    <Users className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
+                                    <Venus className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
                                 </div>
                             </div>
                         </div>

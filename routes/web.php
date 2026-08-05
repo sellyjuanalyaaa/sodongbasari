@@ -37,7 +37,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
 
     // CRUD Resources
     Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
-    Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('posts-categories', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('sliders', \App\Http\Controllers\Admin\SliderController::class);
     Route::resource('potentials', \App\Http\Controllers\Admin\PotentialController::class);
     Route::resource('potential-categories', \App\Http\Controllers\Admin\PotentialCategoryController::class);

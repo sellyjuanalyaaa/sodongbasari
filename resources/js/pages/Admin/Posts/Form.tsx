@@ -96,7 +96,7 @@ export default function PostForm({ post, categories }: { post?: any; categories?
                                 </Select>
                             ) : (
                                 <div className="text-sm text-gray-500 p-3 bg-yellow-50 border border-yellow-200 rounded">
-                                    Belum ada kategori. <Link href={route('admin.categories.create')} className="text-orange-600 hover:underline">Buat kategori terlebih dahulu</Link>.
+                                    Belum ada kategori. <Link href={route('admin.posts-categories.create')} className="text-orange-600 hover:underline">Buat kategori terlebih dahulu</Link>.
                                 </div>
                             )}
                             {errors.category_id && <p className="text-sm text-red-500">{errors.category_id}</p>}
