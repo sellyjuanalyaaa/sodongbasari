@@ -5,12 +5,12 @@ import {
   Newspaper,
   Scale,
   Folder,
-  Image,
   MapPinned,
   FileSignature,
   Archive,
   TriangleAlert,
   Handshake,
+  Stethoscope,
   type LucideIcon,
 } from "lucide-react";
 
@@ -21,7 +21,7 @@ export const icons = {
   Newspaper,
   Scale,
   Folder,
-  Image,
+  Stethoscope,
   MapPinned,
   FileSignature,
   TriangleAlert,

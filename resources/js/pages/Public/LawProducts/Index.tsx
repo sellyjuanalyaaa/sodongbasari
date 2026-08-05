@@ -125,7 +125,7 @@ export default function LawProducts({ villageInfo, lawProducts, category, stats,
                                         Total Dokumen
                                     </p>
                                     <p className="mt-1 text-3xl font-semibold tracking-tight text-slate-900">
-                                        {lawProducts.total}
+                                        {stats.totalDoc}
                                     </p>
                                 </div>
                             </CardContent>
@@ -184,7 +184,7 @@ export default function LawProducts({ villageInfo, lawProducts, category, stats,
                             <div>
                                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#EFA00B]">Filter Dokumen</p>
                                 <h2 className="mt-1 text-xl font-semibold tracking-tight text-slate-900">Saring arsip tanpa kehilangan konteks</h2>
-                                <p className="mt-2 text-sm text-slate-600">6 dari {lawProducts.total} dokumen ditampilkan.</p>
+                                <p className="mt-2 text-sm text-slate-600">{lawProducts.total} dari {stats.totalDoc} dokumen ditampilkan.</p>
                             </div>
                             <div className="mt-8">
                                 <div className="relative">

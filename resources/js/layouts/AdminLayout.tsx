@@ -66,7 +66,7 @@ export default function AdminLayout({ children, title, breadcrumbs }: AdminLayou
         {
             label: "Konten & Informasi",
             items: [
-                { label: "Berita & Artikel", routeName: "admin.posts.index", active: "admin.posts.*", icon: FileText },
+                { label: "Berita & Artikel", routeName: "admin.posts.index", active: "admin.posts*", icon: FileText },
                 { label: "Informasi Desa", routeName: "admin.village-info.edit", active: "admin.village-info.*", icon: Target },
             ]
         },

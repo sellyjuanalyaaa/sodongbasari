@@ -29,7 +29,7 @@ interface Props {
 
 export default function Index({ categories }: Props) {
     const handleDelete = (id: number) => {
-        router.delete(route('admin.categories.destroy', id), {
+        router.delete(route('admin.posts-categories.destroy', id), {
             preserveScroll: true,
         });
     };
@@ -43,7 +43,7 @@ export default function Index({ categories }: Props) {
                     <h1 className="text-3xl font-bold tracking-tight text-gray-900">Kelola Kategori</h1>
                     <p className="text-gray-500 mt-1">Atur kategori untuk berita dan artikel.</p>
                 </div>
-                <Link href={route('admin.categories.create')}>
+                <Link href={route('admin.posts-categories.create')}>
                     <Button className="bg-orange-600 hover:bg-orange-700 text-white shadow-sm">
                         <Plus className="h-4 w-4 mr-2" />
                         Tambah Kategori
@@ -55,7 +55,7 @@ export default function Index({ categories }: Props) {
                     <div className="text-center py-12">
                         <Tag className="h-12 w-12 mx-auto text-gray-400 mb-4" />
                         <p className="text-gray-500">Belum ada kategori.</p>
-                        <Link href={route('admin.categories.create')}>
+                        <Link href={route('admin.posts-categories.create')}>
                             <Button className="mt-4 bg-orange-600 hover:bg-orange-700">
                                 <Plus className="h-4 w-4 mr-2" />
                                 Tambah Kategori Pertama
@@ -110,7 +110,7 @@ export default function Index({ categories }: Props) {
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div className="flex items-center justify-end gap-2">
-                                            <Link href={route('admin.categories.edit', category.id)}>
+                                            <Link href={route('admin.posts-categories.edit', category.id)}>
                                                 <Button variant="outline" size="sm" className="border-gray-200">
                                                     <Pencil className="h-4 w-4" />
                                                 </Button>

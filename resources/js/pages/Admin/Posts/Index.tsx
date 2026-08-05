@@ -33,7 +33,7 @@ export default function PostIndex({ posts }: { posts: any }) {
                 </div>
                 <div className="flex gap-2">
                     <Button asChild variant="outline" className="bg-white border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:text-green-800">
-                        <Link href={route('admin.categories.index')}>
+                        <Link href={route('admin.posts-categories.index')}>
                             <Folder className="mr-2 h-4 w-4" /> Kelola Kategori
                         </Link>
                     </Button>
